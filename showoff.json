@@ -1,8 +1,8 @@
-{ 
-  "name": "Fundamentals for puppet",
-  "date": "14.06. - 16.06.2016",
+{
+  "name": "Advanced puppet",
+  "date": "11.07. - 13.07.2016",
   "location": "Nuremberg",
-  "author": "Dirk Götz",
+  "author": "Lennart Betz",
   "release": "1.0",
 
   "favicon": "image/global/favicon.ico",
@@ -17,18 +17,8 @@
 
   "sections": [
    {"section":"global/Pre/Title"},
-   "global/Pre/Staff/DG.md",
-   {"section":"global/Pre/NETWAYS"}, 
-
-   {"section":"training"}, 
-
-   {"section":"basics"}, 
-   {"section":"resource_abstraction_layer"}, 
-   {"section":"toolstack"}, 
-   {"section":"resources"}, 
-   {"section":"modules"}, 
-   {"section":"master"}, 
-   {"section":"forge"}, 
+   "global/Pre/Staff/LB.md",
+   {"section":"global/Pre/NETWAYS"},
 
    {"section":"global/Post"}
   ]
