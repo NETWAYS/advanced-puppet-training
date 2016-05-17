@@ -1,0 +1,36 @@
+{ 
+  "name": "Fundamentals for puppet",
+  "date": "14.06. - 16.06.2016",
+  "location": "Nuremberg",
+  "author": "Dirk Götz",
+  "release": "1.0",
+
+  "favicon": "image/global/favicon.ico",
+
+  "protected": ["presenter", "onepage", "print"],
+  "user": "netways",
+  "password": "awesome",
+
+  "templates" : {
+       "default"   : "global/templates/default.tpl"
+  },
+
+  "sections": [
+   {"section":"global/Pre/Title"},
+   "global/Pre/Staff/DG.md",
+   {"section":"global/Pre/NETWAYS"}, 
+
+   {"section":"training"}, 
+
+   {"section":"basics"}, 
+   {"section":"resource_abstraction_layer"}, 
+   {"section":"toolstack"}, 
+   {"section":"resources"}, 
+   {"section":"modules"}, 
+   {"section":"master"}, 
+   {"section":"forge"}, 
+
+   {"section":"global/Post"}
+  ]
+}
+
