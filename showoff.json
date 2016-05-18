@@ -21,6 +21,7 @@
    {"section":"global/Pre/NETWAYS"},
 
    {"section":"facts"},
+   {"section":"functions"},
 
    {"section":"global/Post"}
   ]
