@@ -67,6 +67,25 @@ Facter.add('role') do
 end
 </pre>
 
+~~~SECTION:handouts~~~
+
+****
+
+setcode will accept a Ruby block or a single shell command as a string. For example, you could implement first fact concisely in pure Ruby like so:
+
+<pre>
+# role.rb
+Facter.add('role') do
+  setcode do
+    File.read('/etc/role').gsub(/<.*?>/m, "")
+  end
+end
+</pre>
+
+Note that older versions of Facter exposed a method called Facter::Util::Resultion.exec. This has been deprecated and currently redirects to the Facter::Core::Execution.exec you see in the example.
+
+~~~ENDSECTION~~~
+
 !SLIDE smbullets small
 # Distributing Facts
 
@@ -75,8 +94,29 @@ end
 
 <pre>
 # puppet agent -t
+Info: Using configured environment 'production'
+Info: Retrieving pluginfacts
+Info: Retrieving plugin
+Notice: /File[/opt/puppetlabs/puppet/cache/lib/facter]/ensure: created
+Notice: /File[/opt/puppetlabs/puppet/cache/lib/facter/role.rb]/ensure: defined content as '{md5}6f5231ef17747dc73e619970ca654998'
+Info: Loading facts
 ...
+Notice: Applied catalog in 0.03 seconds
 </pre>
+
+~~~SECTION:handouts~~~
+
+****
+
+Notice that the Puppet agent run first downloads any new or changed facts and then loads them. This precedes the catalog request and application. The practical implications of this are that custom facts are available for use on the very first Puppet agent run after they are defined. You do not need to sync them on one Puppet run and then use them on the next unless they depend on resources that are managed by Puppet itself.
+
+You can force a pluginsync without a Puppet run with puppet plugin download.
+
+If a fact is synced via pluginsync, then the version of the fact that was synced will take precedence over a fact tested by setting FACTERLIB. For this reason, it is often useful to stop the Puppet agent before commencing development so that an incomplete fact doesn't get synced.
+
+As of Puppet 3.0, the RUBYLIB or FACTERLIB environment variable must be fully qualified.
+
+~~~ENDSECTION~~~
 
 !SLIDE smbullets small
 # External Facts
@@ -101,6 +141,19 @@ nuremberg
 </pre>
 
 * Also distributed via pluginsync from $module/facts.d
+
+~~~SECTION:handouts~~~
+
+****
+
+As of Puppet 3.4 and Facter 2.0.1, external facts are now pluginsynced like any other custom fact. This makes distributing these facts much simpler. External facts should be located in the module's facts.d directory, and they'll automatically synced on each Puppet run.
+
+External facts will also execute scripts in the external fact path with the execute bit set. For Facter to parse the output, the script must echo key/value pairs on stdout in the format:
+
+key1=value1
+key2=value2
+
+~~~ENDSECTION~~~
 
 !SLIDE smbullets small
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Facts
@@ -129,7 +182,7 @@ nuremberg
  * Use a command line with apachectl and sed,
  * optional: Build the same fact in ruby.
 
-'apachectl -v 2>&1|sed -n "s|^Server version:\s*Apache/\([0-9]\+.[0-9]\+.[0-9]\+\).*$|\1|p"'
+'apachectl -v 2>&1|sed -n "s|^Server version:\s*Apache/\([0-9]\\+.[0-9]\\+.[0-9]\\+\).*$|\1|p"'
 
 * Test the new fact locally.
 * Push your code to the master, do an agent run and call facter.
@@ -162,7 +215,7 @@ nuremberg
 <pre>
 Facter.add(:apache_version) do
   setcode 'apachectl -v 2>&1 | \
-    sed -n "s|^Server version:\s*Apache/\([0-9]\+.[0-9]\+.[0-9]\+\).*$|\1|p"
+    sed -n "s|^Server version:\s*Apache/\([0-9]\\+.[0-9]\\+.[0-9]\\+\).*$|\1|p"
 end
 </pre>
 
