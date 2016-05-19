@@ -1,5 +1,14 @@
 !SLIDE smbullets small
-# Modularized Classes
+# Good Module Design
+
+* only manage their own resources.
+ * Don't manage logrotating in your apache module.
+ * What happens if your drupal module manage Apache and PHP?
+* be granular, portable and reusable.
+* avoid exposing implementation details.
+
+!SLIDE smbullets small
+# Architecting Modules
 
 ## Motivation
 
@@ -137,6 +146,7 @@ class custom::service inherites custom::params {
 
 The same should be happend as before reworked the module.
 
+
 !SLIDE supplemental solutions
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Module Design
 
@@ -272,3 +282,88 @@ define apache::vhost (
 }
 </pre>
 
+
+!SLIDE smbullets small
+# The Containment Problem
+
+* Classes contain all of the resources included.
+ * Relationships to the class transfer to included resources.
+ * Relationships do NOT transfer to included classes
+* Enforcement order can be unpredictable and surprising.
+* Classes included in other classes are unordered.
+
+<pre>
+class repo {
+  yumrepo { 'custom':
+    ...
+  }
+}
+
+class apache {
+  include apache::install
+  include apache::config
+  include apache::service
+}
+
+Class['repo'] -> Class['apache']
+</pre>
+
+
+!SLIDE smbullets small
+# The Containment Problem
+
+****
+
+## Classes aren't contained.
+
+****
+
+### Where ist host::secure contained?
+
+<pre>
+class repo {
+  include host::secure
+
+  yumrepo { 'custom':
+    ...
+  }
+}
+
+class apache {
+  include host::secure
+
+  include apache::install
+  include apache::config
+  include apache::service
+}
+
+Class['repo'] -> Class['apache']
+</pre>
+
+
+!SLIDE smbullets small
+# Anchor Pattern
+
+* Resources are contained.
+* Relationshipe can be defined between resources and classes.
+* use anchor resources to manually bookend classes.
+
+<pre>
+class apache {
+  anchor { 'apache::begin': }
+    -> Class['apache::install']
+    -> Class['apache::config']
+    ~> Class['apache::service']
+    -> anchor { 'apache::end': }
+
+  include apache::install
+  include apache::config
+  include apache::service
+}
+
+class { 'repo':
+  before => Class['apache']
+}
+</pre>
+
+### You can use also the function contain instead of include since Puppet 3.4, contain automates the anchor pattern.
