@@ -20,14 +20,13 @@ What Should You be Testing?
 
 ****
 
-rspec-puppet
+RSpec tests for Puppet manifests:
 
 ****
 
-RSpec tests for Puppet manifests:
-
 <pre>
 require 'spec_helper'
+
 describe('apache', :type => :class) do
   let(:node) { 'agent-centos.localdomain' }
 
@@ -44,12 +43,21 @@ describe('apache', :type => :class) do
 end
 </pre>
 
+!SLIDE smbullets small
+# Unit Tests
+
+****
+
 Running tests:
+
+****
 
 <pre>
 # /opt/puppetlabs/puppet/bin/rake spec
-/opt/puppetlabs/puppet/bin/ruby -S rspec spec/classes/motd_spec.rb --color
+/opt/puppetlabs/puppet/bin/ruby
+  -S rspec spec/classes/motd_spec.rb --color
 ...
+
 Finished in 0.14713 seconds 1 example, 0 failures
 </pre>
 
@@ -107,6 +115,7 @@ RSpec matchers can match exact values, regular expressions, or Ruby Procs. You c
 
 <pre>
 require 'spec_helper'
+
 describe('apache', :type => :class) do
   let(:node) { 'agent-centos.localdomain' }
 
@@ -177,12 +186,22 @@ require 'puppetlabs_spec_helper/rake_tasks'
 <pre>
 require 'puppetlabs_spec_helper/module_spec_helper'
 </pre>
+
+!SLIDE smbullets small
+# Unit Tests
+
+****
+
+Module Configuration
+
+****
+
 * Create .fixtures.yml.
  * rspec_puppet compiles catalogs in a sandbox.
  * It needs a minimal environment, including modulepath.
  * It has to have entries for all module dependencies.
 
-</pre>
+<pre>
 ---
 fixtures:
   symlinks:
@@ -194,8 +213,8 @@ fixtures:
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Unit Test a Class
 
 * Objective
- * Update the apache module and create unit tests for it.
  * Practice setting up a testing environment.
+ * Update the apache module and create unit tests for it.
  * Practice incremental development using tests as validation.
 
 
@@ -204,10 +223,118 @@ fixtures:
 
 ## Objective:
 
- * Update the apache module and create unit tests for it.
- * Practice setting up a testing environment.
- * Practice incremental development using tests as validation.
+* Practice setting up a testing environment.
+* Update the apache module and create unit tests for it.
+* Practice incremental development using tests as validation.
 
 ## Steps:
 
-fvkjge
+* Install puppet-rspec and puppetlabs_spec_helper.
+* Create Rakefile, .fixtures.yml, spec_helper.rb.
+* Write unit tests in spec/classes/apache_spec.rb.
+* Run unit tests and fix problems if appeared.
+
+
+!SLIDE supplemental solutions
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Unit Test a Class
+
+****
+
+## Practice setting up a testing environment
+
+****
+
+### Install puppet-rspec and puppetlabs_spec_helper
+
+* Install puppet-rspec gem module.
+<pre>
+# /opt/puppetlabs/puppet/bin/gem install puppet-rspec
+</pre>
+* Install puppetlabs_spec_helper gem module.
+<pre>
+# /opt/puppetlabs/puppet/bin/gem install puppetlabs_spec_helper
+</pre>
+
+### Create Rakefile, .fixtures.yml, spec_helper.rb
+
+* Change into your apache module directory:
+
+<pre>
+# cd ~/puppetcode/modules
+</pre>
+
+* Create Rakefile:
+
+<pre>
+# vim Rakefile
+require 'puppetlabs_spec_helper/rake_tasks'
+</pre>
+
+* Create spec and classes directory:
+
+<pre>
+# mkdir -p spec/classes
+</pre>
+
+* Create spec_helper.rb file:
+
+<pre>
+# vim spec/spec_helper.rb
+require 'puppetlabs_spec_helper/module_spec_helper'
+</pre>
+* Create .fixtures.yml:
+
+<pre>
+---
+fixtures:
+  symlinks:
+    "apache": "#{source_dir}"
+</pre>
+
+****
+
+## Update the apache module and create unit tests for it
+
+****
+
+<pre>
+# vim spec/classes/apache_spec.rb
+require 'spec_helper'
+
+describe('apache', :type => :class) do
+
+  describe 'when call on an unsupportred operatingsystem' do
+    let(:facts) { {:osfamily => 'foo'} }
+    it do
+      expect {
+        should contain_package('httpd')
+      }.to raise_error(Puppet::Error, /Your plattform is not supported, yet./)
+    end
+  end
+
+  describe 'when call without parameters on redhat' do
+    let(:facts) { {:osfamily => 'RedHat'} }
+    it do
+      should contain_package('httpd').with(
+        'ensure' => 'installed')
+
+      should contain_file('/etc/httpd/conf/httpd.conf').with(
+        'ensure' => 'file',
+        'owner'  => 'root',
+        'group'  => 'root').with_content(
+          /^DocumentRoot \/var\/www\/html$/)
+
+      should contain_service('httpd').with(
+        'ensure' => 'running',
+        'enable' => 'true')
+    end
+  end
+
+  describe 'when call with ssl => true on redhat' do
+    let(:facts) { {:osfamily => 'RedHat'} }
+    it { should contain_package('mod_ssl') }
+  end
+
+end
+</pre>
+
