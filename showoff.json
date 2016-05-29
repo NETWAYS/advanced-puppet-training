@@ -20,6 +20,9 @@
    "global/Pre/Staff/LB.md",
    {"section":"global/Pre/NETWAYS"},
 
+   {"section":"classroom"},
+   {"section":"review"},
+   {"section":"files"},
    {"section":"design"},
    {"section":"facts"},
    {"section":"functions"},
