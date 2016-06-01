@@ -16,7 +16,7 @@
 * A lot of code lines
 * Complex dependency structures
 * Some examples:
- * puppetlbas/apache
+ * puppetlabs/apache
  * camptocamp/tomcat
 
 !SLIDE smbullets small
