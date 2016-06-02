@@ -1,5 +1,5 @@
 !SLIDE smbullets small
-# Acceptence Tests
+# Acceptance Tests
 
 ****
 
@@ -14,7 +14,7 @@ Test the end result
 * Listining on correct port.
 
 !SLIDE smbullets small
-# Acceptence Tests
+# Acceptance Tests
 
 ****
 
@@ -30,7 +30,7 @@ serverspec: Checks requirements on servers.
 * Configuration management agnostic.
 
 !SLIDE smbullets small
-# Acceptence Tests
+# Acceptance Tests
 
 *****
 
@@ -47,7 +47,7 @@ serverspec: Installation
 </pre>
 
 !SLIDE smbullets small
-# Acceptence Tests
+# Acceptance Tests
 
 *****
 
@@ -79,7 +79,7 @@ end
 </pre>
 
 !SLIDE smbullets small
-# Acceptence Tests
+# Acceptance Tests
 
 *****
 
@@ -99,14 +99,14 @@ Finished in 0.098741 seconds
 </pre>
 
 !SLIDE smbullets small
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Acceptence Tests
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Acceptance Tests
 
 ## Objective:
 
 ****
 
-* Use acceptence test to validate the result of a puppet agent run.
-* Practice designing acceptence tests for the apache module.
+* Use acceptance test to validate the result of a puppet agent run.
+* Practice designing acceptance tests for the apache module.
 
 ## Steps:
 

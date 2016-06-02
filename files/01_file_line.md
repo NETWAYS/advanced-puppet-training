@@ -3,7 +3,7 @@
 
 ****
 
-Included in puppetlabs/stdlib module since 3.0
+Included in puppetlabs/stdlib module since 2.1
 
 ****
 
