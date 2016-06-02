@@ -1,22 +1,21 @@
 !SLIDE smbullets small
-# Modules and Classes
+# Class Syntax
 
-<pre>
-class apache {
-  package { 'httpd':
-    ensure => installed,
-  }
+    @@@ Puppet
+    class apache {
+      package { 'httpd':
+        ensure => installed,
+      }
 
-  file { '/etc/httpd/conf/httpd.conf':
-    ensure => file,
-    owner  => 'root',
-    group  => 'root',
-    source => 'puppet:///modules/apache/httpd.conf',
-  }
+      file { '/etc/httpd/conf/httpd.conf':
+        ensure => file,
+        owner  => 'root',
+        group  => 'root',
+        source => 'puppet:///modules/apache/httpd.conf',
+      }
 
-  service { 'httpd':
-    ensure => running,
-    enable => true,
-  }
-}
-</pre>
+      service { 'httpd':
+        ensure => running,
+        enable => true,
+      }
+    }

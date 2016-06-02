@@ -1,0 +1,31 @@
+!SLIDE smbullets 
+# Defined Resource Type
+
+* Very similar to parameterized classes
+* But can be used multiple times
+
+
+!SLIDE small
+# Defined Resource Type
+
+    @@@ Puppet
+    define apache::vhost(
+      Enum['present','absent'] $ensure    = present,
+      String                   $vhostname = $title,
+      String                   $docroot   = undef,
+    ) {
+
+      include apache::params
+
+      if $docroot {
+        $vhost_docroot = $docroot
+      } else {
+        $vhost_docroot = "${apache_vhostdir}/${vhostname}.conf"
+      }
+
+      file { "${apache_vhostd}/${vhostname}.conf":
+        ensure  => file,
+        content => template('apache/vhost.conf.erb'),
+        notify  => Service['httpd'],
+      }
+    }
