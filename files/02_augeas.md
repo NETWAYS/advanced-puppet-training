@@ -1,3 +1,0 @@
-!SLIDE smbullets small
-# augeas
-
