@@ -2,7 +2,7 @@
 # file_line
 
 !SLIDE smbullets
-# file_line Resource Type
+# file_line Overview 
 
 * Ensures that a given line is contained within a file
 * Custom resource type

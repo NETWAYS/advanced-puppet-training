@@ -52,13 +52,13 @@
 !SLIDE smbullets small noprint
 # Implicit Dependencies
 
-<center><img src="../_images/implicit_dependencies.png" style="width:800px;height:492px;" alt="Implicit Dependencies"></center>
+<center><img src="../_images/review/implicit_dependencies.png" style="width:800px;height:492px;" alt="Implicit Dependencies"></center>
 
 
 !SLIDE smbullets small printonly
 # Implicit Dependencies
 
-<center><img src="../_images/implicit_dependencies.png" style="width:480px;height:295px;" alt="Implicit Dependencies"></center>
+<center><img src="../_images/review/implicit_dependencies.png" style="width:480px;height:295px;" alt="Implicit Dependencies"></center>
 
 ~~~SECTION:handouts~~~
 
@@ -77,13 +77,13 @@ https://docs.puppet.com/puppet/latest/reference/type.html
 !SLIDE noprint
 # Resource Abstraction Layer
 
-<center><img src="../_images/resource_abstraction_layer.png" style="width:702px;height:460px;" alt="Resource Abstraction Layer"></center>
+<center><img src="../_images/review/resource_abstraction_layer.png" style="width:702px;height:460px;" alt="Resource Abstraction Layer"></center>
 
 
 !SLIDE printonly
 # Resource Abstraction Layer
 
-<center><img src="../_images/resource_abstraction_layer.png" style="width:480px;height:315px;" alt="Resource Abstraction Layer"></center>
+<center><img src="../_images/review/resource_abstraction_layer.png" style="width:480px;height:315px;" alt="Resource Abstraction Layer"></center>
 
 
 !SLIDE smbullets small

@@ -2,7 +2,7 @@
 # concat
 
 !SLIDE smbullets
-# concat Resource Type
+# concat Overview 
 
 * Builds files from fragments
 * Defined resource type

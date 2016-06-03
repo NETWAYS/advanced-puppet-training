@@ -1,13 +1,13 @@
 !SLIDE noprint
 # Training Environment
 
-<center><img src="../_images/training_environment.png" style="width:800px;height:389px;" alt="Training Environment"/></center>
+<center><img src="../_images/training/training_environment.png" style="width:800px;height:389px;" alt="Training Environment"/></center>
 
 
 !SLIDE printonly
 # Training Environment
 
-<center><img src="../_images/training_environment.png" style="width:480px;height:234px;" alt="Training Environment"/></center>
+<center><img src="../_images/training/training_environment.png" style="width:480px;height:234px;" alt="Training Environment"/></center>
 
 ~~~SECTION:handouts~~~
 

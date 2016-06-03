@@ -2,12 +2,13 @@
 # augeas
 
 !SLIDE smbullets
-# augeas Resource Type
+# augeas Overview
 
 * Treats files as trees of values
 * Modify the tree as you like and write them back
 * Uses `augtool`
 * File parsing based on lenses
+* Built-in resource type
 
 
 !SLIDE small

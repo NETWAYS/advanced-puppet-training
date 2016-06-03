@@ -20,8 +20,10 @@
    "global/Pre/Staff/LB.md",
    {"section":"global/Pre/NETWAYS"},
 
-   {"section":"classroom"},
+   {"section":"training"},
+
    {"section":"review"},
+   {"section":"resources"},
    {"section":"files"},
    {"section":"design"},
    {"section":"facts"},
@@ -31,4 +33,3 @@
    {"section":"global/Post"}
   ]
 }
-
