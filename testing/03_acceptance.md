@@ -89,7 +89,7 @@ Running tests
 
 <pre>
 # cd ~puppetcode/apache/serverspec
-# rake spec
+# /opt/puppetlabs/puppet/bin/rake spec
 /opt/puppetlabs/puppet/bin/ruby -S rspec
   spec/localhost/httpd_spec.rb
 ...
@@ -98,18 +98,100 @@ Finished in 0.098741 seconds
 6 examples, 0 failures
 </pre>
 
+
 !SLIDE smbullets small
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Acceptance Tests
 
+* Objective
+ * Practice designing acceptance tests for the apache module.
+
+
+!SLIDE supplemental exercises
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Unit Test a Class
+
 ## Objective:
 
-****
-
-* Use acceptance test to validate the result of a puppet agent run.
 * Practice designing acceptance tests for the apache module.
 
 ## Steps:
 
+* Install and configure serverspec.
+* Write tests to check the apache webserver on your local virtual machine.
+
+
+!SLIDE supplemental solutions
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Unit Test a Class
+
 ****
 
-* Install and configure serverspec.
+## Practice designing acceptance tests for the apache module
+
+****
+
+### Install and configure serverspec
+
+* Create a directory serverspec and change into it.
+<pre>
+# mkdir ~/serverspec
+# cd ~/serverspec
+</pre>
+
+* Initialize the acceptance test environment.
+<pre>
+# /opt/puppetlabs/puppet/bin/serverspec-init
+Select OS type:
+
+  1) UN*X
+  2) Windows
+
+Select number: 1
+
+Select a backend type:
+
+  1) SSH
+  2) Exec (local)
+
+Select number: 1
+
+Vagrant instance y/n: n
+Input target host name: centos7.localdomain
+</pre>
+
+### Write tests to check the apache webserver on your local virtual machine
+
+* Write tests to check, i.e. the package is installed, service is running and listen on port 80.
+<pre>
+# vim spec/centos7.localdomain
+require 'spec_helper'
+
+describe package('httpd'), :if => os[:family] == 'redhat' do
+  it { should be_installed }
+end
+
+describe service('httpd'), :if => os[:family] == 'redhat' do
+  it { should be_enabled }
+  it { should be_running }
+end
+
+describe port(80) do
+  it { should be_listening }
+end
+</pre>
+
+* Run the acceptance test.
+<pre>
+# /opt/puppetlabs/puppet/bin/rake spec
+...
+ackage "httpd"
+  should be installed
+
+Service "httpd"
+  should be enabled
+  should be running
+
+Port "80"
+  should be listening
+
+Finished in 0.13169 seconds (files took 4.63 seconds to load)
+4 examples, 0 failures
+</pre>
