@@ -43,7 +43,7 @@ serverspec: Installation
 # cd ~puppetcode/apache
 # mkdir serverspec
 # cd serverspec
-# serverspec-init
+# /opt/puppetlabs/puppet/bin/serverspec-init
 </pre>
 
 !SLIDE smbullets small
@@ -88,7 +88,7 @@ Running tests
 ****
 
 <pre>
-# cd ~puppetcode/apache
+# cd ~puppetcode/apache/serverspec
 # rake spec
 /opt/puppetlabs/puppet/bin/ruby -S rspec
   spec/localhost/httpd_spec.rb
