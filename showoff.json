@@ -29,6 +29,7 @@
    {"section":"facts"},
    {"section":"functions"},
    {"section":"testing"},
+   {"section":"roles_profiles"},
 
    {"section":"global/Post"}
   ]
