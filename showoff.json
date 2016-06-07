@@ -1,8 +1,8 @@
 {
-  "name": "Advanced puppet",
+  "name": "Advanced Puppet",
   "date": "11.07. - 13.07.2016",
   "location": "Nuremberg",
-  "author": "Lennart Betz",
+  "author": "Dirk Götz & Markus Waldmüller",
   "release": "1.0",
 
   "favicon": "image/global/favicon.ico",
@@ -17,17 +17,19 @@
 
   "sections": [
    {"section":"global/Pre/Title"},
-   "global/Pre/Staff/LB.md",
+   "global/Pre/Staff/DG.md",
+   "global/Pre/Staff/MW.md",
    {"section":"global/Pre/NETWAYS"},
 
    {"section":"training"},
 
    {"section":"review"},
    {"section":"resources"},
-   {"section":"files"},
    {"section":"ordering"},
    {"section":"facts"},
    {"section":"functions"},
+   {"section":"files"},
+   {"section":"git"},
    {"section":"design"},
    {"section":"testing"},
    {"section":"roles_profiles"},
