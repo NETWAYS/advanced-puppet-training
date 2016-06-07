@@ -1,4 +1,4 @@
-!SLIDE smbullets small
+!SLIDE small
 # Resource Collectors
 
     @@@ Puppet
