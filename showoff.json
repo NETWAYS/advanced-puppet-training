@@ -27,8 +27,8 @@
    {"section":"files"},
    {"section":"ordering"},
    {"section":"facts"},
-   {"section":"design"},
    {"section":"functions"},
+   {"section":"design"},
    {"section":"testing"},
    {"section":"roles_profiles"},
 

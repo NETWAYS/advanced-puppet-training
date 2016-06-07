@@ -1,8 +1,8 @@
 !SLIDE small
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Facts
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Create a Custom Fact
 
 * Objective:
- * Expand your apache module to provide a fact for the apache version.
+ * Expand your apache module to provide a fact for the apache version
 * Steps:
  * Create the fact in `lib/facter/apache_version.rb`
  * Test the new fact locally
@@ -10,7 +10,7 @@
 
 
 !SLIDE supplemental exercises
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Facts
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Create a Custom Fact
 
 ## Objective:
 
@@ -33,7 +33,7 @@
 
 
 !SLIDE supplemental solutions
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Facts
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Create a Custom Fact
 
 ****
 
