@@ -30,6 +30,7 @@
    {"section":"functions"},
    {"section":"files"},
    {"section":"git"},
+   {"section":"validation"},
    {"section":"design"},
    {"section":"testing"},
    {"section":"roles_profiles"},

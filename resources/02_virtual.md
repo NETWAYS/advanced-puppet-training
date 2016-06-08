@@ -7,13 +7,7 @@
 * Can be realized any number of times
 
 
-!SLIDE noprint
-# Virtual Resources
-
-<center><img src="../_images/resources/virtual_resources.png" style="width:365px;height:456px;" alt="Virtual Resources"/></center>
-
-
-!SLIDE printonly
+!SLIDE 
 # Virtual Resources
 
 <center><img src="../_images/resources/virtual_resources.png" style="width:365px;height:456px;" alt="Virtual Resources"/></center>
