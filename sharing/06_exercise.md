@@ -60,5 +60,6 @@ Write a `metadata.json` file:
 Build an uploadable tarball:
 
     @@@ Sh
-    # cd /etc/puppet/modules/
-    # puppet module build apache
+    # puppet module build /etc/puppet/modules/apache
+    Notice: Building /etc/puppet/modules/apache for release
+    Module built: /etc/puppet/modules/apache/pkg/training-apache-0.1.0.tar.gz
