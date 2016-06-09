@@ -36,6 +36,9 @@
    {"section":"validation"},
    {"section":"sharing"},
    {"section":"testing"},
+   {"section":"orchestration"},
+   {"section":"reports"},
+   {"section":"troubleshooting"},
 
    {"section":"global/Post"}
   ]
