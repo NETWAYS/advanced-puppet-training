@@ -1,2 +1,2 @@
 !SLIDE subsection
-# ~~~SECTION:MAJOR~~~ Validation
+# ~~~SECTION:MAJOR~~~ Code Validation
