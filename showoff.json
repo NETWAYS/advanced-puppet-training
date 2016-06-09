@@ -29,11 +29,12 @@
    {"section":"facts"},
    {"section":"functions"},
    {"section":"files"},
+   {"section":"hiera"},
+   {"section":"roles_profiles"},
+   {"section":"design"},
    {"section":"git"},
    {"section":"validation"},
-   {"section":"design"},
    {"section":"testing"},
-   {"section":"roles_profiles"},
 
    {"section":"global/Post"}
   ]
