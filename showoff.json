@@ -31,8 +31,8 @@
    {"section":"files"},
    {"section":"hiera"},
    {"section":"roles_profiles"},
-   {"section":"design"},
    {"section":"git"},
+   {"section":"design"},
    {"section":"validation"},
    {"section":"testing"},
 

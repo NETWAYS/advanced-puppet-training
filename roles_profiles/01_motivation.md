@@ -1,25 +1,35 @@
-!SLIDE smbullets small
+!SLIDE smbullets 
 # Evolving Infrastructure
 
-* Infrastructure grows.
-* More and more edge cases.
-* Wanna reuse code.
-* Eventually code feels bulky and high maintenance.
+* Infrastructure grows
+* More and more edge cases
+* Wanna reuse code
+* Eventually code feels bulky and high maintenance
 
 
-!SLIDE smbullets small
+!SLIDE smbullets noprint
 # Modular Design
 
 * Develop modules and
-* classify them to nodes.
+* Classify them to nodes
 
-insert picture
+<center><img src="../_images/roles_profiles/legacy_classification.png" style="width:774px;height:257px;" alt="Legacy Classification"/></center>
 
-!SLIDE smbullets small
-# If this signs appear something's going wrong.
 
-* Resources declared in multiple modules.
-* You find yourself wondering where your implementation fits.
-* Copious amount of logic at a node level.
-* Repetition and duplication.
-* The if statement is your best friend.
+!SLIDE smbullets printonly
+# Modular Design
+
+* Develop modules and
+* Classify them to nodes
+
+<center><img src="../_images/roles_profiles/legacy_classification.png" style="width:480px;height:159px;" alt="Legacy Classification"/></center>
+
+
+!SLIDE smbullets
+# Danger Signs
+
+* Resources declared in multiple modules
+* You find yourself wondering where your implementation fits
+* Copious amount of logic at a node level
+* Repetition and duplication
+* The `if` statement is your best friend
