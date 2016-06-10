@@ -6,14 +6,14 @@
 * Correlates reports to version of Puppet codebase
 
 <pre>
-# $environmentpath/production/environment.conf
+$environmentpath/production/environment.conf
 config_version = /bin/date
 </pre>
 
 * Can be integrated with version control to display latest commit
 
 <pre>
-# $environmentpath/development/environment.conf
+$environmentpath/development/environment.conf
 config_version = /usr/local/bin/return_git_version
 
 info: Caching catalog for agent.puppetlabs.vm

@@ -33,24 +33,40 @@ Checks requirements on servers:
     @@@ Sh
     # gem install serverspec
     # cd /etc/puppet/modules/apache/
-    # mkdir serverspec
-    # cd serverspec/
     # serverspec-init
+    Select OS type:
+
+      1) UN*X
+      2) Windows
+
+    Select number: 1
+
+    Select a backend type:
+
+      1) SSH
+      2) Exec (local)
+
+    Select number: 2
+
+     + spec/
+     + spec/localhost/
+     + spec/localhost/sample_spec.rb
+     + spec/spec_helper.rb
 
 
 !SLIDE small
 # Serverspec - Configuration
 
     @@@ Ruby
-    # vim spec/localhost/httpd_spec.rb
+    # vim /etc/puppet/modules/apache/spec/localhost/sample_spec.rb
     require 'spec_helper'
 
     describe package('httpd') do
-      if { should be_installed }
+      it { should be_installed }
     end
 
     describe service('httpd') do
-      it { should be_enable }
+      it { should be_enabled }
       it { should be_running }
     end
 
@@ -60,7 +76,7 @@ Checks requirements on servers:
 
     decribe file('/etc/httpd/conf/httpd.conf') do
       it { should be_file }
-      its(:content) { should match /ServerName localost/ }
+      its(:content) { should match /ServerName localhost/ }
     end
 
 
@@ -68,7 +84,7 @@ Checks requirements on servers:
 # Running Tests
 
     @@@ Sh
-    # cd /etc/puppet/modules/apache/serverspec/
+    # cd /etc/puppet/modules/apache/
     # rake spec
     # ruby -S rspec spec/localhost/httpd_spec.rb
     ...
@@ -111,10 +127,8 @@ Checks requirements on servers:
 Install and configure `serverspec`:
 
     @@@ Sh
-    # mkdir ~/serverspec
-    # cd ~/serverspec
-
-    # /opt/puppetlabs/puppet/bin/serverspec-init
+    # cd /etc/puppet/modules/apache/
+    # serverspec-init
     Select OS type:
 
       1) UN*X
@@ -130,12 +144,12 @@ Install and configure `serverspec`:
     Select number: 1
 
     Vagrant instance y/n: n
-    Input target host name: centos7.localdomain
+    Input target host name: training.localdomain
 
 Write tests to check the Apache webserver on your local virtual machine:
 
     @@@ Ruby
-    # vim spec/centos7.localdomain
+    # vim spec/training.localdomain/sample_spec.rb
     require 'spec_helper'
 
     describe package('httpd'), :if => os[:family] == 'redhat' do

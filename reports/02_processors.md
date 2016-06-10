@@ -64,23 +64,23 @@ On the Puppet Master:
 
 
 !SLIDE smbullets 
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Core Reports
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Core Report Processors
 
 * Objective:
- * Use Core Reports
+ * Use Core Report Processors
 * Steps:
  * Step 1
  * Step 2
 
 
 !SLIDE supplemental exercises
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Core Reports
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Core Report Processors
 
 ## Objective:
 
 ****
 
-* Use Core Reports
+* Use Core Report Processors
 
 ## Steps:
 
@@ -95,7 +95,7 @@ On the Puppet Master:
 
 ****
 
-## Use Core Reports
+## Use Core Report Processors
 
 ****
 
@@ -133,9 +133,27 @@ Some solution:
 
 
 !SLIDE small
+# tag Metaparameter
+
+    @@@ Puppet
+    apache::vhost {'docs.example.com':
+      port => 80,
+      tag  => ['us_mirror1', 'us_mirror2'],
+    }
+
+* Can be used with normal resources, defined resources and classes
+* Every resource automatically receives the following tags: Resource type, full name of the class/defined type, every namespace segment of the resource’s class/defined type
+* Used for:
+ * Collecting resources (virtual and exported resources)
+ * Restricting catalog runs
+ * Sending `tagmail` reports
+ * Reading tags in custom report handlers
+ 
+
+!SLIDE small
 # tagmail Report Processor
 
-* Included in puppetlabs/tagmail
+* Included in puppetlabs/tagmail module
 * Delivers log reports via email based on tags
 * Sends email when resources with matching tags change
 
