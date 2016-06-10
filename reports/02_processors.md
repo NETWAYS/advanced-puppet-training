@@ -24,7 +24,7 @@ On the Puppet Master:
 * Stores report data on the Puppet Master as YAML in the `reportdir` setting
 * Available for external processing by custom tooling
 * Default report processor
-* Collect quickly, perform some maintenance on them:
+* Reports collect quickly, perform some maintenance on them:
 
     <pre>
     tidy { '/var/lib/puppet/reports':
