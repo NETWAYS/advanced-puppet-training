@@ -107,12 +107,16 @@ Chaining arrows:
       }
     }
 
-    # vim /etc/puppet/modules/apache/examples/init.pp
-    include apache
-
-    stage { 'yum':
-     before => Stage['main'],
+    # vim /etc/puppet/modules/apache/manifests/stages.pp
+    class apache::stages {
+      stage { 'yum':
+        before => Stage['main'],
+      }
     }
+
+    # vim /etc/puppet/modules/apache/examples/init.pp
+    include apache::stages
+    include apache
 
     class { 'apache::yumrepos':
       stage => 'yum',

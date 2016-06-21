@@ -115,3 +115,84 @@ Collect exported resources:
 
     # puppet apply --noop /etc/puppet/modules/monitoring/examples/init.pp
     # puppet apply /etc/puppet/modules/monitoring/examples/init.pp
+
+
+!SLIDE smbullets
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Exported Resources
+
+* Objective:
+ * Create a haproxy configuration using exported resources
+* Steps:
+ * Expand the `apache` module
+ * Declare an exported resource `haproxy::balancermember` in `config.pp`
+ * Install `puppetlabs-haproxy` module
+ * Install `haproxy` and collect exported resources
+ * Test and apply your configuration
+
+
+!SLIDE supplemental exercises
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Exported Resources
+
+## Objective:
+
+****
+
+* Create a haproxy configuration using exported resources
+
+## Steps:
+
+****
+
+* Expand the `apache` module
+* Declare an exported resource `haproxy::balancermember` in `config.pp`
+* Install `puppetlabs-haproxy` module
+* Install `haproxy` and collect exported resources 
+* Test and apply your configuration
+
+
+!SLIDE supplemental solutions
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Proposed Solution
+
+****
+
+## Use Exported Resources
+
+****
+
+    @@@ Sh
+    # vim /etc/puppet/modules/apache/manifests/config.pp
+    class apache::config (
+    ) inherits apache::params {
+      $vhosts = $apache::vhosts
+
+      file { $apache_config:
+        ensure => file,
+        owner  => 'root',
+        group  => 'root',
+        source => 'puppet:///modules/apache/httpd.conf',
+      }
+
+      @@haproxy::balancermember { 'master':
+        listening_service => "${apache_service}",
+        server_names      => "$::fqdn",
+        ipaddresses       => "$::ipaddress",
+        ports             => '80',
+        options           => 'check',
+      }
+
+      $vhosts.each | String $name, Hash $vhost | {
+        apache::vhost { $name :
+          * => $vhost,
+        }
+      }
+    }
+
+    # puppet parser validate /etc/puppet/modules/apache/config.pp
+    # vim /etc/puppet/modules/apache/examples/haproxy.pp
+    include apache
+    include haproxy
+    Haproxy::Balancermember <<| |>>
+
+    # puppet parser validate /etc/puppet/modules/apache/examples/haproxy.pp
+    # puppet apply --noop /etc/puppet/modules/apache/examples/haproxy.pp
+    # puppet apply /etc/puppet/modules/apache/examples/haproxy.pp

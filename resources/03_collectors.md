@@ -60,3 +60,72 @@ Either operand can be a search expression that evaluates as true
     User <| (groups == 'dba' or groups == 'sysadmin') or title
 
 The users luke, james, jeff will be created, but brad will not.
+
+
+!SLIDE smbullets
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Resource Collectors
+
+* Objective:
+ * Use resource collectors for all packages
+* Steps:
+ * Switch package resources in `apache::install` to virtual resources
+ * Realize package resources
+ * Test and apply your configuration
+
+
+!SLIDE supplemental exercises
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Resource Collectors
+
+## Objective:
+
+****
+
+* Use resource collectors for all packages
+
+## Steps:
+
+****
+
+* Switch package resources in `apache::install` to virtual resources
+* Realize package resources
+* Test and apply your configuration
+
+
+!SLIDE supplemental solutions
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Proposed Solution
+
+****
+
+## Use Resource Collectors
+
+****
+
+    @@@ Sh
+    # vim /etc/puppet/modules/apache/manifests/install.pp
+    class apache::install (
+    ) inherits apache::params {
+      $ssl = $apache::ssl
+
+      if $ssl {
+        case $::osfamily {
+          'RedHat': {
+            @package {'mod_ssl':
+              ensure => installed,
+            }
+          }
+          default: {
+            fail("This module has no support for ssl on $::osfamily, yet")
+          }
+        }
+      }
+
+      @package { $apache_package:
+        ensure => installed,
+      }
+
+      Package <| |>
+    }
+
+    # puppet parser validate /etc/puppet/modules/apache/manifests/install.pp
+    # puppet apply --noop /etc/puppet/modules/apache/examples/init.pp
+    # puppet apply /etc/puppet/modules/apache/examples/init.pp
