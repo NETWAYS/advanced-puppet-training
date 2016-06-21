@@ -78,10 +78,10 @@ Simply assign a role to each node
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Designing Roles
 
 * Objective:
- * Designing Roles
+ * Create and use a `webserver` role 
 * Steps:
- * Step 1
- * Step 2
+ * Combine `database` and `webserver` profiles to a role
+ * Test and apply your configuration
 
 
 !SLIDE supplemental exercises
@@ -91,14 +91,14 @@ Simply assign a role to each node
 
 ****
 
-* Designing Roles
+* Create and use a `webserver` role
 
 ## Steps:
 
 ****
 
-* Step 1
-* Step 2
+* Combine `database` and `webserver` profiles to a role
+* Test and apply your configuration
 
 
 !SLIDE supplemental solutions
@@ -110,7 +110,17 @@ Simply assign a role to each node
 
 ****
 
-Some solution:
+    @@@ Sh
+    # vim /etc/puppetlabs/code/modules/roles/manifests/webserver.pp
+    class roles::webserver {
+      include profiles::database
+      include profiles::webserver
+    }
 
-    @@@ Sh
-    # ...
+    # puppet parser validate /etc/puppetlabs/code/modules/roles/manifests/webserver.pp
+    # vim /etc/puppetlabs/code/modules/roles/examples/webserver.pp
+    include roles::webserver
+
+    # puppet parser validate /etc/puppetlabs/code/modules/roles/examples/webserver.pp
+    # puppet apply --noop /etc/puppetlabs/code/modules/roles/examples/webserver.pp
+    # puppet apply /etc/puppetlabs/code/modules/roles/examples/webserver.pp

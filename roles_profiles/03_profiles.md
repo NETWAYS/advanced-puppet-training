@@ -23,10 +23,12 @@
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Designing Profiles
 
 * Objective:
- * Designing Profiles
+ * Create `database` and `webserver` profiles
 * Steps:
- * Step 1
- * Step 2
+ * Install `puppetlabs-mysql` module
+ * Create a `database` profile for mysql
+ * Create a `webserver` profile for apache
+ * Test and apply your configuration
 
 
 !SLIDE supplemental exercises
@@ -36,14 +38,16 @@
 
 ****
 
-* Designing Profiles
+* Create `database` and `webserver` profiles
 
 ## Steps:
 
 ****
 
-* Step 1
-* Step 2
+* Install `puppetlabs-mysql` module
+* Create a `database` profile for mysql
+* Create a `webserver` profile for apache
+* Test and apply your configuratio
 
 
 !SLIDE supplemental solutions
@@ -55,7 +59,58 @@
 
 ****
 
-Some solution:
 
     @@@ Sh
-    # ...
+    # puppet module install puppetlabs-mysql
+
+    # vim /etc/puppetlabs/code/environments/production/modules/profiles/manifests/database.pp
+    class profiles::database {
+      class { '::mysql::server':
+        root_password           => 'swordfish',
+        remove_default_accounts => true,
+      }
+
+      mysql_database { 'information_schema':
+        ensure  => 'present',
+        charset => 'utf8',
+        collate => 'utf8_general_ci',
+      }
+
+      mysql_database { 'mysql':
+        ensure  => 'present',
+        charset => 'latin1',
+        collate => 'latin1_swedish_ci',
+      }
+
+      mysql_database { 'performance_schema':
+        ensure  => 'present',
+       charset => 'utf8',
+       collate => 'utf8_general_ci',
+      }
+    }
+
+    # puppet parser validate /etc/puppet/code/modules/profiles/manifests/database.pp
+    # vim /etc/puppet/code/modules/profiles/examples/database.pp
+    include profiles::database
+
+    # puppet parser validate /etc/puppet/code/modules/profiles/examples/database.pp
+    # puppet apply --noop /etc/puppet/code/modules/profiles/examples/database.pp
+    # puppet apply /etc/puppet/code/modules/profiles/examples/database.pp
+
+    # vim /etc/puppet/code/modules/profiles/manifests/webserver.pp
+    class profiles::webserver {
+      include apache::stages
+      include apache
+
+      class { 'apache::yumrepos':
+        stage => 'yum',
+      }
+    }
+
+    # puppet parser validate /etc/puppet/codei/modules/profiles/manifests/webserver.pp
+    # vim /etc/puppet/code/modules/profiles/examples/webserver.pp
+    include profiles::webserver
+
+    # puppet parser validate /etc/puppet/code/modules/profiles/examples/webserver.pp
+    # puppet apply --noop /etc/puppet/code/modules/profiles/examples/webserver.pp
+    # puppet apply /etc/puppet/code/modules/profiles/examples/webserver.pp
