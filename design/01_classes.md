@@ -2,7 +2,7 @@
 # Main Class
 
     @@@ Puppet
-    class custom(
+    class custom (
       Enum['running','stopped'] $ensure = running,
       Boolean                   $enable = true,
       String                    $param1 = $custom::params::param1,
@@ -142,7 +142,8 @@ The same should be happend as before reworked the module.
 Rework the main apache class:
 
     @@@ Puppet
-    class apache(
+    # vim /etc/puppet/modules/apache/manifests/init.pp
+    class apache (
       Enum['running','stopped'] $ensure     = running,
       Boolean                   $enable     = true,
       Boolean                   $ssl        = $apache::params::ssl,
@@ -163,6 +164,7 @@ Rework the main apache class:
 Review the `apache::params` class:
 
     @@@ Puppet
+    # vim /etc/puppet/modules/apache/manifests/params.pp
     class apache::params {
       case $::osfamily {
        'RedHat': {
@@ -185,11 +187,12 @@ Review the `apache::params` class:
 Create the `apache::install` class:
 
     @@@ Puppet
+    # vim /etc/puppet/modules/apache/manifests/install.pp
     class apache::install (
     ) inherits apache::params {
       $ssl = $apache::ssl
 
-     if $ssl {
+      if $ssl {
         case $::osfamily {
           'RedHat': {
             package {'mod_ssl':
@@ -200,7 +203,7 @@ Create the `apache::install` class:
             fail("This module has no support for ssl on $::osfamily, yet")
           }
         }
-    }
+      }
 
       package { $apache_package:
         ensure => installed,
@@ -210,6 +213,7 @@ Create the `apache::install` class:
 Create the `apache::config` class:
 
     @@@ Puppet
+    # vim /etc/puppet/modules/apache/manifests/config.pp
     class apache::config (
     ) inherits apache::params {
       $vhosts = $apache::vhosts
@@ -231,6 +235,7 @@ Create the `apache::config` class:
 Create the `apache::service` class:
 
     @@@ Puppet
+    # vim /etc/puppet/modules/apache/manifests/service.pp
     class apache::service (
     ) inherits apache::params {
 
@@ -241,11 +246,12 @@ Create the `apache::service` class:
         ensure => $ensure,
         enable => $enable,
       }
-   }
+    }
 
 Modify the defined resource `apache::vhost`:
 
     @@@ Puppet
+    # vim /etc/puppet/modules/apache/manifests/vhost.pp
     define apache::vhost (
       String $ip,
       String $shortname    = $title,
