@@ -45,7 +45,7 @@
       subscribe => File['/etc/httpd/conf/httpd.conf'],
     }
 
-* Puppet does not enforce resources top down
+* Puppet 4 does enforce resources top down
 * Four metaparameters to define relationships (before, subscribe, require and notify)
 
 
