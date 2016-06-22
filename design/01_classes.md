@@ -95,7 +95,7 @@
 * Finally the service subclass handles all resources to manage the service respectively services
 
 
-!SLIDE small
+!SLIDE smbullets
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Module Design
 
 * Objective:

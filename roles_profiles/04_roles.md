@@ -59,21 +59,6 @@
 <center><img src="../_images/roles_profiles/role_classification.png" style="width:480px;height:109px;" alt="Role Classification"/></center>
 
 
-!SLIDE small
-# Classifying Nodes
-
-Simply assign a role to each node
-
-    @@@ Puppet
-    node 'bob.training.vm' {
-      include role::database_control_panel
-    }
-
-* Roles define the logical role a node should play
- * Select profiles that make up a logical role
- * Expose no implementation details
-
-
 !SLIDE smbullets 
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Designing Roles
 
