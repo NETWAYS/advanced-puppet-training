@@ -1,4 +1,4 @@
-!SLIDE small
+!SLIDE smbullets
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Create a Custom Function
 
 * Objective:

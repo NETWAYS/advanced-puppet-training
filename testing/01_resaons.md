@@ -1,4 +1,4 @@
-!SLIDE small
+!SLIDE smbullets
 # Why Test Code?
 
 * Confirm that code updates don't break anything
@@ -7,7 +7,7 @@
 * Helps maintain good programming practice
 
 
-!SLIDE small
+!SLIDE smbullets
 # Kinds of Tests
 
 * Unit Tests:
