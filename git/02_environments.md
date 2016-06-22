@@ -46,7 +46,7 @@
  * Rename the `master´ branch to `production`
  * Create a configuration file `r10k.yaml`
  * Deploy the `production` environment
- * Add the `puppetlabs-stdlib` module to the Puppetfile
+ * Add the `puppetlabs-stdlib` and your `apache` module to the Puppetfile
  * Update the `production` environment
  * Add a new branch `development`
  * Deploy the `development` environment
@@ -71,7 +71,7 @@
 * Rename the `master´ branch to `production`
 * Create a configuration file `r10k.yaml`
 * Deploy the `production` environment
-* Add the `puppetlabs-stdlib` module to the Puppetfile
+* Add the `puppetlabs-stdlib` and your `apache` module to the Puppetfile
 * Update the `production` environment
 * Add a new branch `development`
 * Deploy the `development` environment
@@ -128,22 +128,24 @@ Create a configuration file `r10k.yaml`:
 Deploy the `production` environment:
 
     @@@ Sh
-    # r10k deploy environment production -c /etc/puppetlabs/puppet/r10k.yaml
+    # r10k deploy environment production -p -c /etc/puppetlabs/puppet/r10k.yaml
 
-Add the `puppetlabs-stdlib` module to the Puppetfile:
+Add the `puppetlabs-stdlib` and your `apache` module to the Puppetfile:
 
     @@@ Sh
     # vim /etc/puppetlabs/code/environments/production/Puppetfile
     mod "puppetlabs/stdlib", :latest
+    mod 'apache',
+      :git => '/usr/local/src/apache.git'
 
     # git add Puppetfile
-    # git commit -m 'stdlib module'
+    # git commit -m 'modules'
     # git push origin production
 
 Update the `production` environment:
 
      @@@ Sh
-    # r10k deploy environment production -c /etc/puppetlabs/puppet/r10k.yaml
+    # r10k deploy environment production -p -c /etc/puppetlabs/puppet/r10k.yaml
 
 Add a new branch `development`:
 
@@ -155,4 +157,4 @@ Add a new branch `development`:
 Deploy the `development` environment:
 
     @@@ Sh
-    # r10k deploy environment development -c /etc/puppetlabs/puppet/r10k.yaml
+    # r10k deploy environment development -p -c /etc/puppetlabs/puppet/r10k.yaml

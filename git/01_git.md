@@ -146,3 +146,58 @@ Resources you may be interested in:
  * http://try.github.com/
 
 ~~~ENDSECTION~~~
+
+
+!SLIDE smbullets
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Git
+
+* Objective:
+ * Manage your `apache` module with Git
+* Steps:
+ * Initialize a new Git repository
+ * Clone the repository
+ * Copy your `apache` module into the clone
+ * Add the `apache` module
+ * Commit your changes
+ * Push your changes
+
+
+!SLIDE supplemental exercises
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Git
+
+## Objective:
+
+****
+
+* Manage your `apache` module with Git
+
+## Steps:
+
+****
+
+* Initialize a new Git repository
+* Clone the repository
+* Copy your `apache` module into the clone
+* Add the `apache` module
+* Commit your changes
+* Push your changes
+
+
+!SLIDE supplemental solutions
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Proposed Solution
+
+****
+
+## Use Git
+
+****
+
+    @@@ Sh
+    # cd /usr/local/src/
+    # git init --bare apache.git
+    # git clone /usr/local/src/apache.git apache
+    # cp -Rf /etc/puppet/modules/apache/* /usr/local/src/apache/
+    # cd /usr/local/src/apache/
+    # git add apache
+    # git commit -m 'apache module'
+    # git push origin master
