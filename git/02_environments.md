@@ -1,30 +1,4 @@
 !SLIDE small
-# Static Puppet Environments
-
-    @@@ Puppet
-    [main]
-    server = puppet.example.com
-    environment = production
-    confdir = /etc/puppet
-
-    [agent]
-    report = true
-    show_diff = true
-
-    [production]
-    manifest = /etc/puppet/environments/production/manifests/site.pp
-    modulepath = /etc/puppet/environments/production/modules
-
-    [testing]
-    manifest = /etc/puppet/environments/testing/manifests/site.pp
-    modulepath = /etc/puppet/environments/testing/modules
-
-    [development]
-    manifest = /etc/puppet/environments/development/manifests/site.pp
-    modulepath = /etc/puppet/environments/development/modules
-
-
-!SLIDE small
 # Git using Static Puppet Environments
 
     @@@ Sh
@@ -58,3 +32,127 @@
 * Tool that allows you to manage your environment configurations in a source control repository (Git or SVN)
 * Based on the code in your control repo branches, r10k creates environments on your Master (dynamic environments), installs and updates the modules you want in each environment
 * `Control Manager` is a replacement for r10k in newer Puppet Enterprise versions (PE 2015.3)
+
+
+!SLIDE smbullets
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use r10k
+
+* Objective:
+ * Deploy environments and modules with r10k
+* Steps:
+ * Install `r10k`
+ * Initialize a new Git repository
+ * Add the content from the `control-repo`
+ * Rename the `master´ branch to `production`
+ * Create a configuration file `r10k.yaml`
+ * Deploy the `production` environment
+ * Add the `puppetlabs-stdlib` module to the Puppetfile
+ * Update the `production` environment
+ * Add a new branch `development`
+ * Deploy the `development` environment
+
+
+!SLIDE supplemental exercises
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use r10k
+
+## Objective:
+
+****
+
+* Deploy environments and modules with r10k
+
+## Steps:
+
+****
+
+* Install `r10k`
+* Initialize a new Git repository
+* Add the content from the `control-repo`
+* Rename the `master´ branch to `production`
+* Create a configuration file `r10k.yaml`
+* Deploy the `production` environment
+* Add the `puppetlabs-stdlib` module to the Puppetfile
+* Update the `production` environment
+* Add a new branch `development`
+* Deploy the `development` environment
+
+
+!SLIDE supplemental solutions
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Proposed Solution
+
+****
+
+## Use r10k
+
+****
+
+Install `r10k`:
+
+    @@@ Sh
+    # gem install r10k
+
+Initialize a new Git repository:
+
+    @@@ Sh
+    # git init --bare /usr/local/src/puppet.git
+
+Add the content from the `control-repo`:
+
+    @@@ Sh
+    # cd /usr/local/src/
+    # git clone https://github.com/puppetlabs/control-repo.git
+    # git clone /usr/local/src/puppet.git /usr/local/src/puppet
+    # cp -Rf control-repo/* puppet/
+
+Rename the `master´ branch to `production`:
+
+    @@@ Sh
+    # cd /usr/local/src/puppet/
+    # git add .
+    # git commit -m 'inital commit'
+    # git push origin master
+    # cd /usr/local/src/puppet.git/
+    # git branch -m master production
+
+Create a configuration file `r10k.yaml`:
+
+    @@@ Sh
+    # vim /etc/puppetlabs/puppet/r10k.yaml
+    :cachedir: '/opt/r10k/cache'
+
+    :sources:
+      :puppet:
+        remote: '/usr/local/src/puppet.git'
+        basedir: '/etc/puppetlabs/code/environments'
+
+Deploy the `production` environment:
+
+    @@@ Sh
+    # r10k deploy environment production -c /etc/puppetlabs/puppet/r10k.yaml
+
+Add the `puppetlabs-stdlib` module to the Puppetfile:
+
+    @@@ Sh
+    # vim /etc/puppetlabs/code/environments/production/Puppetfile
+    mod "puppetlabs/stdlib", :latest
+
+    # git add Puppetfile
+    # git commit -m 'stdlib module'
+    # git push origin production
+
+Update the `production` environment:
+
+     @@@ Sh
+    # r10k deploy environment production -c /etc/puppetlabs/puppet/r10k.yaml
+
+Add a new branch `development`:
+
+    @@@ Sh
+    # cd /etc/puppetlabs/code/environments/production/
+    # git checkout -b development
+    # git push -u origin development
+
+Deploy the `development` environment:
+
+    @@@ Sh
+    # r10k deploy environment development -c /etc/puppetlabs/puppet/r10k.yaml
