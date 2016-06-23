@@ -67,10 +67,12 @@ On the Puppet Master:
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Core Report Processors
 
 * Objective:
- * Use Core Report Processors
+ * Enable the `store` Core Report Processor
 * Steps:
- * Step 1
- * Step 2
+ * Configure `store` report processor in `puppet.conf`
+ * Set `reportdir` to `/var/lib/puppet/reports`
+ * Restart Puppet Master
+ * Have a look at the generated reports
 
 
 !SLIDE supplemental exercises
@@ -80,14 +82,16 @@ On the Puppet Master:
 
 ****
 
-* Use Core Report Processors
+* Enable the `store` Core Report Processor
 
 ## Steps:
 
 ****
 
-* Step 1
-* Step 2
+* Configure `store` report processor in `puppet.conf`
+* Set `reportdir` to `/var/lib/puppet/reports`
+* Restart Puppet Master 
+* Have a look at the generated reports
 
 
 !SLIDE supplemental solutions
@@ -99,10 +103,23 @@ On the Puppet Master:
 
 ****
 
-Some solution:
+Configure `store` report processor in `puppet.conf` and set `reportdir` to `/var/lib/puppet/reports`:
 
     @@@ Sh
-    # ...
+    # vim /etc/puppet/puppet.conf
+    [master]
+      reports = https,tagmail,store,log
+      reportdir = /var/lib/puppet/reports
+
+Restart Puppet Master:
+
+    @@@ Sh
+    # systemctl restart puppetserver
+
+Have a look at the generated reports:
+
+    @@@@ Sh
+    # ls /var/lib/puppet/reports/
 
 
 !SLIDE small

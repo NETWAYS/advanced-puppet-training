@@ -48,10 +48,15 @@ This is managed by Puppet
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Report Processors
 
 * Objective:
- * Use Report Processors
+ * Use `tagmail` Report Processor
 * Steps:
- * Step 1
- * Step 2
+ * Install `puppetlabs-tagmail` module
+ * Ensure that `report` and `pluginsync` are enabled
+ * Configure `tagmail` report processor in `puppet.conf`
+ * Create `tagmail.conf` using sendmail
+ * Send emails with tag `webserver` to `root@localhost`
+ * Set tag `webserver` for `apache` main class
+ * Apply and validate your configuration
 
 
 !SLIDE supplemental exercises
@@ -61,14 +66,19 @@ This is managed by Puppet
 
 ****
 
-* Use Report Processors
+* Use `tagmail` Report Processor
 
 ## Steps:
 
 ****
 
-* Step 1
-* Step 2
+* Install `puppetlabs-tagmail` module
+* Ensure that `report` and `pluginsync` are enabled
+* Configure `tagmail` report processor in `puppet.conf`
+* Create `tagmail.conf` using sendmail
+* Send emails with tag `webserver` to `root@localhost`
+* Set tag `webserver` for `apache` main class
+* Apply and validate your configuration
 
 
 !SLIDE supplemental solutions
@@ -80,7 +90,47 @@ This is managed by Puppet
 
 ****
 
-Some solution:
+Install `puppetlabs-tagmail` module:
 
     @@@ Sh
-    # ...
+    # puppet module install puppetlabs-tagmail
+
+Ensure that `report` and `pluginsync` are enabled:
+
+    @@@ Sh
+    # puppet config print report
+    true
+    # puppet config print pluginsync
+    true
+
+Configure `tagmail` report processor in `puppet.conf`:
+
+    @@@ Sh
+    # vim /etc/puppet/puppet.conf
+    [master]
+      reports = tagmail
+
+Send emails with tag `webserver` to `root@localhost`:
+
+    @@@ Sh
+    # vim /etc/puppet/tagmail.conf
+    [transport]
+    reportfrom = puppetmaster@training.vm
+    sendmail = /usr/sbin/sendmail
+
+    [tagmap]
+    webserver: root@localhost
+
+Set tag `webserver` for `apache` main class
+
+    @@@ Sh
+    # vim /usr/local/src/apache/examples/init.pp
+    class { 'apache':
+      tag => 'webserver',
+    }
+
+Apply and validate your configuration:
+
+    @@@ Sh
+    # puppet apply /usr/local/src/apache/examples/init.pp
+    # vim /var/mail/root
