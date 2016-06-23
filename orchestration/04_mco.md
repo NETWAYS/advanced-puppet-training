@@ -88,4 +88,7 @@
        restart, start, status, stop
     ...
 
-* `mco help <agent>:` Display agent documentation
+Display agent documentation:
+
+    @@@ Sh
+    mco help <agent>

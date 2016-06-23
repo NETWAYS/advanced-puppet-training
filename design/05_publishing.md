@@ -23,10 +23,10 @@
 !SLIDE noprint
 # Puppet Forge Sign Up
 
-<center><img src="../_images/sharing/puppetforge_sign_up.png" style="width:800px;height:483px;" alt="Puppet Forge Sign Up"/></center>
+<center><img src="../_images/design/puppetforge_sign_up.png" style="width:800px;height:483px;" alt="Puppet Forge Sign Up"/></center>
 
 
 !SLIDE printonly
 # Puppet Forge Sign Up
 
-<center><img src="../_images/sharing/puppetforge_sign_up.png" style="width:480px;height:290px;" alt="Puppet Forge Sign Up"/></center>
+<center><img src="../_images/design/puppetforge_sign_up.png" style="width:470px;height:284px;" alt="Puppet Forge Sign Up"/></center>

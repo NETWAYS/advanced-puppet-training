@@ -57,39 +57,34 @@ Remember that you do not need to run rspec-puppet-init when using puppetlabs_spe
 ~~~ENDSECTION~~~
 
 
-!SLIDE smbullets small
+!SLIDE small
 # RSpec Matchers
 
-* Validate successful catalog compilation:
+Validate successful catalog compilation:
 
-    <pre>
+    @@@ Sh
     it {should compile}
-    </pre>
 
-* Validate the catolog contains resources:
+Validate the catolog contains resources:
 
-    <pre>
+    @@@ Sh
     contain_{resource type}
-    </pre>
 
-* Validate that resources have specified attributes:
+Validate that resources have specified attributes:
 
-    <pre>
+    @@@ Sh
     with_{attribute}
     without_{attribute}
-    </pre>
 
-* Validate thate resources have relationships set:
+Validate thate resources have relationships set:
 
-    <pre>
+    @@@ Sh
     that_{relationship}
-    </pre>
 
-* Shortcut helpers combine matchers:
+Shortcut helpers combine matchers:
 
-    <pre>
+    @@@ Sh
     with, without
-    </pre>
 
 ~~~SECTION:handouts~~~
 
@@ -133,48 +128,44 @@ RSpec matchers can match exact values, regular expressions, or Ruby Procs. You c
 !SLIDE small
 # Global Installation
 
-* Install `rspec-puppet`:
+Install `rspec-puppet`:
 
-    <pre>
+    @@@ Sh
     # gem install rspec-puppet
-    </pre>
 
-* Install `puppetlabs_spec_helpers` to setup tests:
+Install `puppetlabs_spec_helpers` to setup tests:
 
-    <pre>
+    @@@ Sh
     # gem install puppetlabs_spec_helper
-    </pre>
 
 
-!SLIDE smbullets
+!SLIDE small
 # Module Configuration (1/2)
 
-* Create a module using the module tool:
+Create a module using the module tool:
 
-    <pre>
+    @@@ Sh
     # puppet module generate {username}-{modulename}
-    </pre>
 
-* Create Rakefile:
+Create Rakefile:
 
-    <pre>
+    @@@ Sh
     # require 'puppetlabs_spec_helper/rake_tasks'
-    </pre>
 
-* Update `spec/spec_helper.rb`:
+Update `spec/spec_helper.rb`:
 
-    <pre>
+    @@@ Sh
     # require 'puppetlabs_spec_helper/module_spec_helper'
-    </pre>
 
 
 !SLIDE smbullets
 # Module Configuration (2/2)
 
-* Create `.fixtures.yml`:
- * `rspec_puppet` compiles catalogs in a sandbox
- * It needs a minimal environment, including modulepath
- * It has to have entries for all module dependencies
+Create `.fixtures.yml`:
+ 
+* `rspec_puppet` compiles catalogs in a sandbox
+* It needs a minimal environment, including modulepath
+* It has to have entries for all module dependencies
 
     <pre>
     ---

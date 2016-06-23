@@ -7,7 +7,7 @@
 !SLIDE printonly
 # Training Environment
 
-<center><img src="../_images/training/training_environment.png" style="width:480px;height:234px;" alt="Training Environment"/></center>
+<center><img src="../_images/training/training_environment.png" style="width:470px;height:228px;" alt="Training Environment"/></center>
 
 ~~~SECTION:handouts~~~
 

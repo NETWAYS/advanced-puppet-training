@@ -7,7 +7,7 @@
 !SLIDE printonly
 # Lifecycle
 
-<center><img src="../_images/review/puppet_workflow.png" style="width:400px;height:330px;" alt="Lifecycle"/></center>
+<center><img src="../_images/review/puppet_workflow.png" style="width:470px;height:323px;" alt="Lifecycle"/></center>
 
 ~~~SECTION:handouts~~~
 
