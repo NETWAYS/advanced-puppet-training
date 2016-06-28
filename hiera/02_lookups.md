@@ -84,10 +84,10 @@ specific solutions like Foreman are available which use an existing datastore as
 !SLIDE noprint
 # Resolution Hierarchy
 
-<center><img src="../_images/hiera/hiera.png" style="width:759px;height:435px;" alt="Resolution Hierarchy"/></center>
+<center><img src="../_images/hiera/hiera.png" style="width:577px;height:361px;" alt="Resolution Hierarchy"/></center>
 
 
 !SLIDE printonly
 # Resolution Hierarchy
 
-<center><img src="../_images/hiera/hiera.png" style="width:480px;height:275px;" alt="Resolution Hierarchy"/></center>
+<center><img src="../_images/hiera/hiera.png" style="width:470px;height:294px;" alt="Resolution Hierarchy"/></center>
