@@ -1,5 +1,5 @@
 !SLIDE small
-# Check Settings (1/2)
+# Check Settings (1/3)
 
 Value of one setting:
 
@@ -27,7 +27,7 @@ Value of all settings:
 
 
 !SLIDE small
-# Check Settings (2/2)
+# Check Settings (2/3)
 
 Values of config sections:
 
@@ -48,3 +48,34 @@ Specify environment:
 
     @@@ Sh
     # puppet config print [--environment <ENVIRONMENT>]
+
+!SLIDE small
+# Check Settings (2/3)
+
+Alternative syntax:
+
+    @@@ Sh
+    # puppet [agent|master] --configprint <SETTING NAME>
+    # puppet agent --configprint ssldir
+    /etc/puppetlabs/puppet/ssl
+
+Generate a configuration file including all defaults and explanation:
+
+    @@@ Sh
+    # puppet agent --genconfig
+    # puppet agent --genconfig > /etc/puppetlabs/puppet/puppet.conf
+
+~~~SECTION:handouts~~~
+
+****
+
+All these commands are really helpful to verify settings, especially if defaults are
+changed from version to version or platform to platform. The "--genconfig" option is
+nice for all the explanation helping to find the affecting setting without know its name.
+
+You can furthermore use them for scripting without hardcoded paths.
+
+    @@@ Sh
+    # rm -rf $(puppet agent --configprint ssldir)
+
+~~~ENDSECTION~~~

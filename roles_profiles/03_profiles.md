@@ -47,7 +47,7 @@
 * Install `puppetlabs-mysql` module
 * Create a `database` profile for mysql
 * Create a `webserver` profile for apache
-* Test and apply your configuratio
+* Test and apply your configuration
 
 
 !SLIDE supplemental solutions
