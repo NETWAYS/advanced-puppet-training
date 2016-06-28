@@ -1,11 +1,4 @@
-!SLIDE smbullets 
-# Defined Resource Type
-
-* Very similar to parameterized classes
-* But can be used multiple times
-
-
-!SLIDE small
+!SLIDE small smbullets
 # Defined Resource Type
 
     @@@ Puppet
@@ -14,13 +7,12 @@
       String                   $vhostname = $title,
       String                   $docroot   = undef,
     ) {
-
       include apache::params
 
       if $docroot {
         $vhost_docroot = $docroot
       } else {
-        $vhost_docroot = "${apache_vhostdir}/${vhostname}.conf"
+        $vhost_docroot = "${apache_vhostdir}/${vhostname}"
       }
 
       file { "${apache_vhostd}/${vhostname}.conf":
@@ -29,3 +21,6 @@
         notify  => Service['httpd'],
       }
     }
+
+* Very similar to parameterized classes
+* But can be used multiple times

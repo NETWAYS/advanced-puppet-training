@@ -30,8 +30,12 @@
 
 ~~~SECTION:handouts~~~
 
+****
+
 Facter returns key value pairs named facts. In older versions these were simple string representations, newer versions
 also structured facts are possible which means a array or hash is returned. 
+
+~~~PAGEBREAK~~~
 
 The facts are used as Puppet's inventory tool and are generated before requesting a catalog from the master. The master
 can use facts in conditionals or templates during catalog compilation but it is impossible to change its values during
