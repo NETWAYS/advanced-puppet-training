@@ -20,7 +20,7 @@ Same as:
       enable => true,
     }
 
-Same as:
+Same as (but not good style according to the style guide):
 
     @@@ Puppet
     Service['ntpd'] <~ File['/etc/ntp.conf'] <- Package['ntp']

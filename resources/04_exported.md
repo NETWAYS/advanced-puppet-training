@@ -117,9 +117,9 @@ Collect exported resources:
 * Objective:
  * Create a haproxy configuration using exported resources
 * Steps:
+ * Install `puppetlabs-haproxy` module
  * Expand the `apache` module
  * Declare an exported resource `haproxy::balancermember` in `config.pp`
- * Install `puppetlabs-haproxy` module
  * Install `haproxy` and collect exported resources
  * Test and apply your configuration
 
@@ -137,9 +137,9 @@ Collect exported resources:
 
 ****
 
+* Install `puppetlabs-haproxy` module
 * Expand the `apache` module
 * Declare an exported resource `haproxy::balancermember` in `config.pp`
-* Install `puppetlabs-haproxy` module
 * Install `haproxy` and collect exported resources 
 * Test and apply your configuration
 
@@ -154,6 +154,7 @@ Collect exported resources:
 ****
 
     @@@ Sh
+    # puppet module install puppetlabs-haproxy
     # vim /etc/puppet/modules/apache/manifests/config.pp
     class apache::config (
     ) inherits apache::params {

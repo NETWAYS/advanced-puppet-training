@@ -57,7 +57,8 @@ Either operand can be a search expression that evaluates as true
       groups  => 'webadmins',
     }
 
-    User <| (groups == 'dba' or groups == 'sysadmin') or title
+    User <| (groups == 'dba' or groups == 'sysadmin')
+            or title == 'luke' |>
 
 The users luke, james, jeff will be created, but brad will not.
 

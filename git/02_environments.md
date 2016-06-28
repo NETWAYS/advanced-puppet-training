@@ -43,7 +43,7 @@
  * Install `r10k`
  * Initialize a new Git repository
  * Add the content from the `control-repo`
- * Rename the `master´ branch to `production`
+ * Rename the `master` branch to `production`
  * Create a configuration file `r10k.yaml`
  * Deploy the `production` environment
  * Add the `puppetlabs-stdlib` and your `apache` module to the Puppetfile
@@ -68,7 +68,7 @@
 * Install `r10k`
 * Initialize a new Git repository
 * Add the content from the `control-repo`
-* Rename the `master´ branch to `production`
+* Rename the `master` branch to `production`
 * Create a configuration file `r10k.yaml`
 * Deploy the `production` environment
 * Add the `puppetlabs-stdlib` and your `apache` module to the Puppetfile
@@ -104,7 +104,7 @@ Add the content from the `control-repo`:
     # git clone /usr/local/src/puppet.git /usr/local/src/puppet
     # cp -Rf control-repo/* puppet/
 
-Rename the `master´ branch to `production`:
+Rename the `master` branch to `production`:
 
     @@@ Sh
     # cd /usr/local/src/puppet/

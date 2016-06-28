@@ -19,7 +19,7 @@ Example usage:
       ensure => present,
       path   => '/etc/bashrc',
       line   => 'export HTTP_PROXY=http://proxy:8080',
-      match  => 'export /HTTP_PROXY=/',
+      match  => '^export\ HTTP_PROXY\=',
     }
 
 Help:
