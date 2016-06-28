@@ -5,16 +5,10 @@
 * Collect and use them on other nodes
 
 
-!SLIDE noprint
+!SLIDE
 # Exported Resources
 
-<center><img src="../_images/resources/exported_resources.png" style="width:503px;height:425px;" alt="Exported Resources"/></center>
-
-
-!SLIDE printonly
-# Exported Resources
-
-<center><img src="../_images/resources/exported_resources.png" style="width:480px;height:406px;" alt="Exported Resources"/></center>
+<center><img src="../_images/resources/exported_resources.png" style="width:429px;height:468px;" alt="Exported Resources"/></center>
 
 
 !SLIDE smbullets small

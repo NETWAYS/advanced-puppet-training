@@ -13,7 +13,7 @@
 * Develop modules and
 * Classify them to nodes
 
-<center><img src="../_images/roles_profiles/legacy_classification.png" style="width:774px;height:257px;" alt="Legacy Classification"/></center>
+<center><img src="../_images/roles_profiles/legacy_classification.png" style="width:800px;height:204px;" alt="Legacy Classification"/></center>
 
 
 !SLIDE smbullets printonly
@@ -22,7 +22,7 @@
 * Develop modules and
 * Classify them to nodes
 
-<center><img src="../_images/roles_profiles/legacy_classification.png" style="width:480px;height:159px;" alt="Legacy Classification"/></center>
+<center><img src="../_images/roles_profiles/legacy_classification.png" style="width:470px;height:120px;" alt="Legacy Classification"/></center>
 
 
 !SLIDE smbullets

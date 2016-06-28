@@ -10,7 +10,7 @@
 !SLIDE 
 # Virtual Resources
 
-<center><img src="../_images/resources/virtual_resources.png" style="width:365px;height:456px;" alt="Virtual Resources"/></center>
+<center><img src="../_images/resources/virtual_resources.png" style="width:355px;height:455px;" alt="Virtual Resources"/></center>
 
 
 !SLIDE small

@@ -1,13 +1,13 @@
 !SLIDE noprint
 # Workflow
 
-<center><img src="../_images/review/puppet_workflow.png" style="width:800px;height:549px;" alt="Lifecycle"/></center>
+<center><img src="../_images/review/puppet_workflow.png" style="width:516px;height:456px;" alt="Workflow"/></center>
 
 
 !SLIDE printonly
 # Lifecycle
 
-<center><img src="../_images/review/puppet_workflow.png" style="width:470px;height:323px;" alt="Lifecycle"/></center>
+<center><img src="../_images/review/puppet_workflow.png" style="width:470px;height:418px;" alt="Workflow"/></center>
 
 ~~~SECTION:handouts~~~
 
