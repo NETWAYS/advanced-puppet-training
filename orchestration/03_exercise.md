@@ -90,3 +90,5 @@ Test orchestration:
 
     @@@ Sh
     # mco ping
+
+In a productive environment you should not run a message queue without securing it!

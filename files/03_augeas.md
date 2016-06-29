@@ -98,8 +98,6 @@ Help:
     X11Forwarding = yes
     ...
 
-
-    @@@ Puppet
     # mkdir -p /etc/puppet/modules/ssh/{manifests,examples}
     # vim /etc/puppet/modules/ssh/manifests/augeas.pp
     class ssh::augeas {
@@ -110,8 +108,8 @@ Help:
         ],
       }
 
-   # vim /etc/puppet/modules/ssh/examples/augeas.pp
-   include ssh::augeas
-
-   # puppet apply --noop /etc/puppet/modules/ssh/examples/augeas.pp
-   # puppet apply /etc/puppet/modules/ssh/examples/augeas.pp
+    # vim /etc/puppet/modules/ssh/examples/augeas.pp
+    include ssh::augeas
+ 
+    # puppet apply --noop /etc/puppet/modules/ssh/examples/augeas.pp
+    # puppet apply /etc/puppet/modules/ssh/examples/augeas.pp

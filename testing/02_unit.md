@@ -246,7 +246,7 @@ Write unit tests in `spec/classes/apache_spec.rb`:
 
     describe('apache', :type => :class) do
 
-      describe 'when call on an unsupportred operatingsystem' do
+      describe 'when call on an unsupported operatingsystem' do
         let(:facts) { {:osfamily => 'foo'} }
         it do
           expect {
@@ -280,4 +280,4 @@ Write unit tests in `spec/classes/apache_spec.rb`:
 
     end
 
-Run unit tests and fix problems if appeared:
+Run unit tests and fix problems if appeared.

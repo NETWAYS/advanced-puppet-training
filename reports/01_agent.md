@@ -20,7 +20,8 @@ The Puppet Agent can send a report to the Puppet Master after every puppet run
 Basic Example:
 
     info: Applying configuration version '1328975856'
-    Notice: /Stage[main]/Main/File[/tmp/foo]/mode: mode changed '0444' to '0644'
+    Notice: /Stage[main]/Main/File[/tmp/foo]/mode: 
+       mode changed '0444' to '0644'
     notice: Finished catalog run in 0.03 seconds
 
 * Metadata about the node, its environment and Puppet version, and the catalog used in the run

@@ -4,7 +4,7 @@
 * Objective:
  * Add a pre-commit hook for Puppet Lint checking
 * Steps:
- * Install `puppet-lint` via `gem`
+ * Install `puppet-lint` via `yum` or `gem`
  * Clone `https://github.com/drwahl/puppet-git-hooks` repo
  * Symlink the pre-commit file to `.git/hooks/pre-commit` of your repository
  * Produce a style guide error and test the pre-commit hook
@@ -23,7 +23,7 @@
 
 ****
 
-* Install `puppet-lint` via `gem`
+* Install `puppet-lint` via `yum` or `gem`
 * Clone `https://github.com/drwahl/puppet-git-hooks` repo
 * Symlink the pre-commit file to `.git/hooks/pre-commit` of your repository
 * Produce a style guide error and test the pre-commit hook
@@ -38,7 +38,12 @@
 
 ****
 
-Install `puppet-lint` via `gem`:
+Install `puppet-lint` via `yum` (requires EPEL repository):
+
+    @@@ Sh
+    # yum install rubygem-puppet-lint
+
+Install `puppet-lint` via `gem` (gives typically a newer version):
 
     @@@ Sh
     # gem install puppet-lint

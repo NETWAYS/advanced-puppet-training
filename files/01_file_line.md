@@ -76,7 +76,6 @@ Help:
     # puppet module install puppetlabs-stdlib
     # mkdir -p /etc/puppet/modules/apache/{manifests,examples}
 
-    @@@ Vim
     # vim /etc/puppet/modules/apache/manifests/init.pp
     class apache {
       package { 'httpd':
@@ -99,6 +98,5 @@ Help:
     # vim /etc/puppet/modules/apache/examples/init.pp
     include apache
 
-    @@@ Sh
     # puppet apply --noop /etc/puppet/modules/apache/examples/init.pp
     # puppet apply /etc/puppet/modules/apache/examples/init.pp

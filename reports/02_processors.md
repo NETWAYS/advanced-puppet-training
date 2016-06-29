@@ -108,7 +108,7 @@ Configure `store` report processor in `puppet.conf` and set `reportdir` to `/var
     @@@ Sh
     # vim /etc/puppet/puppet.conf
     [master]
-      reports = https,tagmail,store,log
+      reports = store
       reportdir = /var/lib/puppet/reports
 
 Restart Puppet Master:
@@ -118,7 +118,7 @@ Restart Puppet Master:
 
 Have a look at the generated reports:
 
-    @@@@ Sh
+    @@@ Sh
     # ls /var/lib/puppet/reports/
 
 

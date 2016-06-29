@@ -108,6 +108,8 @@ Configure `tagmail` report processor in `puppet.conf`:
     @@@ Sh
     # vim /etc/puppet/puppet.conf
     [master]
+      #reports = store
+      #reportdir = /var/lib/puppet/reports
       reports = tagmail
 
 Send emails with tag `webserver` to `root@localhost`:

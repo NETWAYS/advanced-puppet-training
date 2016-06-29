@@ -26,6 +26,13 @@ Checks requirements on servers:
 * Uses native tools
 * Configuration management agnostic
 
+~~~SECTION:handouts~~~
+
+****
+
+More on Serverspec including a overview of the resource types: http://serverspec.org/
+
+~~~ENDSECTION~~~
 
 !SLIDE small
 # Serverspec - Installation

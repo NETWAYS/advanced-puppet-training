@@ -39,6 +39,7 @@
 ****
 
 Create a new file in your git repository `.git/hooks/pre-commit`:
+
     @@@ Sh
     # touch .git/hooks/pre-commit
 
@@ -101,7 +102,7 @@ Produce a syntax error and test the pre-commit hook:
     class apache {
     ...
 
-    # git add apache/manifests/site.pp
+    # git add apache/manifests/init.pp
     # git commit -m 'syntax check'
     Checking puppet manifest syntax for ...
     Error: One or more file(s) specified did not exist:

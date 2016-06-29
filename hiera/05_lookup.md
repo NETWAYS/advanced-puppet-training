@@ -4,6 +4,7 @@
 * Returns the first value found by default
 * Configure it to merge multiple values into one
 * Replaces `hiera`, `hiera_array`, and `hiera_hash` functions of Hiera 3
+* Adds support for environment data and data in modules
 
 
 !SLIDE small
@@ -36,6 +37,7 @@ Do a deep hash merge lookup of user data, but let higher priority sources remove
 Puppet apply:
 
     @@@ Sh
+    # puppet apply -e "notice(lookup('message'))"
     # puppet apply -e "notice(hiera('message'))"
 
 Hiera command line tool:

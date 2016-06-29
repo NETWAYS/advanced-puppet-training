@@ -15,3 +15,5 @@ A custom **:rvalue** function:
       type => :rvalue do |args|
       ...
     end
+
+It will always return the output of the last line executed
