@@ -35,10 +35,9 @@ Help:
  * Use the `file_line` resource type
 * Steps:
  * Install module `puppetlabs-stdlib`
- * Create a new module called `apache`
- * Manage package `httpd`
- * Manage file `/var/www/html/index.html`
- * Make sure that the Indexpage contains `<h1>Welcome to the training!</h1>` using `file_line`
+ * Create a new module called `ssh`
+ * Create a new subclass called `file_line`
+ * Make sure that `GSSAPIAuthentication` is set to `no` using file_line
  * Add a smoke test and apply your manifest
 
 
@@ -56,10 +55,9 @@ Help:
 ****
 
 * Install module `puppetlabs-stdlib`
-* Create a new module called `apache`
-* Manage package `httpd`
-* Manage file `/var/www/html/index.html`
-* Make sure that the Indexpage contains `<h1>Welcome to the training!</h1>` using `file_line`
+* Create a new module called `ssh`
+* Create a new subclass called `file_line`
+* Make sure that `GSSAPIAuthentication` is set to `no` using file_line
 * Add a smoke test and apply your manifest
 
 
@@ -74,29 +72,20 @@ Help:
 
     @@@ Sh
     # puppet module install puppetlabs-stdlib
-    # mkdir -p /etc/puppet/modules/apache/{manifests,examples}
+    # mkdir -p /etc/puppet/modules/ssh/{manifests,examples}
 
-    # vim /etc/puppet/modules/apache/manifests/init.pp
-    class apache {
-      package { 'httpd':
+    # vim /etc/puppet/modules/ssh/manifests/file_line.pp
+    class ssh::file_line {
+      file_line { 'GSSAPIAuthentication':
         ensure => present,
-      }
-
-      file { '/var/www/html/index.html':
-        ensure => file,
-        owner  => 'root',
-        group  => 'root',
-      }
-
-      file_line { 'Indexpage':
-        ensure => present,
-        path   => '/var/www/html/index.html',
-        line   => '<h1>Welcome to the training!</h1>',
+        path   => '/etc/ssh/sshd_config',
+        line   => 'GSSAPIAuthentication no',
+        match  => '^GSSAPIAuthentication',
       }
     }
 
-    # vim /etc/puppet/modules/apache/examples/init.pp
-    include apache
+    # vim /etc/puppet/modules/ssh/examples/file_line.pp
+    include ssh::file_line
 
-    # puppet apply --noop /etc/puppet/modules/apache/examples/init.pp
-    # puppet apply /etc/puppet/modules/apache/examples/init.pp
+    # puppet apply --noop /etc/puppet/modules/ssh/examples/file_line.pp
+    # puppet apply /etc/puppet/modules/ssh/examples/file_line.pp

@@ -130,3 +130,23 @@ The users luke, james, jeff will be created, but brad will not.
     # puppet parser validate /etc/puppet/modules/apache/manifests/install.pp
     # puppet apply --noop /etc/puppet/modules/apache/examples/init.pp
     # puppet apply /etc/puppet/modules/apache/examples/init.pp
+
+
+!SLIDE small
+# Optional Usage of Resource Collectors 
+
+For Dependencies:
+
+    @@@ Puppet
+    Yumrepo['epel'] -> Package <| tag == 'epel' |>
+    Yumrepo['puppetlabs'] -> Package <| tag == 'puppetlabs' |>
+
+To provide defaults (will override attributes):
+
+    @@@ Puppet
+    User <| group == sysadmin |> {
+      shell => '/usr/bin/bash',
+    }
+    Package <| |> {
+      provider => 'yum',
+    }

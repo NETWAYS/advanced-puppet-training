@@ -20,3 +20,63 @@ Help:
 
     @@@ Puppet
     # puppet describe resources
+
+
+!SLIDE smbullets
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Resources Resource Type
+
+* Objective:
+ * Use the `resource` resource type to purge host entries
+* Steps:
+ * Create a new manifest called `hosts`
+ * Manage the host entries for `localhost` and `localhost6`
+ * Purge all other host entries
+ * Apply your manifest
+
+
+!SLIDE supplemental exercises
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use file_line
+
+## Objective:
+
+****
+
+* Use the `resource` resource type to purge host entries
+
+## Steps:
+
+****
+
+* Create a new manifest called `hosts`
+* Manage the host entries for `localhost` and `localhost6`
+* Purge all other host entries
+* Apply your manifest
+
+
+!SLIDE supplemental solutions
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Proposed Solution
+
+****
+
+## Use the `resource` resource type to purge host entries
+
+****
+
+    @@@ Sh
+    # vi hosts.pp
+    host {'localhost.localdomain':
+      ip           => '127.0.0.1',
+      host_aliases => [ 'localhost' ],
+    }
+    
+    host {'localhost6.localdomain6':
+      ip           => '::1',
+      host_aliases => 'localhost6',
+    }
+    
+    resources { 'host':
+      purge => true,
+    }
+
+    # puppet apply --noop hosts.pp
+    # puppet apply hosts.pp

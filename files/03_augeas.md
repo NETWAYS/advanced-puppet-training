@@ -54,10 +54,10 @@ Help:
 * Steps:
  * Install package `augeas`
  * Use `augtool` to list `/etc/ssh/sshd_config`
- * Create a new module called `ssh`
  * Create a new subclass called `augeas`
  * Make sure that `X11Forwarding` is set to `no` using augeas
  * Add a smoke test and apply your manifest 
+ * Optional: Add a smoke test using your both subclasses and apply it
 
 
 !SLIDE supplemental exercises
@@ -75,11 +75,13 @@ Help:
 
 * Install package `augeas`
 * Use `augtool` to list `/etc/ssh/sshd_config`
-* Create a new module called `ssh`
 * Create a new subclass called `augeas`
 * Make sure that `X11Forwarding` is set to `no` using augeas
 * Add a smoke test and apply your manifest
 
+### Optional
+
+* Add a smoke test using your both subclasses and apply it
 
 !SLIDE supplemental solutions
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Proposed Solution
@@ -98,7 +100,6 @@ Help:
     X11Forwarding = yes
     ...
 
-    # mkdir -p /etc/puppet/modules/ssh/{manifests,examples}
     # vim /etc/puppet/modules/ssh/manifests/augeas.pp
     class ssh::augeas {
       augeas { "sshd_config":
@@ -107,6 +108,7 @@ Help:
           "set X11Forwarding no",
         ],
       }
+    }
 
     # vim /etc/puppet/modules/ssh/examples/augeas.pp
     include ssh::augeas

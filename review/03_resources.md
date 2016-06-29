@@ -24,6 +24,37 @@
 
 
 !SLIDE smbullets small
+# Resource Defaults
+
+Global defaults
+
+    @@@ Puppet
+    File {
+      owner => 'root',
+      group => 'root',
+      mode  => '0644',
+    }
+
+Block based defaults (new with Puppet 4)
+
+    @@@ Puppet
+    file {
+      default:
+        mode   => '0600',
+        owner  => 'root',
+        group  => 'root',
+        ensure => file,
+      ;
+      '/etc/ssh_host_key':
+      ;
+      '/etc/ssh_host_dsa_key.pub':
+        mode => '0644',
+      ;
+    }
+
+
+
+!SLIDE smbullets small
 # Resource Relationships
 
     @@@ Puppet
