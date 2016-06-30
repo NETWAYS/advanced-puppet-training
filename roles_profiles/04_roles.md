@@ -23,28 +23,6 @@
 * If a node requires two roles, it has by definition become a new role
 * A single role can be applied to many nodes, however
 
-<center><img src="../_images/roles_profiles/legacy_classification.png" style="width:800px;height:204px;" alt="Legacy Classification"/></center>
-
-
-!SLIDE smbullets printonly
-# Mapping Nodes to Roles
-
-**A node can only have one role!**
-
-* If a node requires two roles, it has by definition become a new role
-* A single role can be applied to many nodes, however
-
-<center><img src="../_images/roles_profiles/legacy_classification.png" style="width:470px;height:120px;" alt="Legacy Classification"/></center>
-
-
-!SLIDE smbullets noprint
-# Mapping Nodes to Roles
-
-**A node can only have one role!**
-
-* If a node requires two roles, it has by definition become a new role
-* A single role can be applied to many nodes, however
-
 <center><img src="../_images/roles_profiles/role_classification.png" style="width:800px;height:116px;" alt="Role Classification"/></center>
 
 

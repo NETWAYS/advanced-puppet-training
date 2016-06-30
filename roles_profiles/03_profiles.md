@@ -19,6 +19,22 @@
 * Create a code layer responsible for implementation
 
 
+!SLIDE smbullets noprint
+# Mapping Nodes to Profiles
+
+* Modules are grouped to profiles
+
+<center><img src="../_images/roles_profiles/profile_classification.png" style="width:800px;height:204px;" alt="Profile Classification"/></center>
+
+
+!SLIDE smbullets printonly
+# Mapping Nodes to Profiles
+
+* Modules are grouped to profiles
+
+<center><img src="../_images/roles_profiles/profile_classification.png" style="width:470px;height:120px;" alt="Profile Classification"/></center>
+
+
 !SLIDE smbullets 
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Designing Profiles
 
