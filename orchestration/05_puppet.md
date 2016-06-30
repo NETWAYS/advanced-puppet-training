@@ -79,6 +79,7 @@ Discover how many mailservers are running:
 * Steps:
  * Install MCollective Puppet Agent Plugin
  * Test Puppet orchestration
+ * Optional: Use Puppet to get the facts inventory up and running
 
 
 !SLIDE supplemental exercises
@@ -97,6 +98,9 @@ Discover how many mailservers are running:
 * Install MCollective Puppet Agent Plugin
 * Test Puppet orchestration
 
+### Optional
+
+* Use Puppet to get the facts inventory up and running
 
 !SLIDE supplemental solutions
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Proposed Solution
@@ -107,12 +111,32 @@ Discover how many mailservers are running:
 
 ****
 
-Install MCollective Puppet Agent Plugin:
+### Install MCollective Puppet Agent Plugin:
 
     @@@ Sh
-    # yum install mcollective-puppet-agent
+    # git clone https://github.com/puppetlabs/mcollective-puppet-agent /opt/puppetlabs/mcollective/plugins/mcollective
+    # systemctl restart mcollective.service
 
-Test Puppet orchestration:
+### Test Puppet orchestration:
+
+Behaviour changes depending on the fact if the agent is running or not. If it is running commands like `runonce` will take
+place immediately but can not take arguments like `--noop`. If it is stopped commands will be splayed by default.
 
     @@@ Sh
-    # mco rpc puppet runonce
+    # mco puppet status
+    # mco puppet runonce --no-splay
+    # sleep 10
+    # mco puppet status
+    # mco puppet summary
+
+### Use Puppet to get the facts inventory up and running
+
+There is also an agent for gathering the facts but it can be quite slow, so the default is using a precreated yaml inventory.
+How to get this up and running is explained in https://docs.puppet.com/mcollective/plugin_directory/facter_via_yaml.html.
+
+Alternative add a fact manual to the file `/etc/puppetlabs/mcollective/facts.yaml` for testing.
+
+    @@@ Sh
+    # echo "osfamily=RedHat" >> /etc/puppetlabs/mcollective/facts.yaml
+    # mco puppet runonce -F osfamily=Debian
+    # mco puppet runonce -F osfamily=RedHat

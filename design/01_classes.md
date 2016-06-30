@@ -161,15 +161,11 @@ Rework the main apache class:
       Hash                      $vhosts     = {},
     ) inherits apache::params {
 
-      Class['apache::install']
-        -> Class['apache::config']
-        ~> Class['apache::service']
-      Class['apache::install']
-        ~> Class['apache::service']
-
-      include apache::install
-      include apache::config
-      include apache::service
+      class{'apache::install':}
+      ->
+      class{'apache::config':}
+      ~>
+      class{'apache::service':}
     }
 
 Review the `apache::params` class:
@@ -208,6 +204,8 @@ Create the `apache::install` class:
           'RedHat': {
             package {'mod_ssl':
               ensure => installed,
+              # until we move this to a seperate class or defined resource
+              notify => Class['apache::service']
             }
           }
           default: {

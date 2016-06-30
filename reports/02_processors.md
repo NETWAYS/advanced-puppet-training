@@ -189,3 +189,98 @@ all,!testing: admins@example.com
 webserver,production: webadmin@example.com
 security: secteam@example.com
 </pre>
+
+
+!SLIDE smbullets
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Report Processors
+
+* Objective:
+ * Use `tagmail` Report Processor
+* Steps:
+ * Install `puppetlabs-tagmail` module
+ * Ensure that `report` and `pluginsync` are enabled
+ * Configure `tagmail` report processor in `puppet.conf`
+ * Create `tagmail.conf` using sendmail
+ * Send emails with tag `webserver` to `root@localhost`
+ * Set tag `webserver` for `apache` main class
+ * Apply and validate your configuration
+
+
+!SLIDE supplemental exercises
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Report Processors
+
+## Objective:
+
+****
+
+* Use `tagmail` Report Processor
+
+## Steps:
+
+****
+
+* Install `puppetlabs-tagmail` module
+* Ensure that `report` and `pluginsync` are enabled
+* Configure `tagmail` report processor in `puppet.conf`
+* Create `tagmail.conf` using sendmail
+* Send emails with tag `webserver` to `root@localhost`
+* Set tag `webserver` for `apache` main class
+* Apply and validate your configuration
+
+
+!SLIDE supplemental solutions
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Proposed Solution
+
+****
+
+## Use Report Processors
+
+****
+
+Install `puppetlabs-tagmail` module:
+
+    @@@ Sh
+    # puppet module install puppetlabs-tagmail
+
+Ensure that `report` and `pluginsync` are enabled:
+
+    @@@ Sh
+    # puppet config print report
+    true
+    # puppet config print pluginsync
+    true
+
+Configure `tagmail` report processor in `puppet.conf`:
+
+    @@@ Sh
+    # vim /etc/puppet/puppet.conf
+    [master]
+      #reports = store
+      #reportdir = /var/lib/puppet/reports
+      reports = tagmail
+
+Send emails with tag `webserver` to `root@localhost`:
+
+    @@@ Sh
+    # vim /etc/puppet/tagmail.conf
+    [transport]
+    reportfrom = puppetmaster@training.vm
+    sendmail = /usr/sbin/sendmail
+
+    [tagmap]
+    webserver: root@localhost
+
+Set tag `webserver` for `apache` main class
+
+    @@@ Sh
+    # vim /usr/local/src/apache/examples/init.pp
+    class { 'apache':
+      tag => 'webserver',
+    }
+
+Apply and validate your configuration:
+
+    @@@ Sh
+    # puppet apply /usr/local/src/apache/examples/init.pp
+    # vim /var/mail/root
+

@@ -33,6 +33,7 @@
    {"section":"git"},
    {"section":"facts"},
    {"section":"functions"},
+   {"section":"types_providers"},
    {"section":"validation"},
    {"section":"testing"},
    {"section":"orchestration"},

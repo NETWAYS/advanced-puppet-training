@@ -13,6 +13,12 @@
 * Puppet will inform you when changes occur
 * Can monitor any resource
 
+~~~SECTION:notes~~~
+
+Tell the student that you can manage and audit an attribute, but it will result in
+an additional audit event after Puppet reverted the drift.
+
+~~~ENDSECTION~~~
 
 !SLIDE small
 # Using Audit Metaparameter
@@ -25,18 +31,18 @@
 
 <pre>
 # puppet apply audit.pp
-notice: /Stage[main]//File[/etc/motd]/ensure: audit change: newly-recorded v...
-notice: /Stage[main]//File[/etc/motd]/content: audit change: newly-recorded ...
-notice: /Stage[main]//File[/etc/motd]/owner: audit change: newly-recorded va...
-notice: /Stage[main]//File[/etc/motd]/group: audit change: newly-recorded va...
-notice: /Stage[main]//File[/etc/motd]/mode: audit change: newly-recorded val...
+notice: File[/etc/motd]/ensure: audit change: newly-recorded v...
+notice: File[/etc/motd]/content: audit change: newly-recorded ...
+notice: File[/etc/motd]/owner: audit change: newly-recorded va...
+notice: File[/etc/motd]/group: audit change: newly-recorded va...
+notice: File[/etc/motd]/mode: audit change: newly-recorded val...
 [...]
 notice: Finished catalog run in 0.02 seconds
 # echo "** Externally Modified **" >> /etc/motd
 # puppet apply audit.pp
-notice: /Stage[main]//File[/etc/motd]/content: audit change: previously reco...
-notice: /Stage[main]//File[/etc/motd]/ctime: audit change: previously record...
-notice: /Stage[main]//File[/etc/motd]/mtime: audit change: previously record...
+notice: File[/etc/motd]/content: audit change: previously reco...
+notice: File[/etc/motd]/ctime: audit change: previously record...
+notice: File[/etc/motd]/mtime: audit change: previously record...
 notice: Finished catalog run in 0.02 seconds
 # cat /etc/motd
 This is managed by Puppet
@@ -45,40 +51,40 @@ This is managed by Puppet
 
 
 !SLIDE smbullets 
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Report Processors
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Auditing
 
 * Objective:
- * Use `tagmail` Report Processor
+ * Use Puppet for auditing
 * Steps:
- * Install `puppetlabs-tagmail` module
- * Ensure that `report` and `pluginsync` are enabled
- * Configure `tagmail` report processor in `puppet.conf`
- * Create `tagmail.conf` using sendmail
- * Send emails with tag `webserver` to `root@localhost`
- * Set tag `webserver` for `apache` main class
- * Apply and validate your configuration
+ * Audit all attributes of `/etc/ssh/sshd_config`
+ * Manage owner, group and mode and audit its content of '/etc/resolv.conf`
+ * Apply this manifest to record the value
+ * Change the content of both files
+ * Apply the manifest to get audit changes
+ * Change the mode of both files to `0666`
+ * Apply the manifest to get audit changes 
 
 
 !SLIDE supplemental exercises
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Report Processors
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Auditing
 
 ## Objective:
 
 ****
 
-* Use `tagmail` Report Processor
+* Use Puppet for auditing
 
 ## Steps:
 
 ****
 
-* Install `puppetlabs-tagmail` module
-* Ensure that `report` and `pluginsync` are enabled
-* Configure `tagmail` report processor in `puppet.conf`
-* Create `tagmail.conf` using sendmail
-* Send emails with tag `webserver` to `root@localhost`
-* Set tag `webserver` for `apache` main class
-* Apply and validate your configuration
+* Audit all attributes of `/etc/ssh/sshd_config`
+* Manage owner, group and mode and audit its content of '/etc/resolv.conf`
+* Apply this manifest to record the value
+* Change the content of both files
+* Apply the manifest to get audit changes
+* Change the mode of both files to `0666`
+* Apply the manifest to get audit changes 
 
 
 !SLIDE supplemental solutions
@@ -86,53 +92,61 @@ This is managed by Puppet
 
 ****
 
-## Use Report Processors
+## Use Auditing
 
 ****
 
-Install `puppetlabs-tagmail` module:
+
+### Audit all attributes of `/etc/ssh/sshd_config`
 
     @@@ Sh
-    # puppet module install puppetlabs-tagmail
-
-Ensure that `report` and `pluginsync` are enabled:
-
-    @@@ Sh
-    # puppet config print report
-    true
-    # puppet config print pluginsync
-    true
-
-Configure `tagmail` report processor in `puppet.conf`:
-
-    @@@ Sh
-    # vim /etc/puppet/puppet.conf
-    [master]
-      #reports = store
-      #reportdir = /var/lib/puppet/reports
-      reports = tagmail
-
-Send emails with tag `webserver` to `root@localhost`:
-
-    @@@ Sh
-    # vim /etc/puppet/tagmail.conf
-    [transport]
-    reportfrom = puppetmaster@training.vm
-    sendmail = /usr/sbin/sendmail
-
-    [tagmap]
-    webserver: root@localhost
-
-Set tag `webserver` for `apache` main class
-
-    @@@ Sh
-    # vim /usr/local/src/apache/examples/init.pp
-    class { 'apache':
-      tag => 'webserver',
+    # vi audit.pp
+    file { '/etc/ssh/sshd_config':
+      audit => all,
     }
 
-Apply and validate your configuration:
+### Manage owner, group and mode and audit its content of '/etc/resolv.conf`
 
-    @@@ Sh
-    # puppet apply /usr/local/src/apache/examples/init.pp
-    # vim /var/mail/root
+    @@@ Sh
+    # vi audit.pp
+    file { '/etc/resolv.conf':
+      ensure => file,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+      audit  => content,
+    }
+
+### Apply this manifest to record the value
+
+During this apply you should see messages including `audit change: newly-recorded value`.
+
+    @@@ Sh
+    # puppet apply audit.pp
+
+### Change the content of both files
+
+    @@@ Sh
+    echo "# content change" >> /etc/ssh/sshd_config
+    echo "# content change" >> /etc/resolv.conf
+
+### Apply the manifest to get audit changes
+
+During this apply you should see messages containing `audit change: previously recorded value ... has been changed`
+
+    @@@ Sh
+    # puppet apply audit.pp
+
+### Change the mode of both files to `0666`
+
+    @@@ Sh
+    # chmod 0666 /etc/ssh/sshd_config
+    # chmod 0666 /etc/resolv.conf
+
+### Apply the manifest to get audit changes 
+
+During this apply you should see message about `audit change` for `sshd_config` and `mode change` on `resolv.conf`
+
+    @@@ Sh
+    # puppet apply audit.pp
+
