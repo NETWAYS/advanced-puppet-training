@@ -109,9 +109,8 @@ to explicitly define relationships you can tell puppet to enforce resources in r
 The picture above shows an overview of the most important implicit dependencies.
 A dependency is only created if both resources are managed by Puppet.
 
-Two more detailed examples are shown on the next sides. To find all implicit dependencies
-have a look on the Autorequires description of the resources on:
-https://docs.puppet.com/puppet/latest/reference/type.html
+To find all implicit dependencies have a look on the Autorequires description of
+the resources on: https://docs.puppet.com/puppet/latest/reference/type.html
 
 ~~~ENDSECTION~~~
 

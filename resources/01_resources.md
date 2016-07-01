@@ -35,7 +35,7 @@ Help:
 
 
 !SLIDE supplemental exercises
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use file_line
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Resources Resource Type
 
 ## Objective:
 
@@ -58,7 +58,7 @@ Help:
 
 ****
 
-## Use the `resource` resource type to purge host entries
+## Resources Resource Type
 
 ****
 
