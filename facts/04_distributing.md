@@ -26,6 +26,8 @@ Notice that the Puppet agent run first downloads any new or changed facts and th
 
 You can force a pluginsync without a Puppet run with `puppet plugin download`.
 
+~~~PAGEBREAK~~~
+
 If a fact is synced via pluginsync, then the version of the fact that was synced will take precedence over a fact tested by setting FACTERLIB. For this reason, it is often useful to stop the Puppet agent before commencing development so that an incomplete fact doesn't get synced.
 
 As of Puppet 3.0, the RUBYLIB or FACTERLIB environment variable must be fully qualified.

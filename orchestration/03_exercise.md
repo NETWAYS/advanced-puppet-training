@@ -24,6 +24,9 @@
 ****
 
 * Install and start ActiveMQ
+
+You can get it from a community repository: https://copr.fedoraproject.org/coprs/lkiesow/apache-activemq-dist/repo/epel-7/lkiesow-apache-activemq-dist-epel-7.repo
+
 * Configure MCollective to work with ActiveMQ
 * Start MCollective Server
 * Test orchestration

@@ -28,6 +28,9 @@ The valid merge behaviors are:
 
 * 'first' — Returns the first value found, with no merging. Puppet lookup’s default behavior.
 * 'unique' (called “array merge” in classic Hiera) — Combines any number of arrays and scalar values to return a merged, flattened array with all duplicate values removed. The lookup will fail if any hash values are found.
+
+~~~PAGEBREAK~~~
+
 * 'hash' — Combines the keys and values of any number of hashes to return a merged hash. If the same key exists in multiple source hashes, Puppet will use the value from the highest-priority data source; it won’t recursively merge the values.
 * 'deep' — Combines the keys and values of any number of hashes to return a merged hash. If the same key exists in multiple source hashes, Puppet will recursively merge hash or array values (with duplicate values removed from arrays). For conflicting scalar values, the highest-priority value will win.
 * {'strategy' => 'first|unique|hash'} — Same as the string versions of these merge behaviors.

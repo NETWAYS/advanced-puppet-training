@@ -12,6 +12,7 @@
 Puppet Git Hooks are available from: https://github.com/drwahl/puppet-git-hooks
 
 Client side checks:
+
 * Puppet manifest syntax
 * Puppet epp template syntax
 * Erb template syntax
@@ -21,6 +22,7 @@ Client side checks:
 * r10k puppetfile syntax
 
 Server side checks:
+
 * Puppet manifest syntax
 * Puppet epp template syntax
 * Erb template syntax

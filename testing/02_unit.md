@@ -103,6 +103,9 @@ RSpec matchers can match exact values, regular expressions, or Ruby Procs. You c
 
         it { should contain_package('httpd').with_ensure('installed') }
 
+~~~PAGEBREAK~~~
+
+    @@@ Ruby
         it {
           should contain_file('/etc/httpd/conf/httpd.conf').with(
             'ensure' => 'file',
@@ -238,6 +241,7 @@ Create `Rakefile`, `.fixtures.yml` and `spec_helper.rb`:
       symlinks:
         "apache": "#{source_dir}"
 
+~~~PAGEBREAK~~~
 
 Write unit tests in `spec/classes/apache_spec.rb`:
 

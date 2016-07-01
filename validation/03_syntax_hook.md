@@ -95,6 +95,8 @@ Grant execute permissions on `.git/hooks/pre-commit`:
     @@@ Sh
     # chmod +x .git/hooks/pre-commit
 
+~~~PAGEBREAK~~~
+
 Produce a syntax error and test the pre-commit hook:
 
     @@@ Sh

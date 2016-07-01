@@ -56,6 +56,8 @@ Defined Resource Type:
 The Puppet apply command combines master and agent functionality which is useful for development
 and local testing or master-less setups.
 
+~~~PAGEBREAK~~~
+
 It takes a file containing Puppet code as input, then gathers information about the system using
 facter to compile a catalog and last but not least enforces the configuration. It can also run in
 simulation mode which only notifies about required changes instead of enforcing it.
