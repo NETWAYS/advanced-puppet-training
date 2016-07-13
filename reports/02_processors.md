@@ -4,14 +4,14 @@
 On the Puppet Agent:
 
     @@@ Sh
-    # vim /etc/puppet/puppet.conf
+    $ vim /etc/puppetlabs/puppet/puppet.conf
     [agent]
         report = true
 
 On the Puppet Master:
 
     @@@ Sh
-    # vim /etc/puppet/puppet.conf
+    $ vim /etc/puppetlabs/puppet/puppet.conf
     [master]
         reports = https,tagmail,store,log
         reportdir = /var/lib/puppet/reports
@@ -50,7 +50,7 @@ On the Puppet Master:
 # log Report Processor
 
     @@@ Puppet
-    # tail -f /var/log/puppet/puppetserver/puppetserver.log
+    $ tail -f /var/log/puppet/puppetserver/puppetserver.log
     Compiled catalog for training.puppetlabs.vm in 0.86 seconds
     Caching catalog for training.puppetlabs.vm
     Applying configuration version '1328977795'
@@ -106,27 +106,28 @@ On the Puppet Master:
 Configure `store` report processor in `puppet.conf` and set `reportdir` to `/var/lib/puppet/reports`:
 
     @@@ Sh
-    # vim /etc/puppet/puppet.conf
+    $ vim /etc/puppetlabs/puppet/puppet.conf
     [master]
-      reports = store
+      reports = puppetdb,store
       reportdir = /var/lib/puppet/reports
 
 Restart Puppet Master:
 
     @@@ Sh
-    # systemctl restart puppetserver
+    $ sudo mkdir /var/lib/puppet
+    $ sudo systemctl restart puppetmaster
 
 Have a look at the generated reports:
 
     @@@ Sh
-    # ls /var/lib/puppet/reports/
+    $ ls /var/lib/puppet/reports/
 
 
 !SLIDE small
 # Module Provided Report Processors
 
     @@@ Sh
-    # puppet module search report
+    $ puppet module search report
     Notice: Searching https://forgeapi.puppetlabs.com ...
     NAME                            DESCRIPTION
     evenup-logstash_reporter        Report processor...
@@ -137,10 +138,10 @@ Have a look at the generated reports:
 * Integrate with external reporting solutions
 
 <pre>
-# puppet module install jamtur01/irc
+$ puppet module install jamtur01/irc
 ...
-# tree /etc/puppet/modules/irc/lib/
-/etc/puppet/modules/irc/lib/
+$ tree /home/training/puppet/modules/irc/lib/
+/home/training/puppet/modules/irc/lib/
 └── puppet
     └── reports
         └── irc.rb
@@ -204,6 +205,7 @@ security: secteam@example.com
  * Send emails with tag `webserver` to `root@localhost`
  * Set tag `webserver` for `apache` main class
  * Apply and validate your configuration
+ * Have a look at the mail on the Puppet Master
 
 
 !SLIDE supplemental exercises
@@ -226,6 +228,7 @@ security: secteam@example.com
 * Send emails with tag `webserver` to `root@localhost`
 * Set tag `webserver` for `apache` main class
 * Apply and validate your configuration
+* Have a look at the mail on the Puppet Master
 
 
 !SLIDE supplemental solutions
@@ -240,20 +243,20 @@ security: secteam@example.com
 Install `puppetlabs-tagmail` module:
 
     @@@ Sh
-    # puppet module install puppetlabs-tagmail
+    $ puppet module install puppetlabs-tagmail
 
 Ensure that `report` and `pluginsync` are enabled:
 
     @@@ Sh
-    # puppet config print report
+    $ puppet config print report
     true
-    # puppet config print pluginsync
+    $ puppet config print pluginsync
     true
 
 Configure `tagmail` report processor in `puppet.conf`:
 
     @@@ Sh
-    # vim /etc/puppet/puppet.conf
+    $ vim /etc/puppetlabs/puppet/puppet.conf
     [master]
       #reports = store
       #reportdir = /var/lib/puppet/reports
@@ -262,25 +265,35 @@ Configure `tagmail` report processor in `puppet.conf`:
 Send emails with tag `webserver` to `root@localhost`:
 
     @@@ Sh
-    # vim /etc/puppet/tagmail.conf
+    $ vim /etc/puppetlabs/puppet/tagmail.conf
     [transport]
-    reportfrom = puppetmaster@training.vm
+    reportfrom = puppetmaster@puppet.localdomain
     sendmail = /usr/sbin/sendmail
 
     [tagmap]
     webserver: root@localhost
 
+    $ sudo systemctl restart puppetmaster.service
+    $ sudo puppet agent -t --noop
+
 Set tag `webserver` for `apache` main class
 
     @@@ Sh
-    # vim /usr/local/src/apache/examples/init.pp
+    $ vim /home/training/puppet/modules/profiles/manifests/webserver.pp
     class { 'apache':
+      ssl => true,
       tag => 'webserver',
     }
 
 Apply and validate your configuration:
 
     @@@ Sh
-    # puppet apply /usr/local/src/apache/examples/init.pp
-    # vim /var/mail/root
+    $ cd /home/training/puppet
+    $ git add modules/profiles/manifests/webserver.pp
+    $ git commit -m 'tagmail'
+    $ git push origin master
+    $ sudo puppet agent -t
 
+Have a look at the mail on the Puppet Master:
+
+    $ sudo vim /var/spool/mail/root

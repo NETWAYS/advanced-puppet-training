@@ -2,12 +2,12 @@
 # External Facts
 
     @@@ Sh
-    # cat /etc/puppet/modules/{MODULE NAME}/facts.d/datacenter.yaml
+    # cat /home/training/puppet/modules/{MODULE NAME}/facts.d/datacenter.yaml
     ---
     location: nuremberg
     cluster: webserver
 
-    # cat /etc/puppet/modules/{MODULE NAME}/facts.d/datacenter.txt
+    # cat /home/training/puppet/modules/{MODULE NAME}/facts.d/datacenter.txt
     location=nuremberg
     cluster=webserver
 

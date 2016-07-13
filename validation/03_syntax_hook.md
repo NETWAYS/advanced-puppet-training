@@ -41,12 +41,12 @@
 Create a new file in your git repository `.git/hooks/pre-commit`:
 
     @@@ Sh
-    # touch .git/hooks/pre-commit
+    $ touch /home/training/puppet/.git/hooks/pre-commit
 
 Insert the content of `puppet_manifest_syntax_check.sh` from  `https://github.com/drwahl/puppet-git-hooks`:
 
     @@@ Sh
-    # vim .git/hooks/pre-commit
+    $ vim /home/training/puppet/.git/hooks/pre-commit
     #!/bin/bash
 
     # This script expects $1 to be passed and for $1 to be the filesystem location
@@ -93,19 +93,20 @@ Insert the content of `puppet_manifest_syntax_check.sh` from  `https://github.co
 Grant execute permissions on `.git/hooks/pre-commit`:
 
     @@@ Sh
-    # chmod +x .git/hooks/pre-commit
+    $ chmod +x /home/training/puppet/.git/hooks/pre-commit
 
 ~~~PAGEBREAK~~~
 
 Produce a syntax error and test the pre-commit hook:
 
     @@@ Sh
-    # vim apache/manifests/init.pp
+    $ vim /home/training/puppet/modules/apache/manifests/init.pp
     class apache {
     ...
 
-    # git add apache/manifests/init.pp
-    # git commit -m 'syntax check'
+    $ cd /home/training/puppet/
+    $ git add modules/apache/manifests/init.pp
+    $ git commit -m 'syntax check'
     Checking puppet manifest syntax for ...
     Error: One or more file(s) specified did not exist:
     ["   \n"]

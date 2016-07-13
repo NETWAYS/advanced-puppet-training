@@ -2,7 +2,7 @@
 # Metadata File
 
     @@@ Vim
-    # cat /etc/puppet/modules/mysql/metadata.json
+    $ cat /home/training/puppet/modules/mysql/metadata.json
     {
       "name": "puppetlabs-mysql",
       "version": "3.1.0",

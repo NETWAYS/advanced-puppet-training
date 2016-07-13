@@ -40,17 +40,18 @@
 Change into the modules directory:
 
     @@@ Sh
-    # cd ~/puppetcode/modules
+    $ cd /home/training/puppet/modules/
 
 Create the function in `apache/lib/puppet/parser/functions/bool2httpd.rb`:
 
-    @@@ Ruby
+    @@@ Sh
+    $ vim /home/training/puppet/modules/apache/lib/puppet/parser/functions/bool2httpd.rb
     Puppet::Parser::Functions::newfunction(
       :bool2httpd,
       :type   => :rvalue,
       :arbity => 1
     ) do |args|
-      raise ArgumentError, 'bool2httpd() wrong number of arguments.') if args.size != 1
+      raise ArgumentError, 'bool2httpd() wrong number of arguments.' if args.size != 1
 
       arg = args[0]
 
@@ -66,7 +67,11 @@ Create the function in `apache/lib/puppet/parser/functions/bool2httpd.rb`:
 Test the new function with `puppet apply`:
 
     @@@ Sh
-    # puppet apply -e 'notice(bool2httpd(false))'
+    $ puppet apply -e 'notice(bool2httpd(false))'
     Notice: Scope(Class[main]): Off
+    Notice: Compiled catalog for ...
+    Notice: Applied catalog in 0.02 seconds
+    $ puppet apply -e 'notice(bool2httpd(true))'
+    Notice: Scope(Class[main]): On
     Notice: Compiled catalog for ...
     Notice: Applied catalog in 0.02 seconds

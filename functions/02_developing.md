@@ -2,7 +2,7 @@
 # Developing Functions
 
     @@@ Sh
-    # tree /etc/puppet/modules/{MODULE NAME}
+    # tree /home/training/puppet/modules/{MODULE NAME}
     |-- lib
     |   `-- puppet
     |       `-- parser

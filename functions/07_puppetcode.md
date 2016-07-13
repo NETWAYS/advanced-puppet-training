@@ -2,7 +2,7 @@
 # Functions written in Puppet code
 
     @@@ Puppet
-    function apache::bool2http($arg) {
+    function apache::bool2httpd($arg) {
       case $arg {
         false, undef, /(?i:false)/ : { 'Off' }
         true, /(?i:true)/          : { 'On' }

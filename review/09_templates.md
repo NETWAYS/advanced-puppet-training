@@ -15,7 +15,7 @@ Manifest:
 
 Embedded Ruby Template:
 
-    # vim /etc/puppet/modules/apache/templates/httpd.conf.erb
+    # vim /home/training/puppet/modules/apache/templates/httpd.conf.erb
     ...
     ServerName <%= @servername %>
     ...
@@ -39,7 +39,7 @@ Manifest:
 
 Embedded Puppet Template:
 
-    # vim /etc/puppet/modules/apache/templates/httpd.conf.epp
+    # vim /home/training/puppet/modules/apache/templates/httpd.conf.epp
     <%- | String $servername = "localhost" | -%>
     ...
     ServerName <%= $servername %>

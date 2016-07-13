@@ -76,7 +76,7 @@ Validate that resources have specified attributes:
     with_{attribute}
     without_{attribute}
 
-Validate thate resources have relationships set:
+Validate that resources have relationships set:
 
     @@@ Sh
     that_{relationship}
@@ -134,12 +134,12 @@ RSpec matchers can match exact values, regular expressions, or Ruby Procs. You c
 Install `rspec-puppet`:
 
     @@@ Sh
-    # gem install rspec-puppet
+    $ gem install rspec-puppet
 
 Install `puppetlabs_spec_helpers` to setup tests:
 
     @@@ Sh
-    # gem install puppetlabs_spec_helper
+    $ gem install puppetlabs_spec_helper
 
 
 !SLIDE small
@@ -148,17 +148,17 @@ Install `puppetlabs_spec_helpers` to setup tests:
 Create a module using the module tool:
 
     @@@ Sh
-    # puppet module generate {username}-{modulename}
+    $ puppet module generate {username}-{modulename}
 
 Create Rakefile:
 
     @@@ Sh
-    # require 'puppetlabs_spec_helper/rake_tasks'
+    $ require 'puppetlabs_spec_helper/rake_tasks'
 
 Update `spec/spec_helper.rb`:
 
     @@@ Sh
-    # require 'puppetlabs_spec_helper/module_spec_helper'
+    $ require 'puppetlabs_spec_helper/module_spec_helper'
 
 
 !SLIDE smbullets
@@ -186,10 +186,10 @@ Create `.fixtures.yml`:
  * Update the apache module and create unit tests for it
  * Practice incremental development using tests as validation
 * Steps:
- * Install `puppet-rspec` and `puppetlabs_spec_helper`
+ * Install `rspec-puppet` and `puppetlabs_spec_helper`
  * Create `Rakefile`, `.fixtures.yml` and `spec_helper.rb`
  * Write unit tests in `spec/classes/apache_spec.rb`
- * Run unit tests and fix problems if appeared
+ * Run unit test
 
 
 !SLIDE supplemental exercises
@@ -203,10 +203,10 @@ Create `.fixtures.yml`:
 
 ## Steps:
 
-* Install `puppet-rspec` and `puppetlabs_spec_helper`
+* Install `rspec-puppet` and `puppetlabs_spec_helper`
 * Create `Rakefile`, `.fixtures.yml` and `spec_helper.rb`
 * Write unit tests in `spec/classes/apache_spec.rb`
-* Run unit tests and fix problems if appeared
+* Run unit test
 
 
 !SLIDE supplemental solutions
@@ -218,24 +218,24 @@ Create `.fixtures.yml`:
 
 ****
 
-Install `puppet-rspec` and `puppetlabs_spec_helper`:
+Install `rspec-puppet` and `puppetlabs_spec_helper`:
 
     @@@ Sh
-    # gem install puppet-rspec
-    # gem install puppetlabs_spec_helper
+    $ sudo /opt/puppetlabs/puppet/bin/gem install rspec-puppet
+    $ sudo /opt/puppetlabs/puppet/bin/gem install puppetlabs_spec_helper
 
 Create `Rakefile`, `.fixtures.yml` and `spec_helper.rb`:
 
     @@@ Sh
-    # cd /etc/puppet/modules/
-    # vim Rakefile
+    $ cd /home/training/puppet/modules/apache/
+    $ vim Rakefile
     require 'puppetlabs_spec_helper/rake_tasks'
 
-    # mkdir -p spec/classes
-    # vim spec/spec_helper.rb
+    $ mkdir -p spec/classes
+    $ vim spec/spec_helper.rb
     require 'puppetlabs_spec_helper/module_spec_helper'
 
-    # vim .fixtures.yml
+    $ vim .fixtures.yml
     ---
     fixtures:
       symlinks:
@@ -245,7 +245,7 @@ Create `Rakefile`, `.fixtures.yml` and `spec_helper.rb`:
 
 Write unit tests in `spec/classes/apache_spec.rb`:
 
-    # vim spec/classes/apache_spec.rb
+    $ vim spec/classes/apache_spec.rb
     require 'spec_helper'
 
     describe('apache', :type => :class) do
@@ -268,8 +268,7 @@ Write unit tests in `spec/classes/apache_spec.rb`:
           should contain_file('/etc/httpd/conf/httpd.conf').with(
             'ensure' => 'file',
             'owner'  => 'root',
-            'group'  => 'root').with_content(
-              /^DocumentRoot \/var\/www\/html$/)
+            'group'  => 'root')
 
           should contain_service('httpd').with(
             'ensure' => 'running',
@@ -284,4 +283,9 @@ Write unit tests in `spec/classes/apache_spec.rb`:
 
     end
 
-Run unit tests and fix problems if appeared.
+Run unit test:
+
+    $ cd /home/training/puppet/modules/apache/
+    $ /opt/puppetlabs/puppet/bin/rake spec -- \
+    /opt/puppetlabs/puppet/bin/ruby -S \
+    spec/classes/apache_spec.rb --color

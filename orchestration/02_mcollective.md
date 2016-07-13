@@ -14,7 +14,7 @@
 # Using MCollective
 
     @@@ Sh
-    # mco ping
+    $ mco ping
     dev8                                     time=126.19 ms
     dev6                                     time=132.79 ms
     dev10                                    time=133.57 ms

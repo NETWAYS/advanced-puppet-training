@@ -38,7 +38,7 @@ Collect exported resources:
  * Expand the `apache` module
  * Declare an exported resource `haproxy::balancermember` in `config.pp`
  * Install `haproxy` and collect exported resources
- * Test and apply your configuration
+ * Push and test your configuration
 
 
 !SLIDE supplemental exercises
@@ -58,7 +58,7 @@ Collect exported resources:
 * Expand the `apache` module
 * Declare an exported resource `haproxy::balancermember` in `config.pp`
 * Install `haproxy` and collect exported resources 
-* Test and apply your configuration
+* Push and test your configuration
 
 
 !SLIDE supplemental solutions
@@ -71,8 +71,8 @@ Collect exported resources:
 ****
 
     @@@ Sh
-    # puppet module install puppetlabs-haproxy
-    # vim /etc/puppet/modules/apache/manifests/config.pp
+    $ puppet module install puppetlabs-haproxy
+    $ vim /home/training/puppet/modules/apache/manifests/config.pp
     class apache::config (
     ) inherits apache::params {
       $vhosts = $apache::vhosts
@@ -87,7 +87,7 @@ Collect exported resources:
       @@haproxy::balancermember { 'master':
         listening_service => "${apache_service}",
         server_names      => "$::fqdn",
-        ipaddresses       => "$::ipaddress",
+        ipaddresses       => "$::ipaddress_enp0s8",
         ports             => '80',
         options           => 'check',
       }
@@ -99,12 +99,43 @@ Collect exported resources:
       }
     }
 
-    # puppet parser validate /etc/puppet/modules/apache/config.pp
-    # vim /etc/puppet/modules/apache/examples/haproxy.pp
+    $ puppet parser validate /home/training/puppet/modules/apache/config.pp
+    $ vim /home/training/puppet/modules/apache/examples/haproxy.pp
     include apache
     include haproxy
+
+    haproxy::listen { "$::fqdn":
+      collect_exported => false,
+      ipaddress        => "$::ipaddress_enp0s8",
+      ports            => '8080',
+    }
+
     Haproxy::Balancermember <<| |>>
 
-    # puppet parser validate /etc/puppet/modules/apache/examples/haproxy.pp
-    # puppet apply --noop /etc/puppet/modules/apache/examples/haproxy.pp
-    # puppet apply /etc/puppet/modules/apache/examples/haproxy.pp
+    $ puppet parser validate /home/training/puppet/modules/apache/examples/haproxy.pp
+    $ sudo puppet apply --noop /home/training/puppet/modules/apache/examples/haproxy.pp
+    $ sudo puppet apply /home/training/puppet/modules/apache/examples/haproxy.pp
+    $ vim /home/training/puppet/manifests/site.pp
+    include apache
+    include haproxy
+
+    haproxy::listen { "$::fqdn":
+      collect_exported => false,
+      ipaddress        => "$::ipaddress_enp0s8",
+      ports            => '8080',
+    }
+
+    Haproxy::Balancermember <<| |>>
+
+    $ puppet parser validate /home/training/puppet/manifests/site.pp
+    $ cd /home/training/puppet/
+    $ git status
+    $ git add manifests/
+    $ git add modules/
+    $ git commit -m 'initial commit'
+    $ git push origin master 
+    $ sudo puppet agent -t
+
+Test HAProxy redirect to Apache:
+
+    http://192.168.56.102:8080

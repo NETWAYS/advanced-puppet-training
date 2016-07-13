@@ -2,7 +2,7 @@
 # Inventory
 
     @@@ Sh
-    # mco inventory agent.example.com
+    $ mco inventory agent.example.com
     Inventory for agent.example.com:
      Server Statistics:
        Version: 1.2.1
@@ -29,7 +29,7 @@
 # Filtering Nodes
 
     @@@ Sh
-    # mco ping --with-fact osfamily=RedHat
+    $ mco ping --with-fact osfamily=RedHat
     master.example.com                     time=135.94 ms
     agent.example.com                      time=136.55 ms
     ---- ping statistics ----
@@ -47,7 +47,7 @@
 # Help Subsystem for Applications
 
     @@@ Sh
-    # mco rpc --help
+    $ mco rpc --help
 
     Generic RPC agent client application
 
@@ -71,7 +71,7 @@
 # Help Subsystem for Agents
 
     @@@ Sh
-    # mco help service
+    $ mco help service
     Service Agent
     =============
 
@@ -91,4 +91,4 @@
 Display agent documentation:
 
     @@@ Sh
-    mco help <agent>
+    $ mco help <agent>

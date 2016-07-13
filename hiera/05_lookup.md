@@ -99,7 +99,7 @@ Hiera command line tool:
 ****
 
     @@@ Sh
-    # vim /etc/puppetlabs/puppet/hiera.yaml
+    $ sudo vim /etc/puppetlabs/puppet/hiera.yaml
     ---
     :backends:
       - yaml
@@ -111,11 +111,13 @@ Hiera command line tool:
     :yaml:
       :datadir: "/etc/puppetlabs/code/environments/%{environment}/hieradata"
 
-    # vim /etc/puppetlabs/code/environments/production/RedHat.yaml
+    $ sudo vim /etc/puppetlabs/code/environments/production/RedHat.yaml
+    ---
     message: "Value from RedHat.yaml"
 
-    # vim /etc/puppetlabs/code/environments/production/common.yaml
+    $ sudo vim /etc/puppetlabs/code/environments/production/common.yaml
+    ---
     message: "Value from common.yaml"
 
-    # puppet apply -e "notice(hiera('message'))"
-    # hiera message ::osfamily=RedHat environment=production -c /etc/puppetlabs/puppet/hiera.yaml
+    $ sudo puppet apply -e "notice(hiera('message'))"
+    $ hiera message ::osfamily=RedHat environment=production -c /etc/puppetlabs/puppet/hiera.yaml

@@ -44,7 +44,7 @@
  * Create and use a `webserver` role 
 * Steps:
  * Combine `database` and `webserver` profiles to a role
- * Test and apply your configuration
+ * Push and test your configuration
 
 
 !SLIDE supplemental exercises
@@ -61,7 +61,7 @@
 ****
 
 * Combine `database` and `webserver` profiles to a role
-* Test and apply your configuration
+* Push and test your configuration
 
 
 !SLIDE supplemental solutions
@@ -74,16 +74,27 @@
 ****
 
     @@@ Sh
-    # vim /etc/puppetlabs/code/modules/roles/manifests/webserver.pp
+    $ vim /home/training/puppet/modules/roles/manifests/webserver.pp
     class roles::webserver {
       include profiles::database
       include profiles::webserver
     }
 
-    # puppet parser validate /etc/puppetlabs/code/modules/roles/manifests/webserver.pp
-    # vim /etc/puppetlabs/code/modules/roles/examples/webserver.pp
+    $ puppet parser validate /home/training/puppet/modules/roles/manifests/webserver.pp
+    $ vim /home/training/puppet/modules/roles/examples/webserver.pp
     include roles::webserver
 
-    # puppet parser validate /etc/puppetlabs/code/modules/roles/examples/webserver.pp
-    # puppet apply --noop /etc/puppetlabs/code/modules/roles/examples/webserver.pp
-    # puppet apply /etc/puppetlabs/code/modules/roles/examples/webserver.pp
+    $ puppet parser validate /home/training/puppet/modules/roles/examples/webserver.pp
+    $ sudo puppet apply --noop /home/training/puppet/modules/roles/examples/webserver.pp
+    $ sudo puppet apply /home/training/puppet/modules/roles/examples/webserver.pp
+
+    $ vim /home/training/puppet/manifests/site.pp
+    include roles::webserver
+
+    $ cd /home/training/puppet
+    $ git add manifests/site.pp
+    $ git add modules/profiles/
+    $ git add modules/roles/
+    $ git commit -m 'roles'
+    $ git push origin master
+    $ sudo puppet agent -t

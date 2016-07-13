@@ -41,32 +41,32 @@
 Install `puppet-lint` via `yum` (requires EPEL repository):
 
     @@@ Sh
-    # yum install rubygem-puppet-lint
+    $ sudo yum install rubygem-puppet-lint
 
 Install `puppet-lint` via `gem` (gives typically a newer version):
 
     @@@ Sh
-    # gem install puppet-lint
+    $ gem install puppet-lint
 
 Clone `https://github.com/drwahl/puppet-git-hooks` repo:
 
     @@@ Sh
-    # cd /usr/local/src/
-    # git clone https://github.com/drwahl/puppet-git-hooks.git
+    $ cd /home/training/
+    $ git clone https://github.com/drwahl/puppet-git-hooks.git
 
 Symlink the pre-commit file to `.git/hooks/pre-commit` of your repository:
 
-    # ln -s /usr/local/src/puppet-git-hooks/pre-commit .git/hooks/pre-commit
+    $ ln -s /home/training/puppet-git-hooks/pre-commit /home/training/puppet/.git/hooks/pre-commit
 
 Produce a style guide error and test the pre-commit hook:
 
     @@@ Sh
-    # vim apache/manifests/init.pp
+    $ vim apache/manifests/init.pp
     class apache {
     ...
 
-    # git add apache/manifests/site.pp
-    # git commit -m 'lint check'
+    $ git add apache/manifests/site.pp
+    $ git commit -m 'lint check'
     Checking puppet manifest syntax for production/modules/apache/manifests/init.pp...
     Checking puppet style guide compliance for production/modules/apache/manifests/init.pp...
     production/modules/apache/manifests/init.pp - WARNING: class not documented on line 1

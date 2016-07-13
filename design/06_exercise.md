@@ -6,6 +6,7 @@
 * Steps:
  * Prepare your `apache` module
  * Write a `metadata.json` file
+ * Install package dependencies
  * Build an uploadable tarball
 
 
@@ -23,7 +24,8 @@
 ****
 
 * Prepare your `apache` module
-* Write a `metadata.json` file 
+* Write a `metadata.json` file
+* Install package dependencies
 * Build an uploadable tarball
 
 
@@ -39,7 +41,7 @@
 Write a `metadata.json` file:
 
     @@@ Sh
-    # vim /etc/puppet/modules/apache/metadata.json
+    $ vim /home/training/puppet/modules/apache/metadata.json
     {
       "name": "training-apache",
       "version": "0.1.0",
@@ -49,17 +51,33 @@ Write a `metadata.json` file:
       "source": "git://github.com/training/training-apache.git",
       "project_page": "http://github.com/training/training-apache",
       "issues_url": null,
+      "tags": ["apache", "httpd"],
+      "operatingsystem_support": [
+        {
+          "operatingsystem":"RedHat",
+          "operatingsystemrelease":[ "6.0", "7.0" ]
+        },
+        {
+        "operatingsystem": "Ubuntu",
+        "operatingsystemrelease": [ "12.04" ]
+        }
+      ],
       "dependencies": [
         {
           "name": "puppetlabs-stdlib",
           "version_range": ">= 1.0.0"
         }
-      ]
+      ],
     }
+
+Install package dependencies:
+
+    @@@ Sh
+    $ puppet module install puppetlabs-stdlib
 
 Build an uploadable tarball:
 
     @@@ Sh
-    # puppet module build /etc/puppet/modules/apache
-    Notice: Building /etc/puppet/modules/apache for release
-    Module built: /etc/puppet/modules/apache/pkg/training-apache-0.1.0.tar.gz
+    $ puppet module build /home/training/puppet/modules/apache
+    Notice: Building /home/training/puppet/modules/apache for release
+    Module built: /home/training/puppet/modules/apache/pkg/training-apache-0.1.0.tar.gz

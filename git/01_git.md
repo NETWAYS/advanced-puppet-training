@@ -31,11 +31,11 @@ Process:
 # git status
 
     @@@ Sh
-    # git status
+    $ git status
     On branch master
     nothing to commit, working directory clean
 
-    # git status
+    $ git status
     On branch master
     
     Initial commit
@@ -57,8 +57,8 @@ Process:
 **Stages code to be committed**
 
     @@@ Sh
-    # git add site.pp
-    # git status
+    $ git add site.pp
+    $ git status
     On branch master
 
     Initial commit
@@ -79,7 +79,7 @@ Process:
 **Commits a changeset to your repository**
 
     @@@ Sh
-    # git commit -m 'initial commit'
+    $ git commit -m 'initial commit'
     [master (root-commit) d798484] initial commit
      1 files changed, 44 insertions(+), 0 deletions(-)
      create mode 100644 site.pp
@@ -98,7 +98,7 @@ Process:
 **Pushes updates to a remote repository**
 
     @@@ Sh
-    # git push origin master
+    $ git push origin master
     Counting objects: 3, done.
     Compressing objects: 100% (2/2), done.
     Writing objects: 100% (3/3), 932 bytes, done.
@@ -193,11 +193,11 @@ Resources you may be interested in:
 ****
 
     @@@ Sh
-    # cd /usr/local/src/
-    # git init --bare apache.git
-    # git clone /usr/local/src/apache.git apache
-    # cp -Rf /etc/puppet/modules/apache/* /usr/local/src/apache/
-    # cd /usr/local/src/apache/
-    # git add apache
-    # git commit -m 'apache module'
-    # git push origin master
+    $ cd /home/training/
+    $ git init --bare apache.git
+    $ git clone /home/training/apache.git apache
+    $ cp -Rf /home/training/puppet/modules/apache/* /home/training/apache/
+    $ cd /home/training/apache/
+    $ git add .
+    $ git commit -m 'apache module'
+    $ git push origin master

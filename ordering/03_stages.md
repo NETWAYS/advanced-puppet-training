@@ -96,33 +96,34 @@ Chaining arrows:
 ****
 
     @@@ Puppet
-    # vim /etc/puppet/modules/apache/manifests/yumrepos.pp
+    $ vim /home/training/puppet/modules/apache/manifests/yumrepos.pp
     class apache::yumrepos {
       yumrepo { 'base':
         ensure     => 'present',
         descr      => 'CentOS-$releasever - Base',
         gpgcheck   => '1',
-        gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7',
+        gpgkey     => 'file:///home/training/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7',
         mirrorlist => 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os&infra=$infra',
       }
     }
 
-    # vim /etc/puppet/modules/apache/manifests/stages.pp
+    $ puppet parser validate /home/training/puppet/modules/apache/manifests/yumrepos.pp
+    $ vim /home/training/puppet/modules/apache/manifests/stages.pp
     class apache::stages {
       stage { 'yum':
         before => Stage['main'],
       }
     }
 
-    # vim /etc/puppet/modules/apache/examples/init.pp
+    $ puppet parser validate /home/training/puppet/modules/apache/manifests/stages.pp
+    $ vim /home/training/puppet/modules/apache/manifests/init.pp
+    ...
     include apache::stages
-    include apache
-
+ 
     class { 'apache::yumrepos':
       stage => 'yum',
     }
 
-    # puppet parser validate /etc/puppet/modules/apache/manifests/yumrepos.pp
-    # puppet parser validate /etc/puppet/modules/apache/examples/init.pp
-    # puppet apply --noop /etc/puppet/modules/apache/examples/init.pp
-    # puppet apply /etc/puppet/modules/apache/examples/init.pp
+    $ puppet parser validate /home/training/puppet/modules/apache/manifests/init.pp
+    $ sudo puppet apply --noop /home/training/puppet/modules/apache/examples/init.pp
+    $ sudo puppet apply /home/training/puppet/modules/apache/examples/init.pp

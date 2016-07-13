@@ -17,7 +17,7 @@ Realize all system administrators:
     @@@ Puppet
     User <| groups == 'sysadmin' |>
 
-Realize all users tagged with Portland:
+Realize all users tagged with Nuremberg:
 
     @@@ Puppet
     User <| tag == 'nuremberg' |>
@@ -102,10 +102,14 @@ The users luke, james, jeff will be created, but brad will not.
 ****
 
     @@@ Sh
-    # vim /etc/puppet/modules/apache/manifests/install.pp
+    $ vim /home/training/puppet/modules/apache/manifests/install.pp
     class apache::install (
     ) inherits apache::params {
       $ssl = $apache::ssl
+
+      @package { $apache_package:
+        ensure => installed,
+      }
 
       if $ssl {
         case $::osfamily {
@@ -120,16 +124,12 @@ The users luke, james, jeff will be created, but brad will not.
         }
       }
 
-      @package { $apache_package:
-        ensure => installed,
-      }
-
       Package <| |>
     }
 
-    # puppet parser validate /etc/puppet/modules/apache/manifests/install.pp
-    # puppet apply --noop /etc/puppet/modules/apache/examples/init.pp
-    # puppet apply /etc/puppet/modules/apache/examples/init.pp
+    $ puppet parser validate /home/training/puppet/modules/apache/manifests/install.pp
+    $ sudo puppet apply --noop /home/training/puppet/modules/apache/examples/init.pp
+    $ sudo puppet apply /home/training/puppet/modules/apache/examples/init.pp
 
 
 !SLIDE small

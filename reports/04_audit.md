@@ -20,6 +20,7 @@ an additional audit event after Puppet reverted the drift.
 
 ~~~ENDSECTION~~~
 
+
 !SLIDE small
 # Using Audit Metaparameter
 
@@ -30,7 +31,7 @@ an additional audit event after Puppet reverted the drift.
     }
 
 <pre>
-# puppet apply audit.pp
+$ sudo puppet apply audit.pp
 notice: File[/etc/motd]/ensure: audit change: newly-recorded v...
 notice: File[/etc/motd]/content: audit change: newly-recorded ...
 notice: File[/etc/motd]/owner: audit change: newly-recorded va...
@@ -38,13 +39,13 @@ notice: File[/etc/motd]/group: audit change: newly-recorded va...
 notice: File[/etc/motd]/mode: audit change: newly-recorded val...
 [...]
 notice: Finished catalog run in 0.02 seconds
-# echo "** Externally Modified **" >> /etc/motd
-# puppet apply audit.pp
+$ echo "** Externally Modified **" >> /etc/motd
+$ sudo puppet apply audit.pp
 notice: File[/etc/motd]/content: audit change: previously reco...
 notice: File[/etc/motd]/ctime: audit change: previously record...
 notice: File[/etc/motd]/mtime: audit change: previously record...
 notice: Finished catalog run in 0.02 seconds
-# cat /etc/motd
+$ cat /etc/motd
 This is managed by Puppet
 ** Externally Modified **
 </pre>
@@ -57,7 +58,7 @@ This is managed by Puppet
  * Use Puppet for auditing
 * Steps:
  * Audit all attributes of `/etc/ssh/sshd_config`
- * Manage owner, group and mode and audit its content of '/etc/resolv.conf`
+ * Manage owner, group and mode and audit its content of `/etc/resolv.conf`
  * Apply this manifest to record the value
  * Change the content of both files
  * Apply the manifest to get audit changes
@@ -79,7 +80,7 @@ This is managed by Puppet
 ****
 
 * Audit all attributes of `/etc/ssh/sshd_config`
-* Manage owner, group and mode and audit its content of '/etc/resolv.conf`
+* Manage owner, group and mode and audit its content of `/etc/resolv.conf`
 * Apply this manifest to record the value
 * Change the content of both files
 * Apply the manifest to get audit changes
@@ -100,15 +101,15 @@ This is managed by Puppet
 ### Audit all attributes of `/etc/ssh/sshd_config`
 
     @@@ Sh
-    # vi audit.pp
+    $ vim audit.pp
     file { '/etc/ssh/sshd_config':
       audit => all,
     }
 
-### Manage owner, group and mode and audit its content of '/etc/resolv.conf`
+### Manage owner, group and mode and audit its content of `/etc/resolv.conf`
 
     @@@ Sh
-    # vi audit.pp
+    $ vim audit.pp
     file { '/etc/resolv.conf':
       ensure => file,
       owner  => 'root',
@@ -122,7 +123,7 @@ This is managed by Puppet
 During this apply you should see messages including `audit change: newly-recorded value`.
 
     @@@ Sh
-    # puppet apply audit.pp
+    $ sudo puppet apply audit.pp
 
 ### Change the content of both files
 
@@ -135,18 +136,17 @@ During this apply you should see messages including `audit change: newly-recorde
 During this apply you should see messages containing `audit change: previously recorded value ... has been changed`
 
     @@@ Sh
-    # puppet apply audit.pp
+    $ sudo puppet apply audit.pp
 
 ### Change the mode of both files to `0666`
 
     @@@ Sh
-    # chmod 0666 /etc/ssh/sshd_config
-    # chmod 0666 /etc/resolv.conf
+    $ sudo chmod 0666 /etc/ssh/sshd_config
+    $ sudo chmod 0666 /etc/resolv.conf
 
 ### Apply the manifest to get audit changes 
 
 During this apply you should see message about `audit change` for `sshd_config` and `mode change` on `resolv.conf`
 
     @@@ Sh
-    # puppet apply audit.pp
-
+    $ sudo puppet apply audit.pp

@@ -153,12 +153,12 @@ The same should be happend as before reworked the module.
 Rework the main apache class:
 
     @@@ Puppet
-    # vim /etc/puppet/modules/apache/manifests/init.pp
+    $ vim /home/training/puppet/modules/apache/manifests/init.pp
     class apache (
-      Enum['running','stopped'] $ensure     = running,
-      Boolean                   $enable     = true,
-      Boolean                   $ssl        = $apache::params::ssl,
-      Hash                      $vhosts     = {},
+      Enum['running','stopped'] $ensure = running,
+      Boolean                   $enable = true,
+      Boolean                   $ssl    = $apache::params::ssl,
+      Hash                      $vhosts = {},
     ) inherits apache::params {
 
       class{'apache::install':}
@@ -168,10 +168,12 @@ Rework the main apache class:
       class{'apache::service':}
     }
 
+    $ puppet parser validate /home/training/puppet/modules/apache/manifests/init.pp
+
 Review the `apache::params` class:
 
     @@@ Puppet
-    # vim /etc/puppet/modules/apache/manifests/params.pp
+    $ vim /home/training/puppet/modules/apache/manifests/params.pp
     class apache::params {
       case $::osfamily {
        'RedHat': {
@@ -191,13 +193,20 @@ Review the `apache::params` class:
       }
     }
 
+    $ puppet parser validate /home/training/puppet/modules/apache/manifests/params.pp
+
 Create the `apache::install` class:
 
     @@@ Puppet
-    # vim /etc/puppet/modules/apache/manifests/install.pp
+    $ vim /home/training/puppet/modules/apache/manifests/install.pp
     class apache::install (
     ) inherits apache::params {
+
       $ssl = $apache::ssl
+
+      package { $apache_package:
+        ensure => installed,
+      }
 
       if $ssl {
         case $::osfamily {
@@ -213,18 +222,17 @@ Create the `apache::install` class:
           }
         }
       }
-
-      package { $apache_package:
-        ensure => installed,
-      }
     }
+
+    $ puppet parser validate /home/training/puppet/modules/apache/manifests/install.pp
 
 Create the `apache::config` class:
 
     @@@ Puppet
-    # vim /etc/puppet/modules/apache/manifests/config.pp
+    $ vim /home/training/puppet/modules/apache/manifests/config.pp
     class apache::config (
     ) inherits apache::params {
+
       $vhosts = $apache::vhosts
 
       file { $apache_config:
@@ -241,10 +249,12 @@ Create the `apache::config` class:
       }
     }
 
+    $ puppet parser validate /home/training/puppet/modules/apache/manifests/config.pp
+
 Create the `apache::service` class:
 
     @@@ Puppet
-    # vim /etc/puppet/modules/apache/manifests/service.pp
+    $ vim /home/training/puppet/modules/apache/manifests/service.pp
     class apache::service (
     ) inherits apache::params {
 
@@ -257,10 +267,12 @@ Create the `apache::service` class:
       }
     }
 
+    $ puppet parser validate /home/training/puppet/modules/apache/manifests/service.pp
+
 Modify the defined resource `apache::vhost`:
 
     @@@ Puppet
-    # vim /etc/puppet/modules/apache/manifests/vhost.pp
+    $ vim /home/training/puppet/modules/apache/manifests/vhost.pp
     define apache::vhost (
       String $ip,
       String $shortname    = $title,
@@ -276,3 +288,7 @@ Modify the defined resource `apache::vhost`:
         content => template('apache/vhost.conf.erb'),
       }
     }
+
+    $ puppet parser validate /home/training/puppet/modules/apache/manifests/vhost.pp
+    $ sudo puppet apply --noop /home/training/puppet/modules/apache/examples/init.pp
+    $ sudo puppet apply /home/training/puppet/modules/apache/examples/init.pp

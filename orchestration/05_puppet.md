@@ -20,17 +20,17 @@
 Run Puppet on 5 Debian nodes at a time:
 
     @@@ Sh
-    # mco puppet runall -F osfamily=Debian 5
+    $ mco puppet runall -F osfamily=Debian 5
 
 Temporarily disable Puppet on `dev` classified nodes:
 
     @@@ Sh
-    # mco puppet disable -C dev
+    $ mco puppet disable -C dev
 
 Retrieve the last run summary from a node:
 
     @@@ Sh
-    # mco puppet summary -I proxy.training.vm
+    $ mco puppet summary -I proxy.training.vm
 
 
 !SLIDE small
@@ -39,17 +39,17 @@ Retrieve the last run summary from a node:
 Install a package on classified nodes:
 
     @@@ Sh
-    # mco package install httpd -C backend
+    $ mco package install httpd -C backend
 
 Update a package on a named node:
 
     @@@ Sh
-    # mco package update httpd -I bob.training.vm
+    $ mco package update httpd -I bob.training.vm
 
 Retrieve package versions from all RedHat machines:
 
     @@@ Sh
-    # mco package status httpd -F osfamily=RedHat
+    $ mco package status httpd -F osfamily=RedHat
 
 
 !SLIDE small
@@ -58,17 +58,17 @@ Retrieve package versions from all RedHat machines:
 Restart a service on all `travis` classified nodes:
 
     @@@ Sh
-    # mco service travis-ci restart -C travis
+    $ mco service travis-ci restart -C travis
 
 Stop a service on a named node:
 
     @@@ Sh
-    # mco service exim stop -I compromised.training.vm
+    $ mco service exim stop -I compromised.training.vm
 
 Discover how many mailservers are running:
 
     @@@ Sh
-    # mco service exim status
+    $ mco service exim status
 
 
 !SLIDE smbullets 
@@ -102,6 +102,7 @@ Discover how many mailservers are running:
 
 * Use Puppet to get the facts inventory up and running
 
+
 !SLIDE supplemental solutions
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Proposed Solution
 
@@ -114,8 +115,8 @@ Discover how many mailservers are running:
 ### Install MCollective Puppet Agent Plugin:
 
     @@@ Sh
-    # git clone https://github.com/puppetlabs/mcollective-puppet-agent /opt/puppetlabs/mcollective/plugins/mcollective
-    # systemctl restart mcollective.service
+    $ sudo git clone https://github.com/puppetlabs/mcollective-puppet-agent /opt/puppetlabs/mcollective/plugins/mcollective
+    $ sudo systemctl restart mcollective.service
 
 ### Test Puppet orchestration:
 
@@ -123,20 +124,20 @@ Behaviour changes depending on the fact if the agent is running or not. If it is
 place immediately but can not take arguments like `--noop`. If it is stopped commands will be splayed by default.
 
     @@@ Sh
-    # mco puppet status
-    # mco puppet runonce --no-splay
-    # sleep 10
-    # mco puppet status
-    # mco puppet summary
+    $ mco puppet status
+    $ mco puppet runonce --no-splay
+    $ sleep 10
+    $ mco puppet status
+    $ mco puppet summary
 
 ### Use Puppet to get the facts inventory up and running
 
 There is also an agent for gathering the facts but it can be quite slow, so the default is using a precreated yaml inventory.
 How to get this up and running is explained in https://docs.puppet.com/mcollective/plugin_directory/facter_via_yaml.html.
 
-Alternative add a fact manual to the file `/etc/puppetlabs/mcollective/facts.yaml` for testing.
+Alternative add a fact manually to the file `/etc/puppetlabs/mcollective/facts.yaml` for testing.
 
     @@@ Sh
-    # echo "osfamily=RedHat" >> /etc/puppetlabs/mcollective/facts.yaml
-    # mco puppet runonce -F osfamily=Debian
-    # mco puppet runonce -F osfamily=RedHat
+    $ echo "osfamily: RedHat" >> /etc/puppetlabs/mcollective/facts.yaml
+    $ mco puppet runonce -F osfamily=Debian
+    $ mco puppet runonce -F osfamily=RedHat

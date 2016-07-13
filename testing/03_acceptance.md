@@ -38,9 +38,9 @@ More on Serverspec including a overview of the resource types: http://serverspec
 # Serverspec - Installation
 
     @@@ Sh
-    # gem install serverspec
-    # cd /etc/puppet/modules/apache/
-    # serverspec-init
+    $ gem install serverspec
+    $ cd /home/training/puppet/modules/apache/
+    $ serverspec-init
     Select OS type:
 
       1) UN*X
@@ -65,7 +65,7 @@ More on Serverspec including a overview of the resource types: http://serverspec
 # Serverspec - Configuration
 
     @@@ Ruby
-    # vim /etc/puppet/modules/apache/spec/localhost/sample_spec.rb
+    $ vim /home/training/puppet/modules/apache/spec/localhost/sample_spec.rb
     require 'spec_helper'
 
     describe package('httpd') do
@@ -91,9 +91,12 @@ More on Serverspec including a overview of the resource types: http://serverspec
 # Running Tests
 
     @@@ Sh
-    # cd /etc/puppet/modules/apache/
-    # rake spec
-    # ruby -S rspec spec/localhost/httpd_spec.rb
+    $ cd /home/training/puppet/modules/apache/
+    $ rake spec
+    $ ruby -S rspec spec/localhost/httpd_spec.rb
+    
+    Package "httpd"
+      should be installed
     ...
     Finished in 0.098741 seconds
     6 examples, 0 failures
@@ -107,6 +110,7 @@ More on Serverspec including a overview of the resource types: http://serverspec
  * Install and configure `serverspec`
  * Write tests to check the Apache webserver on your local virtual machine
  * Run the acceptance test
+
 
 !SLIDE supplemental exercises
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Write Acceptance Tests
@@ -127,15 +131,18 @@ More on Serverspec including a overview of the resource types: http://serverspec
 
 ****
 
-## Practice designing acceptance tests for the `apache` module
+## Write Acceptance Tests
 
 ****
 
 Install and configure `serverspec`:
 
     @@@ Sh
-    # cd /etc/puppet/modules/apache/
-    # serverspec-init
+    $ gem install serverspec
+    $ cd /home/training/puppet/modules/apache/
+    $ mv Rakefile Rakefile.bak
+    $ mv spec spec.bak
+    $ serverspec-init
     Select OS type:
 
       1) UN*X
@@ -148,15 +155,17 @@ Install and configure `serverspec`:
       1) SSH
       2) Exec (local)
 
-    Select number: 1
+    Select number: 2
 
-    Vagrant instance y/n: n
-    Input target host name: training.localdomain
+     + spec/
+     + spec/localhost/
+     + spec/localhost/sample_spec.rb
+     + spec/spec_helper.rb
 
 Write tests to check the Apache webserver on your local virtual machine:
 
     @@@ Ruby
-    # vim spec/training.localdomain/sample_spec.rb
+    $ vim spec/localhost/sample_spec.rb
     require 'spec_helper'
 
     describe package('httpd'), :if => os[:family] == 'redhat' do
@@ -175,7 +184,7 @@ Write tests to check the Apache webserver on your local virtual machine:
 Run the acceptance test:
 
     @@@ Sh
-    # rake spec
+    $ rake spec
     ...
     Package "httpd"
       should be installed

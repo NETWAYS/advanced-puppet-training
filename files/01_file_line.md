@@ -19,7 +19,7 @@ Example usage:
       ensure => present,
       path   => '/etc/bashrc',
       line   => 'export HTTP_PROXY=http://proxy:8080',
-      match  => '^export\ HTTP_PROXY\=',
+      match  => '^export HTTP_PROXY=',
     }
 
 Help:
@@ -71,10 +71,10 @@ Help:
 ****
 
     @@@ Sh
-    # puppet module install puppetlabs-stdlib
-    # mkdir -p /etc/puppet/modules/ssh/{manifests,examples}
+    $ puppet module install puppetlabs-stdlib
+    $ mkdir -p /home/training/puppet/modules/ssh/{manifests,examples}
 
-    # vim /etc/puppet/modules/ssh/manifests/file_line.pp
+    $ vim /home/training/puppet/modules/ssh/manifests/file_line.pp
     class ssh::file_line {
       file_line { 'GSSAPIAuthentication':
         ensure => present,
@@ -84,8 +84,10 @@ Help:
       }
     }
 
-    # vim /etc/puppet/modules/ssh/examples/file_line.pp
+    $ puppet parser validate /home/training/puppet/modules/ssh/manifests/file_line.pp
+    $ vim /home/training/puppet/modules/ssh/examples/file_line.pp
     include ssh::file_line
 
-    # puppet apply --noop /etc/puppet/modules/ssh/examples/file_line.pp
-    # puppet apply /etc/puppet/modules/ssh/examples/file_line.pp
+    $ puppet parser validate /home/training/puppet/modules/ssh/examples/file_line.pp
+    $ sudo puppet apply --noop /home/training/puppet/modules/ssh/examples/file_line.pp
+    $ sudo puppet apply /home/training/puppet/modules/ssh/examples/file_line.pp

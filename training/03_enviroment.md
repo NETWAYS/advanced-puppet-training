@@ -15,7 +15,7 @@
 
 The laptop provided for the training is running CentOS 7 with Gnome 3 in Fallback mode.
 You can login with the unprivileged user "training" and password "netways". 
-The password for user "root" typically not required is also "netways".
+The password for user "root" typically not required is "netways0815".
 
 For virtualization the laptop runs Virtualbox. The virtual machines are best accessed using ssh
 with the user "training" and password "netways". The user "root" has the same password"

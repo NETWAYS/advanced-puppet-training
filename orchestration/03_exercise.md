@@ -41,21 +41,21 @@ You can get it from a community repository: https://copr.fedoraproject.org/coprs
 
 ****
 
-### Install and start ActiveMQ:
+Install and start ActiveMQ:
 
     @@@ Sh
-    # curl -L https://copr.fedoraproject.org/coprs/lkiesow/apache-activemq-dist/repo/epel-7/lkiesow-apache-activemq-dist-epel-7.repo \
+    $ sudo curl -L https://copr.fedoraproject.org/coprs/lkiesow/apache-activemq-dist/repo/epel-7/lkiesow-apache-activemq-dist-epel-7.repo \
     -o /etc/yum.repos.d/lkiesow-apache-activemq-dist-epel-7.repo
-    # yum install activemq-dist
-    # systemctl start activemq.service
+    $ sudo yum install activemq-dist
+    $ sudo systemctl start activemq.service
 
-### Configure MCollective to work with ActiveMQ:
+Configure MCollective to work with ActiveMQ:
 
 You do not need to install MCollective as a seperate package because it is already included in Puppet's all-in-one-package.
 You only have to configure it to find your message queue (host and port).
 
     @@@ Sh
-    #vim /etc/puppetlabs/mcollective/server.cfg
+    $ sudo vim /etc/puppetlabs/mcollective/server.cfg
     ...
     connector = activemq
     plugin.activemq.pool.size = 1
@@ -65,7 +65,7 @@ You only have to configure it to find your message queue (host and port).
     plugin.activemq.pool.1.password = marionette
     ...
 
-    #vim /etc/puppetlabs/mcollective/client.cfg
+    $ sudo vim /etc/puppetlabs/mcollective/client.cfg
     ...
     connector = activemq
     plugin.activemq.pool.size = 1
@@ -77,15 +77,16 @@ You only have to configure it to find your message queue (host and port).
 
 If you want to test MCollective on more than one system use your fqdn instead of localhost.
 
-### Start MCollective Server:
+Start MCollective Server:
 
     @@@ Sh
-    # systemctl start mcollective.service
+    $ sudo systemctl start mcollective.service
 
-### Test orchestration:
+Test orchestration:
 
     @@@ Sh
-    # mco ping
+    $ mco ping
+    agent-centos.localdomain      time=41.53 ms
 
 In a productive environment you should not run a message queue without securing it! In this configuration it only uses a
 password on a clear-text connection.

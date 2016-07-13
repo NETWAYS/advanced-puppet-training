@@ -77,9 +77,9 @@
 
 
     @@@ Sh
-    # puppet module install puppetlabs-mysql
+    $ puppet module install puppetlabs-mysql
 
-    # vim /etc/puppetlabs/code/environments/production/modules/profiles/manifests/database.pp
+    $ vim /home/training/puppet/modules/profiles/manifests/database.pp
     class profiles::database {
       class { '::mysql::server':
         root_password           => 'swordfish',
@@ -87,46 +87,45 @@
       }
 
       mysql_database { 'information_schema':
-        ensure  => 'present',
+        ensure  => present,
         charset => 'utf8',
         collate => 'utf8_general_ci',
       }
 
       mysql_database { 'mysql':
-        ensure  => 'present',
+        ensure  => present,
         charset => 'latin1',
         collate => 'latin1_swedish_ci',
       }
 
       mysql_database { 'performance_schema':
-        ensure  => 'present',
+        ensure  => present,
        charset => 'utf8',
        collate => 'utf8_general_ci',
       }
     }
 
-    # puppet parser validate /etc/puppet/code/modules/profiles/manifests/database.pp
-    # vim /etc/puppet/code/modules/profiles/examples/database.pp
+    $ puppet parser validate /home/training/puppet/modules/profiles/manifests/database.pp
+    $ vim /home/training/puppet/modules/profiles/examples/database.pp
     include profiles::database
 
-    # puppet parser validate /etc/puppet/code/modules/profiles/examples/database.pp
-    # puppet apply --noop /etc/puppet/code/modules/profiles/examples/database.pp
-    # puppet apply /etc/puppet/code/modules/profiles/examples/database.pp
+    $ puppet parser validate /home/training/puppet/modules/profiles/examples/database.pp
+    $ sudo puppet apply --noop /home/training/puppet/modules/profiles/examples/database.pp
+    $ sudo puppet apply /home/training/puppet/modules/profiles/examples/database.pp
 
-    # vim /etc/puppet/code/modules/profiles/manifests/webserver.pp
+    $ vim /home/training/puppet/modules/profiles/manifests/webserver.pp
     class profiles::webserver {
-      include apache::stages
-      include apache
-
-      class { 'apache::yumrepos':
-        stage => 'yum',
+      class { 'apache':
+        ensure => running,
+        enable => true,
+        ssl    => true,
       }
     }
 
-    # puppet parser validate /etc/puppet/codei/modules/profiles/manifests/webserver.pp
-    # vim /etc/puppet/code/modules/profiles/examples/webserver.pp
+    $ puppet parser validate /home/training/puppet/modules/profiles/manifests/webserver.pp
+    $ vim /home/training/puppet/modules/profiles/examples/webserver.pp
     include profiles::webserver
 
-    # puppet parser validate /etc/puppet/code/modules/profiles/examples/webserver.pp
-    # puppet apply --noop /etc/puppet/code/modules/profiles/examples/webserver.pp
-    # puppet apply /etc/puppet/code/modules/profiles/examples/webserver.pp
+    $ puppet parser validate /home/training/puppet/modules/profiles/examples/webserver.pp
+    $ sudo puppet apply --noop /home/training/puppet/modules/profiles/examples/webserver.pp
+    $ sudo puppet apply /home/training/puppet/modules/profiles/examples/webserver.pp

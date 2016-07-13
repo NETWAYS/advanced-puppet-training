@@ -63,20 +63,26 @@ Help:
 ****
 
     @@@ Sh
-    # vi hosts.pp
-    host {'localhost.localdomain':
-      ip           => '127.0.0.1',
-      host_aliases => [ 'localhost' ],
-    }
+    $ vim /home/training/puppet/modules/apache/manifests/hosts.pp
+    class apache::hosts {
+      host {'localhost.localdomain':
+        ip           => '127.0.0.1',
+        host_aliases => [ 'localhost' ],
+      }
     
-    host {'localhost6.localdomain6':
-      ip           => '::1',
-      host_aliases => 'localhost6',
-    }
+      host {'localhost6.localdomain6':
+        ip           => '::1',
+        host_aliases => 'localhost6',
+      }
     
-    resources { 'host':
-      purge => true,
+      resources { 'host':
+        purge => true,
+      }
     }
 
-    # puppet apply --noop hosts.pp
-    # puppet apply hosts.pp
+    $ vim /home/training/puppet/modules/apache/examples/hosts.pp
+    include apache::hosts
+
+    $ puppet parser validate /home/training/puppet/modules/apache/manifests/hosts.pp
+    $ sudo puppet apply --noop /home/training/puppet/modules/apache/examples/hosts.pp
+    $ sudo puppet apply /home/training/puppet/modules/apache/examples/hosts.pp

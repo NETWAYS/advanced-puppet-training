@@ -2,7 +2,7 @@
 # Developing Facts
 
     @@@ Sh
-    # tree /etc/puppet/modules/{MODULE NAME}
+    # tree /home/training/puppet/modules/{MODULE NAME}
     |-- lib
     |   |-- facter
     |   |   `-- role.rb
@@ -14,6 +14,6 @@
 Test facts locally by setting FACTERLIB or RUBYLIB environment variables:
 
     @@@ Sh
-    # export RUBYLIB=/etc/puppet/modules/custom/lib
+    # export RUBYLIB=/home/training/puppet/modules/custom/lib
     # facter role
     Apache Webserver
