@@ -93,9 +93,9 @@ Puppet 4's data in module works in a similar fashion like enviroment data you wi
 
     @@@ Puppet
     class custom::service (
-    ) inherits custom::params {
       $ensure = $custom::ensure
       $enable = $custom::enable
+    ) inherits custom::params {
 
       service { $custom_service:
         ensure => $ensure,
