@@ -41,7 +41,8 @@ is active pre default and pre configured.
 !SLIDE small
 # Sample Configuration
 
-    # cat /etc/puppet/environments/production/hiera.yaml
+    @@@Sh
+    $ cat /etc/puppetlabs/puppet/hiera.yaml
     ---
     version: 4
     datadir: data

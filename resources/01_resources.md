@@ -10,7 +10,7 @@
 
 Example usage:
 
-    @@@ Puppet
+    @@@Puppet
     resources { 'user':
       purge              => true,
       unless_system_user => true,
@@ -18,8 +18,8 @@ Example usage:
 
 Help:
 
-    @@@ Puppet
-    # puppet describe resources
+    @@@Puppet
+    $ puppet describe resources
 
 
 !SLIDE smbullets
@@ -29,7 +29,8 @@ Help:
  * Use the `resource` resource type to purge host entries
 * Steps:
  * Create a new manifest called `hosts`
- * Manage the host entries for `localhost` and `localhost6`
+ * Manage the host entries for `localhost4.localdomain4` and `localhost6.localdomain6`
+ * Manage the host entries for `agent-centos.localdomain` and `puppet.localdomain`
  * Purge all other host entries
  * Apply your manifest
 
@@ -48,7 +49,8 @@ Help:
 ****
 
 * Create a new manifest called `hosts`
-* Manage the host entries for `localhost` and `localhost6`
+* Manage the host entries for `localhost4.localdomain4` and `localhost6.localdomain6`
+* Manage the host entries for `agent-centos.localdomain` and `puppet.localdomain`
 * Purge all other host entries
 * Apply your manifest
 
@@ -62,17 +64,28 @@ Help:
 
 ****
 
-    @@@ Sh
-    $ vim /home/training/puppet/modules/apache/manifests/hosts.pp
+    @@@Sh
+    $ cd /home/training
+    $ vim apache/manifests/hosts.pp
     class apache::hosts {
-      host {'localhost.localdomain':
+      host { 'localhost4.localdomain4':
         ip           => '127.0.0.1',
-        host_aliases => [ 'localhost' ],
+        host_aliases => [ 'localhost4','localhost.localdomain','localhost' ],
       }
     
-      host {'localhost6.localdomain6':
+      host { 'localhost6.localdomain6':
         ip           => '::1',
-        host_aliases => 'localhost6',
+        host_aliases => [ 'localhost6','localhost.localdomain','localhost' ],
+      }
+    
+      host { 'agent-centos.localdomain':
+        ip           => '192.168.56.102',
+        host_aliases => [ 'agent-centos' ],
+      }
+    
+      host { 'puppet.localdomain':
+        ip           => '192.168.56.101',
+        host_aliases => [ 'puppet' ],
       }
     
       resources { 'host':
@@ -80,9 +93,9 @@ Help:
       }
     }
 
-    $ vim /home/training/puppet/modules/apache/examples/hosts.pp
+    $ vim apache/examples/hosts.pp
     include apache::hosts
 
-    $ puppet parser validate /home/training/puppet/modules/apache/manifests/hosts.pp
-    $ sudo puppet apply --noop /home/training/puppet/modules/apache/examples/hosts.pp
-    $ sudo puppet apply /home/training/puppet/modules/apache/examples/hosts.pp
+    $ puppet parser validate apache/manifests/hosts.pp
+    $ sudo puppet apply --noop apache/examples/hosts.pp
+    $ sudo puppet apply apache/examples/hosts.pp

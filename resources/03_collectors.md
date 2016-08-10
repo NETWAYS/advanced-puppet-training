@@ -1,7 +1,7 @@
 !SLIDE small
 # Resource Collectors
 
-    @@@ Puppet
+    @@@Puppet
     Type <| [Attribute] [Search Expression] [Search Key] |>
 
 * Select a group of resources by searching the attributes of every resource in the catalog
@@ -9,17 +9,17 @@
 
 Realize all virtual user resources:
 
-    @@@ Puppet
+    @@@Puppet
     User <| |>
 
 Realize all system administrators:
 
-    @@@ Puppet
+    @@@Puppet
     User <| groups == 'sysadmin' |>
 
 Realize all users tagged with Nuremberg:
 
-    @@@ Puppet
+    @@@Puppet
     User <| tag == 'nuremberg' |>
 
 
@@ -39,28 +39,28 @@ Either operand can be a search expression that evaluates as true
 !SLIDE small
 # Realizing with Collectors
 
-    @@@ Puppet
-    @user { 'luke': ensure => present, }
+    @@@Puppet
+    @user { 'julian': ensure => present, }
 
-    @user { 'james':
+    @user { 'bernd':
       ensure => present,
       groups  => 'dba',
     }
 
-    @user { 'jeff':
+    @user { 'blerim':
       ensure => present,
-      groups  => 'sysadmin',
+      groups  => 'sysadmins',
     }
 
-    @user { 'brad':
+    @user { 'achim':
       ensure => present,
       groups  => 'webadmins',
     }
 
-    User <| (groups == 'dba' or groups == 'sysadmin')
-            or title == 'luke' |>
+    User <| (groups == 'dba' or groups == 'sysadmins')
+            or title == 'julian' |>
 
-The users luke, james, jeff will be created, but brad will not.
+The users julian, bernd, blerim will be created, but achim will not.
 
 
 !SLIDE smbullets
@@ -102,9 +102,11 @@ The users luke, james, jeff will be created, but brad will not.
 ****
 
     @@@ Sh
-    $ vim /home/training/puppet/modules/apache/manifests/install.pp
+    $ cd /home/training
+    $ vim apache/manifests/install.pp
     class apache::install (
     ) inherits apache::params {
+
       $ssl = $apache::ssl
 
       @package { $apache_package:
@@ -127,9 +129,9 @@ The users luke, james, jeff will be created, but brad will not.
       Package <| |>
     }
 
-    $ puppet parser validate /home/training/puppet/modules/apache/manifests/install.pp
-    $ sudo puppet apply --noop /home/training/puppet/modules/apache/examples/init.pp
-    $ sudo puppet apply /home/training/puppet/modules/apache/examples/init.pp
+    $ puppet parser validate apache/manifests/install.pp
+    $ sudo puppet apply --noop apache/examples/init.pp
+    $ sudo puppet apply apache/examples/init.pp
 
 
 !SLIDE small
@@ -137,16 +139,17 @@ The users luke, james, jeff will be created, but brad will not.
 
 For Dependencies:
 
-    @@@ Puppet
+    @@@Puppet
     Yumrepo['epel'] -> Package <| tag == 'epel' |>
     Yumrepo['puppetlabs'] -> Package <| tag == 'puppetlabs' |>
 
 To provide defaults (will override attributes):
 
-    @@@ Puppet
+    @@@Puppet
     User <| group == sysadmin |> {
       shell => '/usr/bin/bash',
     }
+    
     Package <| |> {
       provider => 'yum',
     }

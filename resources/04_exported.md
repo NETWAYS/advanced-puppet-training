@@ -16,7 +16,7 @@
 
 Declare exported resources:
 
-    @@@ Puppet
+    @@@Puppet
     @@sshkey { $hostname:
       type => dsa,
       key  => $sshdsakey,
@@ -24,7 +24,7 @@ Declare exported resources:
 
 Collect exported resources:
 
-    @@@ Puppet
+    @@@Puppet
     Sshkey <<| |>>
 
 
@@ -34,11 +34,14 @@ Collect exported resources:
 * Objective:
  * Create a haproxy configuration using exported resources
 * Steps:
- * Install `puppetlabs-haproxy` module
- * Expand the `apache` module
+ * Expand the `apache` module on `agent-centos.localdomain`
  * Declare an exported resource `haproxy::balancermember` in `config.pp`
- * Install `haproxy` and collect exported resources
- * Push and test your configuration
+ * Push your configuration to `master`
+ * Install `puppetlabs-haproxy` and `puppetlabs-concat` module with r10k on `puppet.localdomain`
+ * Collect exported resources via `site.pp`
+ * Push your configuration to `production`
+ * Deploy the `production` environment with r10k
+ * Trigger Puppet run and test your configuration on `agent-centos.localdomain`
 
 
 !SLIDE supplemental exercises
@@ -54,11 +57,14 @@ Collect exported resources:
 
 ****
 
-* Install `puppetlabs-haproxy` module
-* Expand the `apache` module
+* Expand the `apache` module on `agent-centos.localdomain`
 * Declare an exported resource `haproxy::balancermember` in `config.pp`
-* Install `haproxy` and collect exported resources 
-* Push and test your configuration
+* Push your configuration to `master`
+* Install `puppetlabs-haproxy` and `puppetlabs-concat` module with r10k on `puppet.localdomain`
+* Collect exported resources via `site.pp`
+* Push your configuration to `production`
+* Deploy the `production` environment with r10k
+* Trigger Puppet run and test your configuration on `agent-centos.localdomain`
 
 
 !SLIDE supplemental solutions
@@ -70,11 +76,14 @@ Collect exported resources:
 
 ****
 
-    @@@ Sh
-    $ puppet module install puppetlabs-haproxy
-    $ vim /home/training/puppet/modules/apache/manifests/config.pp
+Declare an exported resource `haproxy::balancermember` in `config.pp`:
+
+    @@@Sh
+    $ cd /home/training
+    $ vim apache/manifests/config.pp
     class apache::config (
     ) inherits apache::params {
+
       $vhosts = $apache::vhosts
 
       file { $apache_config:
@@ -99,41 +108,62 @@ Collect exported resources:
       }
     }
 
-    $ puppet parser validate /home/training/puppet/modules/apache/config.pp
-    $ vim /home/training/puppet/modules/apache/examples/haproxy.pp
-    include apache
-    include haproxy
+    $ puppet parser validate apache/manifests/config.pp
 
-    haproxy::listen { "$::fqdn":
-      collect_exported => false,
-      ipaddress        => "$::ipaddress_enp0s8",
-      ports            => '8080',
+Push your configuration to `master`:
+
+    @@@Sh
+    $ cd /home/training/apache
+    $ git add manifests/config.pp
+    $ git commit -m 'haproxy'
+    $ git push origin master
+
+Install `puppetlabs-haproxy` and `puppetlabs-concat` module with r10k on `puppet.localdomain`:
+
+    @@@Sh
+    $ cd /home/training/puppet
+    $ vim Puppetfile
+    mod "puppetlabs/stdlib", :latest
+    mod 'apache',
+      :git => '/home/training/apache.git'
+    mod "puppetlabs/haproxy", :latest
+    mod "puppetlabs/concat", :latest
+
+    $ git add Puppetfile
+
+Collect exported resources via `site.pp`:
+
+    @@@Sh
+    $ vim manifests/site.pp
+    node "agent-centos.localdomain" {
+      include apache
+      include haproxy
+
+      haproxy::listen { "$::fqdn":
+        collect_exported => false,
+        ipaddress        => "$::ipaddress_enp0s8",
+        ports            => '8080',
+      }
+
+      Haproxy::Balancermember <<| |>>
     }
 
-    Haproxy::Balancermember <<| |>>
+    $ puppet parser validate manifests/site.pp
+    $ git add manifests/site.pp
 
-    $ puppet parser validate /home/training/puppet/modules/apache/examples/haproxy.pp
-    $ sudo puppet apply --noop /home/training/puppet/modules/apache/examples/haproxy.pp
-    $ sudo puppet apply /home/training/puppet/modules/apache/examples/haproxy.pp
-    $ vim /home/training/puppet/manifests/site.pp
-    include apache
-    include haproxy
+Push your configuration to `production`:
 
-    haproxy::listen { "$::fqdn":
-      collect_exported => false,
-      ipaddress        => "$::ipaddress_enp0s8",
-      ports            => '8080',
-    }
+    $ git commit -m 'haproxy module'
+    $ git push origin production
 
-    Haproxy::Balancermember <<| |>>
+Deploy the `production` environment with r10k:
 
-    $ puppet parser validate /home/training/puppet/manifests/site.pp
-    $ cd /home/training/puppet/
-    $ git status
-    $ git add manifests/
-    $ git add modules/
-    $ git commit -m 'initial commit'
-    $ git push origin master 
+    @@@Sh
+    $ r10k deploy environment production -p -c /etc/puppetlabs/puppet/r10k.yaml
+
+Trigger Puppet run and test your configuration on `agent-centos.localdomain`:
+
+    @@@Sh
     $ sudo puppet agent -t
 
 Test HAProxy redirect to Apache:

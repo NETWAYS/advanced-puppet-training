@@ -81,3 +81,59 @@ Add server and basemodulepath to `puppet.conf`:
       server = puppet.localdomain
       basemodulepath = /home/training/puppet/modules
     $ sudo puppet module list
+
+
+!SLIDE smbullets
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Establish Puppet connection
+
+* Objective:
+ * Establish Puppet connection with `puppet.localdomain`
+* Steps:
+ * Trigger Puppet run on `agent-centos.localdomain`
+ * Sign certificate on `puppet.localdomain`
+ * Trigger Puppet run on `agent-centos.localdomain`
+
+
+!SLIDE supplemental exercises
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Establish Puppet connection
+
+## Objective:
+
+****
+
+* Establish Puppet connection with `puppet.localdomain`
+
+## Steps:
+
+****
+
+* Trigger Puppet run on `agent-centos.localdomain`
+* Sign certificate on `puppet.localdomain`
+* Trigger Puppet run on `agent-centos.localdomain`
+
+
+!SLIDE supplemental solutions
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Proposed Solution
+
+****
+
+## Establish Puppet connection
+
+****
+
+Trigger Puppet run on `agent-centos.localdomain`:
+
+    @@@Sh
+    $ sudo puppet agent -t
+
+Sign certificate on `puppet.localdomain`:
+
+    @@@Sh
+    $ sudo puppet cert list
+    $ sudo puppet cert sign agent-centos.localdomain
+    $ sudo puppet cert list --all
+
+Trigger Puppet run on `agent-centos.localdomain`:
+
+    @@@Sh
+    $ sudo puppet agent -t

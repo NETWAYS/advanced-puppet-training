@@ -40,7 +40,7 @@
 * Objective:
  * Deploy environments and modules with r10k
 * Steps:
- * Install `r10k`
+ * Install `r10k` on `puppet.localdomain`
  * Initialize a new Git repository
  * Clone the repository and create a new branch `production`
  * Add the content from the `control-repo`
@@ -66,7 +66,7 @@
 
 ****
 
-* Install `r10k`
+* Install `r10k` on `puppet.localdomain`
 * Initialize a new Git repository
 * Clone the repository and create a new branch `production`
 * Add the content from the `control-repo`
@@ -92,10 +92,9 @@
 
 ****
 
-Install `r10k`:
+Install `r10k` on `puppet.localdomain`:
 
     @@@Sh
-   $ sudo yum install gem
     $ gem install r10k
 
 Initialize a new Git repository:
@@ -106,8 +105,8 @@ Initialize a new Git repository:
 Clone the repository and create a new branch `production`:
 
     @@@Sh
-    $ git clone /home/training/puppet.git /home/training/puppetclone
-    $ cd /home/training/puppetclone
+    $ git clone /home/training/puppet.git /home/training/puppet
+    $ cd /home/training/puppet
     $ git checkout -b production
 
 Add the content from the `control-repo`:
@@ -115,8 +114,8 @@ Add the content from the `control-repo`:
     @@@Sh
     $ cd /home/training
     $ git clone https://github.com/puppetlabs/control-repo.git
-    $ cp -Rf control-repo/* puppetclone/
-    $ cd /home/training/puppetclone
+    $ cp -Rf control-repo/* puppet/
+    $ cd /home/training/puppet
     $ git add .
     $ git commit -m 'inital commit'
     $ git push origin production
@@ -135,18 +134,18 @@ Create a configuration file `r10k.yaml`:
 Deploy the `production` environment:
 
     @@@Sh
-    $ chown -Rf training:training /etc/puppetlabs/code/environments/
+    $ sudo chown -Rf training:training /etc/puppetlabs/code/environments/
     $ r10k deploy environment production -p -c /etc/puppetlabs/puppet/r10k.yaml
 
 Add the `puppetlabs-stdlib` and your `apache` module to the Puppetfile:
 
     @@@Sh
-    $ vim /home/training/puppetclone/Puppetfile
+    $ vim /home/training/puppet/Puppetfile
     mod "puppetlabs/stdlib", :latest
     mod 'apache',
       :git => '/home/training/apache.git'
 
-    $ cd /home/training/puppetclone/
+    $ cd /home/training/puppet/
     $ git add Puppetfile
     $ git commit -m 'modules'
     $ git push origin production
@@ -163,7 +162,7 @@ Update the `production` environment:
 Add a new branch `development`:
 
     @@@Sh
-    $ cd /home/training/puppetclone/
+    $ cd /home/training/puppet/
     $ git checkout -b development
     $ git push -u origin development
 

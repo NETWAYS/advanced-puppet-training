@@ -18,19 +18,19 @@
 
 Mark resources as virtual:
 
-    @@@ Puppet
+    @@@Puppet
     @package { 'gcc':
       ensure => present
     }
 
 Realize virtual resources:
 
-    @@@ Puppet
+    @@@Puppet
     realize Package['gcc']
 
 No duplicate definitions:
 
-    @@@ Puppet
+    @@@Puppet
     realize Package['gcc']
     realize Package['gcc']
     realize Package['gcc']
