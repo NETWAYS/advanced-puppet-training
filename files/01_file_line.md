@@ -14,7 +14,7 @@
 
 Example usage:
 
-    @@@ Puppet
+    @@@Puppet
     file_line { 'bashrc_proxy':
       ensure => present,
       path   => '/etc/bashrc',
@@ -24,8 +24,8 @@ Example usage:
 
 Help:
 
-    @@@ Sh
-    # puppet describe file_line
+    @@@Sh
+    $ puppet describe file_line
 
 
 !SLIDE smbullets
@@ -34,7 +34,6 @@ Help:
 * Objective:
  * Use the `file_line` resource type
 * Steps:
- * Install module `puppetlabs-stdlib`
  * Create a new module called `ssh`
  * Create a new subclass called `file_line`
  * Make sure that `GSSAPIAuthentication` is set to `no` using file_line
@@ -54,7 +53,6 @@ Help:
 
 ****
 
-* Install module `puppetlabs-stdlib`
 * Create a new module called `ssh`
 * Create a new subclass called `file_line`
 * Make sure that `GSSAPIAuthentication` is set to `no` using file_line
@@ -70,11 +68,11 @@ Help:
 
 ****
 
-    @@@ Sh
-    $ puppet module install puppetlabs-stdlib
-    $ mkdir -p /home/training/puppet/modules/ssh/{manifests,examples}
+    @@@Sh
+    $ cd /home/training/puppet/modules
+    $ mkdir -p ssh/{manifests,examples}
 
-    $ vim /home/training/puppet/modules/ssh/manifests/file_line.pp
+    $ vim ssh/manifests/file_line.pp
     class ssh::file_line {
       file_line { 'GSSAPIAuthentication':
         ensure => present,
@@ -84,10 +82,10 @@ Help:
       }
     }
 
-    $ puppet parser validate /home/training/puppet/modules/ssh/manifests/file_line.pp
-    $ vim /home/training/puppet/modules/ssh/examples/file_line.pp
+    $ puppet parser validate ssh/manifests/file_line.pp
+    $ vim ssh/examples/file_line.pp
     include ssh::file_line
 
-    $ puppet parser validate /home/training/puppet/modules/ssh/examples/file_line.pp
-    $ sudo puppet apply --noop /home/training/puppet/modules/ssh/examples/file_line.pp
-    $ sudo puppet apply /home/training/puppet/modules/ssh/examples/file_line.pp
+    $ puppet parser validate ssh/examples/file_line.pp
+    $ sudo puppet apply --noop ssh/examples/file_line.pp
+    $ sudo puppet apply ssh/examples/file_line.pp

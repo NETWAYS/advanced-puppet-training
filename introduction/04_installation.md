@@ -9,7 +9,7 @@
  * Install package `puppet-agent`
  * Add symlinks for most used commands to `/usr/bin` 
  * Add server `puppet.localdomain` to `puppet.conf`
- * Add basemodulepath to `puppet.conf`
+ * Add basemodulepath `/home/training/puppet/modules` to `puppet.conf`
 
 
 !SLIDE supplemental exercises
@@ -30,7 +30,7 @@
 * Install package `puppet-agent`
 * Add symlinks for most used commands to `/usr/bin`
 * Add server `puppet.localdomain` to `puppet.conf`
-* Add basemodulepath to `puppet.conf`
+* Add basemodulepath `/home/training/puppet/modules` to `puppet.conf`
 
 
 !SLIDE supplemental solutions
@@ -63,17 +63,21 @@ Install package `puppet-agent`:
 Add symlinks for most used commands to `/usr/bin`:
 
     @@@ Sh
-    $ sudo ln -s /opt/puppetlabs/puppet/bin/{augtool,facter,puppet} /usr/bin/
+    $ sudo ln -s /opt/puppetlabs/puppet/bin/{augtool,facter,mco,puppet} /usr/bin/
+    $ puppet --version
 
 Add server and basemodulepath to `puppet.conf`:
 
     @@@Sh
+    $ mkdir /home/training/.puppetlabs/etc/puppet
     $ vim /home/training/.puppetlabs/etc/puppet/puppet.conf
     [main]
       server = puppet.localdomain
       basemodulepath = /home/training/puppet/modules
+    $ puppet module list
 
-    $ vim /etc/puppetlabs/puppet/puppet.conf
+    $ sudo vim /etc/puppetlabs/puppet/puppet.conf
     [main]
       server = puppet.localdomain
       basemodulepath = /home/training/puppet/modules
+    $ sudo puppet module list

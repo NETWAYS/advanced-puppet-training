@@ -14,7 +14,7 @@
 
 Metaparameters:
 
-    @@@ Puppet
+    @@@Puppet
     class stages {
       stage { 'before':
         before => Stage['main'],
@@ -27,7 +27,7 @@ Metaparameters:
 
 Chaining arrows:
 
-    @@@ Puppet
+    @@@Puppet
     class stages {
       stage { [ 'before', 'after']: }
 
@@ -38,7 +38,7 @@ Chaining arrows:
 !SLIDE small
 # Assign Classes to Stages
 
-    @@@ Puppet
+    @@@Puppet
     class webserver {
       include stages
       include packages # Gets Stage['main'] by default
@@ -95,8 +95,9 @@ Chaining arrows:
 
 ****
 
-    @@@ Puppet
-    $ vim /home/training/puppet/modules/apache/manifests/yumrepos.pp
+    @@@Puppet
+    $ cd /home/training/puppet/modules
+    $ vim apache/manifests/yumrepos.pp
     class apache::yumrepos {
       yumrepo { 'base':
         ensure     => 'present',
@@ -107,16 +108,16 @@ Chaining arrows:
       }
     }
 
-    $ puppet parser validate /home/training/puppet/modules/apache/manifests/yumrepos.pp
-    $ vim /home/training/puppet/modules/apache/manifests/stages.pp
+    $ puppet parser validate apache/manifests/yumrepos.pp
+    $ vim apache/manifests/stages.pp
     class apache::stages {
       stage { 'yum':
         before => Stage['main'],
       }
     }
 
-    $ puppet parser validate /home/training/puppet/modules/apache/manifests/stages.pp
-    $ vim /home/training/puppet/modules/apache/manifests/init.pp
+    $ puppet parser validate apache/manifests/stages.pp
+    $ vim apache/manifests/init.pp
     ...
     include apache::stages
  
@@ -124,6 +125,6 @@ Chaining arrows:
       stage => 'yum',
     }
 
-    $ puppet parser validate /home/training/puppet/modules/apache/manifests/init.pp
-    $ sudo puppet apply --noop /home/training/puppet/modules/apache/examples/init.pp
-    $ sudo puppet apply /home/training/puppet/modules/apache/examples/init.pp
+    $ puppet parser validate apache/manifests/init.pp
+    $ sudo puppet apply --noop apache/examples/init.pp
+    $ sudo puppet apply apache/examples/init.pp

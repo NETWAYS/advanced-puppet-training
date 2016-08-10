@@ -1,6 +1,7 @@
 !SLIDE subsectionnonum
 # ini_setting
 
+
 !SLIDE smbullets
 # ini_setting Overview
 
@@ -12,7 +13,7 @@
 !SLIDE smbullets small
 # ini_setting Usage
 
-    @@@ Puppet
+    @@@Puppet
     ini_setting {'Java Home':
       ensure            => present,
       section           => '',
@@ -21,7 +22,6 @@
       setting           => 'JAVA_HOME',
       value             => '/usr/lib/jvm/java-1.8.0',
     }
-
     ini_subsetting {'Java Memory Max':
       ensure            => present,
       section           => '',

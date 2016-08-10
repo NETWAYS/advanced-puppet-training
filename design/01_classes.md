@@ -1,7 +1,7 @@
 !SLIDE small
-# Main Class
+# 'main' Class
 
-    @@@ Puppet
+    @@@Puppet
     class custom (
       Enum['running','stopped'] $ensure = running,
       Boolean                   $enable = true,
@@ -21,9 +21,9 @@
 
 
 !SLIDE smbullets small
-# params Subclass
+# 'params' Subclass
 
-    @@@ Puppet
+    @@@Puppet
     class custom::params {
       $param1 = 'value'
 
@@ -57,9 +57,9 @@ Puppet 4's data in module works in a similar fashion like enviroment data you wi
 
 
 !SLIDE small
-# install Subclass
+# 'install' Subclass
 
-    @@@ Puppet
+    @@@Puppet
     class custom::install (
     ) inherits custom::params {
       package { $custom_package:
@@ -72,9 +72,9 @@ Puppet 4's data in module works in a similar fashion like enviroment data you wi
 
 
 !SLIDE small
-# config Subclass
+# 'config' Subclass
 
-    @@@ Puppet
+    @@@Puppet
     class custom::config (
     ) inherits custom::params {
       $param1 = $custom::param1
@@ -89,9 +89,9 @@ Puppet 4's data in module works in a similar fashion like enviroment data you wi
 
 
 !SLIDE small
-# service Subclass
+# 'service' Subclass
 
-    @@@ Puppet
+    @@@Puppet
     class custom::service (
       $ensure = $custom::ensure
       $enable = $custom::enable
@@ -150,10 +150,11 @@ The same should be happend as before reworked the module.
 
 ****
 
-Rework the main apache class:
+Rework the `main` apache class:
 
-    @@@ Puppet
-    $ vim /home/training/puppet/modules/apache/manifests/init.pp
+    @@@Puppet
+    $ cd /home/training/puppet/modules
+    $ vim apache/manifests/init.pp
     class apache (
       Enum['running','stopped'] $ensure = running,
       Boolean                   $enable = true,
@@ -168,12 +169,12 @@ Rework the main apache class:
       class{'apache::service':}
     }
 
-    $ puppet parser validate /home/training/puppet/modules/apache/manifests/init.pp
+    $ puppet parser validate apache/manifests/init.pp
 
-Review the `apache::params` class:
+Rework the `apache::params` class:
 
-    @@@ Puppet
-    $ vim /home/training/puppet/modules/apache/manifests/params.pp
+    @@@Puppet
+    $ vim apache/manifests/params.pp
     class apache::params {
       case $::osfamily {
        'RedHat': {
@@ -193,12 +194,12 @@ Review the `apache::params` class:
       }
     }
 
-    $ puppet parser validate /home/training/puppet/modules/apache/manifests/params.pp
+    $ puppet parser validate apache/manifests/params.pp
 
 Create the `apache::install` class:
 
-    @@@ Puppet
-    $ vim /home/training/puppet/modules/apache/manifests/install.pp
+    @@@Puppet
+    $ vim apache/manifests/install.pp
     class apache::install (
     ) inherits apache::params {
 
@@ -213,8 +214,7 @@ Create the `apache::install` class:
           'RedHat': {
             package {'mod_ssl':
               ensure => installed,
-              # until we move this to a seperate class or defined resource
-              notify => Class['apache::service']
+              notify => Class['apache::service'],
             }
           }
           default: {
@@ -224,12 +224,12 @@ Create the `apache::install` class:
       }
     }
 
-    $ puppet parser validate /home/training/puppet/modules/apache/manifests/install.pp
+    $ puppet parser validate apache/manifests/install.pp
 
 Create the `apache::config` class:
 
-    @@@ Puppet
-    $ vim /home/training/puppet/modules/apache/manifests/config.pp
+    @@@Puppet
+    $ vim apache/manifests/config.pp
     class apache::config (
     ) inherits apache::params {
 
@@ -243,18 +243,18 @@ Create the `apache::config` class:
       }
 
       $vhosts.each | String $name, Hash $vhost | {
-        apache::vhost { $name :
+        apache::vhost { $name:
           * => $vhost,
         }
       }
     }
 
-    $ puppet parser validate /home/training/puppet/modules/apache/manifests/config.pp
+    $ puppet parser validate apache/manifests/config.pp
 
 Create the `apache::service` class:
 
-    @@@ Puppet
-    $ vim /home/training/puppet/modules/apache/manifests/service.pp
+    @@@Puppet
+    $ vim apache/manifests/service.pp
     class apache::service (
     ) inherits apache::params {
 
@@ -267,12 +267,12 @@ Create the `apache::service` class:
       }
     }
 
-    $ puppet parser validate /home/training/puppet/modules/apache/manifests/service.pp
+    $ puppet parser validate apache/manifests/service.pp
 
 Modify the defined resource `apache::vhost`:
 
-    @@@ Puppet
-    $ vim /home/training/puppet/modules/apache/manifests/vhost.pp
+    @@@Puppet
+    $ vim apache/manifests/vhost.pp
     define apache::vhost (
       String $ip,
       String $shortname    = $title,
@@ -289,6 +289,6 @@ Modify the defined resource `apache::vhost`:
       }
     }
 
-    $ puppet parser validate /home/training/puppet/modules/apache/manifests/vhost.pp
-    $ sudo puppet apply --noop /home/training/puppet/modules/apache/examples/init.pp
-    $ sudo puppet apply /home/training/puppet/modules/apache/examples/init.pp
+    $ puppet parser validate apache/manifests/vhost.pp
+    $ sudo puppet apply --noop apache/examples/init.pp
+    $ sudo puppet apply apache/examples/init.pp

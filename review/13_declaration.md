@@ -1,16 +1,16 @@
-!SLIDE smbullets small
+!SLIDE small
 # Declaration
 
 Default:
 
-    @@@ Puppet
+    @@@Puppet
     include apache
 
     class {'apache': }
 
 Parameterized Class:
 
-    @@@ Puppet
+    @@@Puppet
     class {'apache':
       ensure => running,
       ssl    => true,
@@ -18,24 +18,24 @@ Parameterized Class:
 
 Defined Resource Type:
 
-    @@@ Puppet
+    @@@Puppet
     apache::vhost {'training.netways.de':
       ensure  => present,
       docroot => '/var/www/training',
     }
+
+
 !SLIDE smbullets small
-
-
 # Puppet Apply Command
 
-    @@@ Puppet
-    # puppet apply --noop apache/examples/init.pp
+    @@@Puppet
+    $ sudo puppet apply --noop apache/examples/init.pp
     Notice: /Stage[main]/Apache/Package[httpd]/ensure:
      current_value absent, should be present (noop)
     ...
     Notice: Finished catalog run in 0.20 seconds
 
-    # puppet apply apache/examples/init.pp
+    $ sudo puppet apply apache/examples/init.pp
     Notice: /Stage[main]/Apache/Package[httpd]/ensure: created
     Notice: /Stage[main]/Apache/Service[httpd]/ensure:
       ensure changed 'stopped' to 'running'

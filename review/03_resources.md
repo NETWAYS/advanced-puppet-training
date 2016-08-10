@@ -31,7 +31,6 @@ Global defaults
     @@@ Puppet
     File {
       owner => 'root',
-      group => 'root',
       mode  => '0644',
     }
 
@@ -142,12 +141,12 @@ is assigned to.
 # Puppet Resource Command
 
     @@@ Puppet
-    # puppet resource package vim-enhanced
+    $ puppet resource package vim-enhanced
     package { 'vim-enhanced':
       ensure => 'purged',
     }
 
-    # puppet resource package vim-enhanced ensure=present
+    $ sudo puppet resource package vim-enhanced ensure=present
     Notice: /Package[vim-enhanced]/ensure: created
     package { 'vim-enhanced':
       ensure => '7.4.160-1.el7',

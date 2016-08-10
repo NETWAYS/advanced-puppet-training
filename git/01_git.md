@@ -30,7 +30,7 @@ Process:
 !SLIDE small
 # git status
 
-    @@@ Sh
+    @@@Sh
     $ git status
     On branch master
     nothing to commit, working directory clean
@@ -56,7 +56,7 @@ Process:
 
 **Stages code to be committed**
 
-    @@@ Sh
+    @@@Sh
     $ git add site.pp
     $ git status
     On branch master
@@ -78,7 +78,7 @@ Process:
 
 **Commits a changeset to your repository**
 
-    @@@ Sh
+    @@@Sh
     $ git commit -m 'initial commit'
     [master (root-commit) d798484] initial commit
      1 files changed, 44 insertions(+), 0 deletions(-)
@@ -97,7 +97,7 @@ Process:
 
 **Pushes updates to a remote repository**
 
-    @@@ Sh
+    @@@Sh
     $ git push origin master
     Counting objects: 3, done.
     Compressing objects: 100% (2/2), done.
@@ -192,7 +192,7 @@ Resources you may be interested in:
 
 ****
 
-    @@@ Sh
+    @@@Sh
     $ cd /home/training/
     $ git init --bare apache.git
     $ git clone /home/training/apache.git apache

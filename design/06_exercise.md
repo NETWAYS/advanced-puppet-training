@@ -40,14 +40,15 @@
 
 Write a `metadata.json` file:
 
-    @@@ Sh
-    $ vim /home/training/puppet/modules/apache/metadata.json
+    @@@Sh
+    $ cd /home/training/puppet/modules
+    $ vim apache/metadata.json
     {
       "name": "training-apache",
       "version": "0.1.0",
       "author": "training",
       "summary": "Installs, configures and manages the Apache service",
-      "license": "Apache 2.0",
+      "license": "Apache-2.0",
       "source": "git://github.com/training/training-apache.git",
       "project_page": "http://github.com/training/training-apache",
       "issues_url": null,
@@ -55,7 +56,7 @@ Write a `metadata.json` file:
       "operatingsystem_support": [
         {
           "operatingsystem":"RedHat",
-          "operatingsystemrelease":[ "6.0", "7.0" ]
+          "operatingsystemrelease":[ "6", "7" ]
         },
         {
         "operatingsystem": "Ubuntu",
@@ -65,19 +66,19 @@ Write a `metadata.json` file:
       "dependencies": [
         {
           "name": "puppetlabs-stdlib",
-          "version_range": ">= 1.0.0"
+          "version_requirement": ">= 1.0.0"
         }
       ],
     }
 
 Install package dependencies:
 
-    @@@ Sh
+    @@@Sh
     $ puppet module install puppetlabs-stdlib
 
 Build an uploadable tarball:
 
-    @@@ Sh
-    $ puppet module build /home/training/puppet/modules/apache
+    @@@Sh
+    $ puppet module build apache
     Notice: Building /home/training/puppet/modules/apache for release
     Module built: /home/training/puppet/modules/apache/pkg/training-apache-0.1.0.tar.gz

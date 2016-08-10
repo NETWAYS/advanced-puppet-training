@@ -1,6 +1,7 @@
-!SLIDE smbullets small
+!SLIDE small
 # Module Layout
 
+     @@@Puppet
      {MODULE NAME}
      |-- examples       <- Smoke tests
      |-- facts.d        <- External facts

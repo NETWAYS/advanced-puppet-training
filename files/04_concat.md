@@ -1,6 +1,7 @@
 !SLIDE subsectionnonum
 # concat
 
+
 !SLIDE smbullets
 # concat Overview 
 
@@ -12,7 +13,7 @@
 !SLIDE smbullets small
 # concat Usage
 
-    @@@ Puppet
+    @@@Puppet
     $zone_file = '/var/named/training.zone'
 
     concat{ $zone_file:

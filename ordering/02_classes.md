@@ -1,7 +1,7 @@
 !SLIDE small
 # include Function
 
-    @@@ Puppet
+    @@@Puppet
     class wordpress {
       include apache
       include mysql
@@ -15,7 +15,7 @@
 !SLIDE small
 # require Function
 
-    @@@ Puppet
+    @@@Puppet
     class wordpress {
       require apache
       require mysql
@@ -29,7 +29,7 @@
 !SLIDE small
 # Class Ordering
 
-    @@@ Puppet
+    @@@Puppet
     class repositories {
       include host::secure
 
@@ -54,7 +54,7 @@
 !SLIDE small
 # contain Function
 
-    @@@ Puppet
+    @@@Puppet
     class ntp {
       file { '/etc/ntp.conf':
         ...
@@ -73,7 +73,7 @@
 !SLIDE small
 # anchor Resource
 
-    @@@ Puppet
+    @@@Puppet
     class container {
 
       anchor { 'container:begin':

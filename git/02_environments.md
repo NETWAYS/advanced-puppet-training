@@ -1,7 +1,7 @@
 !SLIDE small
 # Git using Static Puppet Environments
 
-    @@@ Sh
+    @@@Sh
     # tree .
     .
     ├── development
@@ -42,12 +42,13 @@
 * Steps:
  * Install `r10k`
  * Initialize a new Git repository
+ * Clone the repository and create a new branch `production`
  * Add the content from the `control-repo`
- * Rename the `master` branch to `production`
  * Create a configuration file `r10k.yaml`
  * Deploy the `production` environment
  * Add the `puppetlabs-stdlib` and your `apache` module to the Puppetfile
  * Update the `production` environment
+* Bonus:
  * Add a new branch `development`
  * Deploy the `development` environment
 
@@ -67,12 +68,17 @@
 
 * Install `r10k`
 * Initialize a new Git repository
+* Clone the repository and create a new branch `production`
 * Add the content from the `control-repo`
-* Rename the `master` branch to `production`
 * Create a configuration file `r10k.yaml`
 * Deploy the `production` environment
 * Add the `puppetlabs-stdlib` and your `apache` module to the Puppetfile
 * Update the `production` environment
+
+## Bonus:
+
+****
+
 * Add a new branch `development`
 * Deploy the `development` environment
 
@@ -88,37 +94,37 @@
 
 Install `r10k`:
 
-    @@@ Sh
-    $ sudo yum install gem
+    @@@Sh
+   $ sudo yum install gem
     $ gem install r10k
 
 Initialize a new Git repository:
 
-    @@@ Sh
+    @@@Sh
     $ git init --bare /home/training/puppet.git
+
+Clone the repository and create a new branch `production`:
+
+    @@@Sh
+    $ git clone /home/training/puppet.git /home/training/puppetclone
+    $ cd /home/training/puppetclone
+    $ git checkout -b production
 
 Add the content from the `control-repo`:
 
-    @@@ Sh
+    @@@Sh
     $ cd /home/training
     $ git clone https://github.com/puppetlabs/control-repo.git
-    $ git clone /home/training/puppet.git /home/training/puppetclone
     $ cp -Rf control-repo/* puppetclone/
-
-Rename the `master` branch to `production`:
-
-    @@@ Sh
-    $ cd /home/training/puppetclone/
+    $ cd /home/training/puppetclone
     $ git add .
     $ git commit -m 'inital commit'
-    $ git push origin master
-    $ cd /home/training/puppet.git/
-    $ git branch -m master production
+    $ git push origin production
 
 Create a configuration file `r10k.yaml`:
 
-    @@@ Sh
-    $ vim /etc/puppetlabs/puppet/r10k.yaml
+    @@@Sh
+    $ sudo vim /etc/puppetlabs/puppet/r10k.yaml
     :cachedir: '/tmp/r10k/cache'
 
     :sources:
@@ -128,13 +134,13 @@ Create a configuration file `r10k.yaml`:
 
 Deploy the `production` environment:
 
-    @@@ Sh
+    @@@Sh
     $ chown -Rf training:training /etc/puppetlabs/code/environments/
     $ r10k deploy environment production -p -c /etc/puppetlabs/puppet/r10k.yaml
 
 Add the `puppetlabs-stdlib` and your `apache` module to the Puppetfile:
 
-    @@@ Sh
+    @@@Sh
     $ vim /home/training/puppetclone/Puppetfile
     mod "puppetlabs/stdlib", :latest
     mod 'apache',
@@ -147,17 +153,21 @@ Add the `puppetlabs-stdlib` and your `apache` module to the Puppetfile:
 
 Update the `production` environment:
 
-    @@@ Sh
+    @@@Sh
     $ r10k deploy environment production -p -c /etc/puppetlabs/puppet/r10k.yaml
+
+## Bonus:
+
+****
 
 Add a new branch `development`:
 
-    @@@ Sh
+    @@@Sh
     $ cd /home/training/puppetclone/
     $ git checkout -b development
     $ git push -u origin development
 
 Deploy the `development` environment:
 
-    @@@ Sh
+    @@@Sh
     $ r10k deploy environment development -p -c /etc/puppetlabs/puppet/r10k.yaml

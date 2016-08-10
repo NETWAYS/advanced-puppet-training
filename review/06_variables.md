@@ -39,7 +39,7 @@ Access:
 !SLIDE small
 # Variable Example (1/2)
 
-    @@@ Puppet
+    @@@Puppet
     class apache {
       include apache::params
 
@@ -58,11 +58,11 @@ Access:
         source => 'puppet:///modules/apache/httpd.conf',
       }
      ...
-    
+
 !SLIDE small
 # Variable Example (2/2)
 
-    @@@ Puppet
+    @@@Puppet
     ...
       service { 'httpd':
         ensure    => running,

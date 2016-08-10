@@ -14,13 +14,14 @@
 !SLIDE small
 # augtool Usage
 
-    @@@ Sh
+    @@@Sh
     $ cat /etc/yum.conf
     [main]
     cachedir=/var/cache/yum/$basearch/$releasever
     keepcache=0
+    ...
 
-    # augtool
+    $ augtool
     augtool> ls /files/etc/yum.conf/main
     cachedir = /var/cache/yum/$basearch/$releasever
     keepcache = 0
@@ -32,7 +33,7 @@
 
 Example usage:
 
-    @@@ Puppet
+    @@@Puppet
     augeas { 'yum_config':
       context => '/files/etc/yum.conf/main',
       changes => [
@@ -42,7 +43,7 @@ Example usage:
 
 Help:
 
-    @@@ Sh
+    @@@Sh
     $ puppet describe augeas
 
 
@@ -57,7 +58,8 @@ Help:
  * Create a new subclass called `augeas`
  * Make sure that `X11Forwarding` is set to `no` using augeas
  * Add a smoke test and apply your manifest 
- * Optional: Add a smoke test using your both subclasses and apply it
+* Bonus:
+ * Add a smoke test using your both subclasses and apply it
 
 
 !SLIDE supplemental exercises
@@ -79,7 +81,7 @@ Help:
 * Make sure that `X11Forwarding` is set to `no` using augeas
 * Add a smoke test and apply your manifest
 
-### Optional
+### Bonus:
 
 * Add a smoke test using your both subclasses and apply it
 
@@ -93,15 +95,16 @@ Help:
 
 ****
 
-    @@@ Sh
+    @@@Sh
     $ sudo yum install augeas
-    $ augtool
+    $ sudo augtool
     augtool> ls /files/etc/ssh/sshd_config
     ...
     X11Forwarding = yes
     ...
 
-    $ vim /home/training/puppet/modules/ssh/manifests/augeas.pp
+    $ cd /home/training/puppet/modules
+    $ vim ssh/manifests/augeas.pp
     class ssh::augeas {
       augeas { 'sshd_config':
         context => '/files/etc/ssh/sshd_config',
@@ -111,20 +114,22 @@ Help:
       }
     }
 
-    $ vim /home/training/puppet/modules/ssh/examples/augeas.pp
+    $ puppet parser validate ssh/manifests/augeas.pp
+    $ vim ssh/examples/augeas.pp
     include ssh::augeas
 
-    $ puppet parser validate /home/training/puppet/modules/ssh/examples/augeas.pp 
-    $ sudo puppet apply --noop /home/training/puppet/modules/ssh/examples/augeas.pp
-    $ sudo puppet apply /home/training/puppet/modules/ssh/examples/augeas.pp
+    $ puppet parser validate ssh/examples/augeas.pp 
+    $ sudo puppet apply --noop ssh/examples/augeas.pp
+    $ sudo puppet apply ssh/examples/augeas.pp
 
 ## Bonus
 
     @@@ Sh
-    $ vim /home/training/puppet/modules/ssh/examples/filechanges.pp
+    $ cd /home/training/puppet/modules
+    $ vim ssh/examples/filechanges.pp
     include ssh::file_line
     include ssh::augeas
 
-    $ puppet parser validate /home/training/puppet/modules/ssh/examples/filechanges.pp
-    $ sudo puppet apply --noop /home/training/puppet/modules/ssh/examples/filechanges.pp
-    $ sudo puppet apply /home/training/puppet/modules/ssh/examples/filechanges.pp
+    $ puppet parser validate ssh/examples/filechanges.pp
+    $ sudo puppet apply --noop ssh/examples/filechanges.pp
+    $ sudo puppet apply ssh/examples/filechanges.pp

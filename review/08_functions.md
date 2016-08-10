@@ -1,7 +1,7 @@
 !SLIDE smbullets small
 # Functions
 
-    @@@ Puppet
+    @@@Puppet
     class apache::params {
       case $::osfamily {
       ...

@@ -14,8 +14,7 @@
       } else {
         $vhost_docroot = "${apache_vhostdir}/${vhostname}"
       }
-
-      file { "${apache_vhostd}/${vhostname}.conf":
+      file { "${apache_vhostdir}/${vhostname}.conf":
         ensure  => file,
         content => template('apache/vhost.conf.erb'),
         notify  => Service['httpd'],

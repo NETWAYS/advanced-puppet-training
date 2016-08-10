@@ -1,13 +1,13 @@
 !SLIDE noprint
 # Training Environment
 
-<center><img src="../_images/training/training_environment.png" style="width:800px;height:389px;" alt="Training Environment"/></center>
+<center><img src="../_images/introduction/Advanced Puppet - Training Environment.png" style="width:800px;height:485px;" alt="Training Environment"/></center>
 
 
 !SLIDE printonly
 # Training Environment
 
-<center><img src="../_images/training/training_environment.png" style="width:470px;height:228px;" alt="Training Environment"/></center>
+<center><img src="../_images/introduction/Advanced Puppet - Training Environment.png" style="width:470px;height:285px;" alt="Training Environment"/></center>
 
 ~~~SECTION:handouts~~~
 

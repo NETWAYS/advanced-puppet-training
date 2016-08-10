@@ -5,8 +5,8 @@
 * It is used by Puppet to gather information about the node
 * You can also run it on command line to list facts
 
-    <pre>
-    # facter
+    <pre> 
+    $ facter
     augeas => {
       version => "1.4.0"
     }

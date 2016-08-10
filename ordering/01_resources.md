@@ -1,12 +1,12 @@
 !SLIDE small
 # Resource Relationships
 
-    @@@ Puppet
+    @@@Puppet
     Package['ntp'] -> File['/etc/ntp.conf'] ~> Service['ntpd']
 
 Same as:
 
-    @@@ Puppet
+    @@@Puppet
     package { 'ntp':
       ensure => present,
     } ->
@@ -22,5 +22,5 @@ Same as:
 
 Same as (but not good style according to the style guide):
 
-    @@@ Puppet
+    @@@Puppet
     Service['ntpd'] <~ File['/etc/ntp.conf'] <- Package['ntp']
