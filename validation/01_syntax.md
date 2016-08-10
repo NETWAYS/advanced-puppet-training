@@ -11,10 +11,10 @@
 !SLIDE small
 # Syntax Checking
 
-Manually with: `puppet parser validate {FILE NAME}.pp`
+Manually with: **puppet parser validate {FILE NAME}.pp**
 
-    @@@ Sh
-    # puppet parser validate apache/manifests/init.pp
+    @@@Sh
+    $ puppet parser validate apache/manifests/init.pp
     Error: Could not parse for environment production: \
       Syntax error at end of file; expected '}' at \
       /home/training/puppet/modules/apache/manifests/init.pp:17

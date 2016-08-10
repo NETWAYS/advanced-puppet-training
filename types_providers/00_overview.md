@@ -9,10 +9,14 @@
 * Allows to add new complex resources
 * Written in Ruby
 * Located in the module structure
- * Types:<br/> 
-    `lib/puppet/type/<Type Name>.rb`
- * Provider:<br/> 
-    `lib/puppet/provider/<Type Name>/<Provider Name>.rb`
+ * Types: 
+  <pre>
+  `lib/puppet/type/<Type Name>.rb`
+  </pre>
+ * Provider:
+  <pre>
+  `lib/puppet/provider/<Type Name>/<Provider Name>.rb`
+  </pre>
 
 ~~~SECTION:handouts~~~
 

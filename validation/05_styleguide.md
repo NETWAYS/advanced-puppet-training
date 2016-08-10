@@ -8,7 +8,6 @@
  * puppet-lint (http://puppet-lint.com)
  * metadata-json-lint (https://github.com/voxpupuli/metadata-json-lint)
 
-
 ~~~SECTION:handouts~~~
 
 ****

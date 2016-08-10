@@ -2,11 +2,11 @@
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Add a Pre-Commit Hook for Style Guide Checking
 
 * Objective:
- * Add a pre-commit hook for Puppet Lint checking
+ * Add a pre-commit hook for Puppet Lint checking on `agent-centos.localdomain`
 * Steps:
  * Install `puppet-lint` via `yum` or `gem`
  * Clone `https://github.com/drwahl/puppet-git-hooks` repo
- * Symlink the pre-commit file to `.git/hooks/pre-commit` of your repository
+ * Symlink the pre-commit file to `.git/hooks/pre-commit` of your cloned `apache` repository
  * Produce a style guide error and test the pre-commit hook
 
 
@@ -17,7 +17,7 @@
 
 ****
 
-* Add a pre-commit hook for Puppet Lint checking
+* Add a pre-commit hook for Puppet Lint checking on `agent-centos.localdomain`
 
 ## Steps:
 
@@ -25,7 +25,7 @@
 
 * Install `puppet-lint` via `yum` or `gem`
 * Clone `https://github.com/drwahl/puppet-git-hooks` repo
-* Symlink the pre-commit file to `.git/hooks/pre-commit` of your repository
+* Symlink the pre-commit file to `.git/hooks/pre-commit` of your cloned `apache` repository
 * Produce a style guide error and test the pre-commit hook
 
 
@@ -34,38 +34,40 @@
 
 ****
 
-## Add a Pre-Commit Hook for Style Guide Checking
+## Add a Pre-Commit Hook for Style Guide Checking on `agent-centos.localdomain`
 
 ****
 
 Install `puppet-lint` via `yum` (requires EPEL repository):
 
-    @@@ Sh
+    @@@Sh
     $ sudo yum install rubygem-puppet-lint
 
 Install `puppet-lint` via `gem` (gives typically a newer version):
 
-    @@@ Sh
+    @@@Sh
     $ gem install puppet-lint
 
 Clone `https://github.com/drwahl/puppet-git-hooks` repo:
 
-    @@@ Sh
+    @@@Sh
     $ cd /home/training/
     $ git clone https://github.com/drwahl/puppet-git-hooks.git
 
-Symlink the pre-commit file to `.git/hooks/pre-commit` of your repository:
+Symlink the pre-commit file to `.git/hooks/pre-commit` of your cloned `apache` repository:
 
-    $ ln -s /home/training/puppet-git-hooks/pre-commit /home/training/puppet/.git/hooks/pre-commit
+    @@@Sh
+    $ ln -s /home/training/puppet-git-hooks/pre-commit /home/training/puppet/modules/apache/.git/hooks/pre-commit
 
-Produce a style guide error and test the pre-commit hook:
+Produce a style guide error and test the pre-commit hook on `agent-centos.localdomain`:
 
-    @@@ Sh
+    @@@Sh
+    $ cd /home/training/puppet/modules
     $ vim apache/manifests/init.pp
     class apache {
     ...
 
-    $ git add apache/manifests/site.pp
+    $ git add apache/manifests/init.pp
     $ git commit -m 'lint check'
     Checking puppet manifest syntax for production/modules/apache/manifests/init.pp...
     Checking puppet style guide compliance for production/modules/apache/manifests/init.pp...
