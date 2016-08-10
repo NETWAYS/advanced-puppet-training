@@ -101,8 +101,8 @@ The users julian, bernd, blerim will be created, but achim will not.
 
 ****
 
-    @@@ Sh
-    $ cd /home/training
+    @@@Sh
+    $ cd /home/training/puppet/modules
     $ vim apache/manifests/install.pp
     class apache::install (
     ) inherits apache::params {

@@ -1,8 +1,8 @@
 !SLIDE small
 # Custom Facts
 
-    @@@ Ruby
-    # role.rb
+    @@@Ruby
+    $ role.rb
     Facter.add('role') do
       setcode do
         role = Facter::Core::Execution.exec('cat /etc/role')
@@ -15,8 +15,8 @@
 
 If on a string no other manipulation is needed you can pass the string to `setcode`:
 
-    @@@ Ruby
-    # role.rb
+    @@@Ruby
+    $ role.rb
     Facter.add('role') do
       setcode 'cat /etc/role'
     end
@@ -27,8 +27,8 @@ If on a string no other manipulation is needed you can pass the string to `setco
 
 `setcode` will accept a Ruby block or a single shell command as a string. For example, you could implement first fact concisely in pure Ruby like so:
 
-    @@@ Ruby
-    # role.rb
+    @@@Ruby
+    $ role.rb
     Facter.add('role') do
       setcode do
         File.read('/etc/role').gsub(/<.*?>/m, "")

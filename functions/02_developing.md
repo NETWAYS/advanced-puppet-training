@@ -1,8 +1,8 @@
 !SLIDE small
 # Developing Functions
 
-    @@@ Sh
-    # tree /home/training/puppet/modules/{MODULE NAME}
+    @@@Sh
+    $ tree {MODULE NAME}
     |-- lib
     |   `-- puppet
     |       `-- parser

@@ -1,7 +1,7 @@
 !SLIDE small
 # Functions written in Puppet code
 
-    @@@ Puppet
+    @@@Puppet
     function apache::bool2httpd($arg) {
       case $arg {
         false, undef, /(?i:false)/ : { 'Off' }

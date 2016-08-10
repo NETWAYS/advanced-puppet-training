@@ -1,7 +1,7 @@
 !SLIDE small
 # Accessing Facts
 
-    @@@ Puppet
+    @@@Puppet
     class system {
       $operatingsystem = 'OzzyOS'
       notify { "Your operatingsystem is: ${::operatingsystem}" }

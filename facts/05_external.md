@@ -1,17 +1,17 @@
 !SLIDE small
 # External Facts
 
-    @@@ Sh
-    # cat /home/training/puppet/modules/{MODULE NAME}/facts.d/datacenter.yaml
+    @@@Sh
+    $ cat {MODULE NAME}/facts.d/datacenter.yaml
     ---
     location: nuremberg
     cluster: webserver
 
-    # cat /home/training/puppet/modules/{MODULE NAME}/facts.d/datacenter.txt
+    $ cat {MODULE NAME}/facts.d/datacenter.txt
     location=nuremberg
     cluster=webserver
 
-    # facter location
+    $ facter location
     nuremberg
 
 * Could be YAML, JSON, text files or executable scripts

@@ -3,8 +3,8 @@
 
 Simply assign a role to each node in the site manifest `site.pp`:
 
-    @@@ Puppet
-    node 'bob.training.vm' {
+    @@@Puppet
+    node 'agent-centos.localdomain' {
       include role::database_control_panel
     }
 

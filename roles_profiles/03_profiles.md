@@ -1,7 +1,7 @@
 !SLIDE small
 # Profiles
 
-    @@@ Puppet
+    @@@Puppet
     class profile::myapp {
       include tomcat
       include mysql
@@ -39,7 +39,7 @@
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Designing Profiles
 
 * Objective:
- * Create `database` and `webserver` profiles
+ * Create `database` and `webserver` profiles on `agent-centos.localdomain`
 * Steps:
  * Install `puppetlabs-mysql` module
  * Create a `database` profile for mysql
@@ -54,7 +54,7 @@
 
 ****
 
-* Create `database` and `webserver` profiles
+* Create `database` and `webserver` profiles on `agent-centos.localdomain`
 
 ## Steps:
 
@@ -75,11 +75,18 @@
 
 ****
 
+Create `database` and `webserver` profiles on `agent-centos.localdomain`:
 
-    @@@ Sh
+    @@@Sh
     $ puppet module install puppetlabs-mysql
 
-    $ vim /home/training/puppet/modules/profiles/manifests/database.pp
+    $ mkdir /home/training/puppet/modules/profiles/{examples,manifests}
+    $ cd /home/training/puppet/modules
+
+Create a `database` profile for mysql:
+
+    @@@Sh
+    $ vim profiles/manifests/database.pp
     class profiles::database {
       class { '::mysql::server':
         root_password           => 'swordfish',
@@ -105,15 +112,18 @@
       }
     }
 
-    $ puppet parser validate /home/training/puppet/modules/profiles/manifests/database.pp
-    $ vim /home/training/puppet/modules/profiles/examples/database.pp
+    $ puppet parser validate profiles/manifests/database.pp
+    $ vim profiles/examples/database.pp
     include profiles::database
 
-    $ puppet parser validate /home/training/puppet/modules/profiles/examples/database.pp
-    $ sudo puppet apply --noop /home/training/puppet/modules/profiles/examples/database.pp
-    $ sudo puppet apply /home/training/puppet/modules/profiles/examples/database.pp
+    $ puppet parser validate profiles/examples/database.pp
+    $ sudo puppet apply --noop profiles/examples/database.pp
+    $ sudo puppet apply profiles/examples/database.pp
 
-    $ vim /home/training/puppet/modules/profiles/manifests/webserver.pp
+Create a `webserver` profile for apache:
+
+    @@@Sh
+    $ vim profiles/manifests/webserver.pp
     class profiles::webserver {
       class { 'apache':
         ensure => running,
@@ -122,10 +132,14 @@
       }
     }
 
-    $ puppet parser validate /home/training/puppet/modules/profiles/manifests/webserver.pp
-    $ vim /home/training/puppet/modules/profiles/examples/webserver.pp
+    $ puppet parser validate profiles/manifests/webserver.pp
+    $ vim profiles/examples/webserver.pp
     include profiles::webserver
 
-    $ puppet parser validate /home/training/puppet/modules/profiles/examples/webserver.pp
-    $ sudo puppet apply --noop /home/training/puppet/modules/profiles/examples/webserver.pp
-    $ sudo puppet apply /home/training/puppet/modules/profiles/examples/webserver.pp
+    $ puppet parser validate profiles/examples/webserver.pp
+
+Test and apply your configuration:
+
+    @@@Sh
+    $ sudo puppet apply --noop profiles/examples/webserver.pp
+    $ sudo puppet apply profiles/examples/webserver.pp

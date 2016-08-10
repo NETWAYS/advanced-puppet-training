@@ -1,8 +1,8 @@
 !SLIDE small
 # Handling Arguments
 
-    @@@ Ruby
-    # basename.rb
+    @@@Ruby
+    $ cat {MODULE NAME}/lib/puppet/parser/functions/basename.rb
     module Puppet::Parser::Functions
       newfunction(:basename,
         :type   => :rvalue,
@@ -25,7 +25,7 @@
 
 The code on this page is the long form version of the following code, which is more like the code sample from the previous page.
 
-    @@@ Ruby
+    @@@Ruby
     Puppet::Parser::Functions.newfunction(
       :basename,
       :type   => :rvalue,

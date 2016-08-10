@@ -79,7 +79,7 @@ Collect exported resources:
 Declare an exported resource `haproxy::balancermember` in `config.pp`:
 
     @@@Sh
-    $ cd /home/training
+    $ cd /home/training/puppet/modules
     $ vim apache/manifests/config.pp
     class apache::config (
     ) inherits apache::params {
@@ -113,7 +113,7 @@ Declare an exported resource `haproxy::balancermember` in `config.pp`:
 Push your configuration to `master`:
 
     @@@Sh
-    $ cd /home/training/apache
+    $ cd /home/training/puppet/modules/apache
     $ git add manifests/config.pp
     $ git commit -m 'haproxy'
     $ git push origin master

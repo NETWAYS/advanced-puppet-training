@@ -3,14 +3,14 @@
 
 A custom **:statement** function:
 
-    @@@ Ruby
+    @@@Ruby
     Puppet::Parser::Functions.newfunction(:myfunc) do |args|
       ...
     end
 
 A custom **:rvalue** function:
 
-    @@@ Ruby
+    @@@Ruby
     Puppet::Parser::Functions.newfunction(:myfunc), \
       type => :rvalue do |args|
       ...

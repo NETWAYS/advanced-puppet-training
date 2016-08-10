@@ -155,6 +155,7 @@ Resources you may be interested in:
  * Manage your `apache` module with Git
 * Steps:
  * Initialize a new Git repository on `puppet.localdomain`
+ * Backup `apache` module on `agent-centos.localdomain`
  * Clone the repository on `agent-centos.localdomain`
  * Copy your `apache` module into the clone
  * Add the `apache` module
@@ -176,6 +177,7 @@ Resources you may be interested in:
 ****
 
 * Initialize a new Git repository on `puppet.localdomain`
+* Backup `apache` module on `agent-centos.localdomain`
 * Clone the repository on `agent-centos.localdomain`
 * Copy your `apache` module into the clone
 * Add the `apache` module
@@ -201,9 +203,10 @@ On `puppet.localdomain`:
 On `agent-centos.localdomain`:
 
     @@@Sh
-    $ git clone puppet.localdomain:/home/training/apache.git /home/training/apache
-    $ cp -Rf /home/training/puppet/modules/apache/* /home/training/apache/
-    $ cd /home/training/apache/
+    $ mv /home/training/puppet/modules/apache /home/training/puppet/modules/apache.bak
+    $ git clone puppet.localdomain:/home/training/apache.git /home/training/puppet/modules/apache
+    $ cp -Rf /home/training/puppet/modules/apache.bak/* /home/training/puppet/modules/apache/
+    $ cd /home/training/puppet/modules/apache
     $ git add .
     $ git commit -m 'apache module'
     $ git push origin master

@@ -6,7 +6,6 @@
 * Steps:
  * Create the fact in `lib/facter/apache_version.rb`
  * Test the new fact locally
- * Push your code to the master, do an agent run and call facter
 
 
 !SLIDE supplemental exercises
@@ -29,7 +28,6 @@
 'apachectl -v 2>&1|sed -n "s|^Server version:\s*Apache/\([0-9]\\+.[0-9]\\+.[0-9]\\+\).*$|\1|p"'
 
 * Test the new fact locally
-* Push your code to the master, do an agent run and call facter
 
 
 !SLIDE supplemental solutions
@@ -43,11 +41,6 @@
 
 ### Use a command line with apachectl and sed
 
-Change into your apache directory:
-
-    @@@ Sh
-    $ cd /home/training/puppet/modules/
-
 Create the subdirectory structure for custom facts:
 
     @@@ Sh
@@ -55,7 +48,9 @@ Create the subdirectory structure for custom facts:
 
 Create a new ruby file `/home/training/puppet/modules/apache/lib/facter/apache_version.rb`:
 
-    @@@ Ruby
+    @@@SH
+    $ cd /home/training/puppet/modules
+    $ vim apache/lib/facter/apache_version.rb
     Facter.add(:apache_version) do
       setcode 'apachectl -v 2>&1 | \
         sed -n "s|^Server version:\s*Apache/\([0-9]\\+.[0-9]\\+.[0-9]\\+\).*$|\1|p"'
@@ -63,28 +58,25 @@ Create a new ruby file `/home/training/puppet/modules/apache/lib/facter/apache_v
 
 ### Test your code locally
 
-Change into your module directory:
-
-    @@@ Sh
-    $ cd /home/training/puppet/modules/
-
 Check the syntax of the ruby file:
 
-    @@@ Sh
-    # ruby -c ./apache/lib/facter/apache_version.rb
+    @@@Sh
+    $ ruby -c ./apache/lib/facter/apache_version.rb
     Syntax OK
 
 Call facter by setting the RUBYLIB environment variable:
 
-    @@@ Sh
-    $ RUBYLIB=$PWD/apache/lib facter apache_version
+    @@@Sh
+    $ RUBYLIB=/home/training/puppet/modules/apache/lib facter apache_version
     2.4.6
 
 ### Optional: Build the same fact in ruby
 
 New content of `/home/training/puppet/modules/apache/lib/facter/apache_version.rb`:
 
-    @@@ Ruby
+    @@@Sh
+    $ cd /home/training/puppet/modules
+    $ vim apache/lib/facter/apache_version.rb
     Facter.add(:apache_version) do
       setcode do
         if Facter::Util::Resolution.which('apachectl')

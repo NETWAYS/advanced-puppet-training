@@ -65,7 +65,7 @@ Help:
 ****
 
     @@@Sh
-    $ cd /home/training
+    $ cd /home/training/puppet/modules
     $ vim apache/manifests/hosts.pp
     class apache::hosts {
       host { 'localhost4.localdomain4':

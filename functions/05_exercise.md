@@ -37,15 +37,12 @@
 
 ****
 
-Change into the modules directory:
-
-    @@@ Sh
-    $ cd /home/training/puppet/modules/
-
 Create the function in `apache/lib/puppet/parser/functions/bool2httpd.rb`:
 
-    @@@ Sh
-    $ vim /home/training/puppet/modules/apache/lib/puppet/parser/functions/bool2httpd.rb
+    @@@Sh
+    $ mkdir -p /home/training/puppet/modules/apache/lib/puppet/parser/functions
+    $ cd /home/training/puppet/modules
+    $ vim apache/lib/puppet/parser/functions/bool2httpd.rb
     Puppet::Parser::Functions::newfunction(
       :bool2httpd,
       :type   => :rvalue,
@@ -69,9 +66,6 @@ Test the new function with `puppet apply`:
     @@@ Sh
     $ puppet apply -e 'notice(bool2httpd(false))'
     Notice: Scope(Class[main]): Off
-    Notice: Compiled catalog for ...
-    Notice: Applied catalog in 0.02 seconds
+
     $ puppet apply -e 'notice(bool2httpd(true))'
     Notice: Scope(Class[main]): On
-    Notice: Compiled catalog for ...
-    Notice: Applied catalog in 0.02 seconds

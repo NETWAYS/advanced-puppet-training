@@ -1,8 +1,8 @@
 !SLIDE small
 # Distributing Facts
 
-    @@@ Puppet
-    # puppet agent -t
+    @@@Puppet
+    $ sudo puppet agent -t
     Info: Using configured environment 'production'
     Info: Retrieving pluginfacts
     Info: Retrieving plugin
