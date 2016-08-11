@@ -2,7 +2,7 @@
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Add a Pre-Commit Hook for Style Guide Checking
 
 * Objective:
- * Add a pre-commit hook for Puppet Lint checking on `agent-centos.localdomain`
+ * Add a client side pre-commit hook for Puppet Lint checking on `agent-centos.localdomain`
 * Steps:
  * Install `puppet-lint` via `yum` or `gem`
  * Clone `https://github.com/drwahl/puppet-git-hooks` repo
@@ -17,7 +17,7 @@
 
 ****
 
-* Add a pre-commit hook for Puppet Lint checking on `agent-centos.localdomain`
+* Add a client side pre-commit hook for Puppet Lint checking on `agent-centos.localdomain`
 
 ## Steps:
 
@@ -34,7 +34,7 @@
 
 ****
 
-## Add a Pre-Commit Hook for Style Guide Checking on `agent-centos.localdomain`
+## Add a Client side Pre-Commit Hook for Style Guide Checking on `agent-centos.localdomain`
 
 ****
 
