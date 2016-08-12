@@ -102,8 +102,6 @@ Discover how many mailservers are running:
 
 ## Bonus:
 
-****
-
 * Use Puppet to get the facts inventory up and running
 
 

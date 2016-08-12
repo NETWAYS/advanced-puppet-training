@@ -77,8 +77,6 @@
 
 ## Bonus:
 
-****
-
 * Add a new branch `development`
 * Deploy the `development` environment
 
