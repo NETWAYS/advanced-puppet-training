@@ -45,7 +45,7 @@ echo "node 'puppet.localdomain' {
 }
 
 node default {
-}" >> /etc/puppetlabs/code/environments/master/manifests/site.pp
+}" >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 
 puppet agent -t
 
