@@ -197,11 +197,15 @@ Create `.fixtures.yml`:
 
 ## Objective:
 
+****
+
 * Practice setting up a testing environment
 * Update the apache module and create unit tests for it
 * Practice incremental development using tests as validation
 
 ## Steps:
+
+****
 
 * Install `rspec-puppet` and `puppetlabs_spec_helper` on `agent-centos.localdomain`
 * Create `Rakefile`, `.fixtures.yml` and `spec_helper.rb`

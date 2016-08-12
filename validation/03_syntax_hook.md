@@ -2,7 +2,7 @@
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Add a Pre-Commit Hook for Syntax Checking
 
 * Objective:
- * Add a pre-commit hook for Puppet manifest syntax checking
+ * Add a pre-commit hook for Puppet manifest syntax checking on `puppet.localdomain`
 * Steps:
  * Create a new file in your git repository `.git/hooks/pre-commit`
  * Insert the content of `puppet_manifest_syntax_check.sh` from  `https://github.com/drwahl/puppet-git-hooks`
@@ -17,7 +17,7 @@
 
 ****
 
-* Add a pre-commit hook for Puppet manifest syntax checking
+* Add a pre-commit hook for Puppet manifest syntax checking on `puppet.localdomain`
 
 ## Steps:
 
@@ -40,12 +40,12 @@
 
 Create a new file in your git repository `.git/hooks/pre-commit`:
 
-    @@@ Sh
+    @@@Sh
     $ touch /home/training/puppet/.git/hooks/pre-commit
 
 Insert the content of `puppet_manifest_syntax_check.sh` from  `https://github.com/drwahl/puppet-git-hooks`:
 
-    @@@ Sh
+    @@@Sh
     $ vim /home/training/puppet/.git/hooks/pre-commit
     #!/bin/bash
 

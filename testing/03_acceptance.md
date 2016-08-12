@@ -118,9 +118,13 @@ More on Serverspec including a overview of the resource types: http://serverspec
 
 ## Objective:
 
+****
+
 * Practice designing acceptance tests for the `apache` module
 
 ## Steps:
+
+****
 
 * Install and configure `serverspec` on `agent-centos.localdomain`
 * Write tests to check the Apache webserver on your local virtual machine
@@ -200,6 +204,3 @@ Run the acceptance test:
 
     Port "80"
       should be listening
-
-    Finished in 0.13169 seconds (files took 4.63 seconds to load)
-    4 examples, 0 failures

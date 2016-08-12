@@ -157,8 +157,6 @@ Update the `production` environment:
 
 ## Bonus:
 
-****
-
 Add a new branch `development`:
 
     @@@Sh

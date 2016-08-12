@@ -34,7 +34,7 @@
 
 ****
 
-## Add a Client side Pre-Commit Hook for Style Guide Checking on `agent-centos.localdomain`
+## Add a Client side Pre-Commit Hook for Style Guide Checking
 
 ****
 

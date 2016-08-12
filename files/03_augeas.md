@@ -124,7 +124,7 @@ Help:
 
 ## Bonus
 
-    @@@ Sh
+    @@@Sh
     $ cd /home/training/puppet/modules
     $ vim ssh/examples/filechanges.pp
     include ssh::file_line
