@@ -1,7 +1,8 @@
 #!/bin/bash
 
-yum -t -y -e 0 remove facter puppet
+yum -t -y -e 0 remove facter hiera puppet
 rm -Rf /etc/puppet
+rm -Rf /var/lib/puppet
 rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
 yum -t -y -e 0 install puppet-agent
 ln -s /opt/puppetlabs/puppet/bin/{augtool,facter,mco,puppet,rake} /usr/bin/
