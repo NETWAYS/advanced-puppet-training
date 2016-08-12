@@ -43,18 +43,19 @@ You can get it from a community repository: https://copr.fedoraproject.org/coprs
 
 Install and start ActiveMQ:
 
-    @@@ Sh
+    @@@Sh
     $ sudo curl -L https://copr.fedoraproject.org/coprs/lkiesow/apache-activemq-dist/repo/epel-7/lkiesow-apache-activemq-dist-epel-7.repo \
     -o /etc/yum.repos.d/lkiesow-apache-activemq-dist-epel-7.repo
     $ sudo yum install activemq-dist
     $ sudo systemctl start activemq.service
+    $ sudo systemctl enable activemq.service
 
 Configure MCollective to work with ActiveMQ:
 
 You do not need to install MCollective as a seperate package because it is already included in Puppet's all-in-one-package.
 You only have to configure it to find your message queue (host and port).
 
-    @@@ Sh
+    @@@Sh
     $ sudo vim /etc/puppetlabs/mcollective/server.cfg
     ...
     connector = activemq
@@ -81,12 +82,14 @@ Start MCollective Server:
 
     @@@ Sh
     $ sudo systemctl start mcollective.service
+    $ sudo systemctl enable mcollective.service
 
 Test orchestration:
 
     @@@ Sh
     $ mco ping
     agent-centos.localdomain      time=41.53 ms
+    puppet.localdomain            time=75.71 ms
 
 In a productive environment you should not run a message queue without securing it! In this configuration it only uses a
 password on a clear-text connection.

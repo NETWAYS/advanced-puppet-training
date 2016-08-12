@@ -63,7 +63,7 @@ Install package `puppet-agent`:
 Add symlinks for most used commands to `/usr/bin`:
 
     @@@ Sh
-    $ sudo ln -s /opt/puppetlabs/puppet/bin/{augtool,facter,mco,puppet} /usr/bin/
+    $ sudo ln -s /opt/puppetlabs/puppet/bin/{augtool,facter,mco,puppet,rake} /usr/bin/
     $ puppet --version
 
 Add server and basemodulepath to `puppet.conf`:

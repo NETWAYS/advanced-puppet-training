@@ -19,17 +19,17 @@
 
 Run Puppet on 5 Debian nodes at a time:
 
-    @@@ Sh
+    @@@Sh
     $ mco puppet runall -F osfamily=Debian 5
 
 Temporarily disable Puppet on `dev` classified nodes:
 
-    @@@ Sh
+    @@@Sh
     $ mco puppet disable -C dev
 
 Retrieve the last run summary from a node:
 
-    @@@ Sh
+    @@@Sh
     $ mco puppet summary -I proxy.training.vm
 
 
@@ -38,17 +38,17 @@ Retrieve the last run summary from a node:
 
 Install a package on classified nodes:
 
-    @@@ Sh
+    @@@Sh
     $ mco package install httpd -C backend
 
 Update a package on a named node:
 
-    @@@ Sh
+    @@@Sh
     $ mco package update httpd -I bob.training.vm
 
 Retrieve package versions from all RedHat machines:
 
-    @@@ Sh
+    @@@Sh
     $ mco package status httpd -F osfamily=RedHat
 
 
@@ -57,17 +57,17 @@ Retrieve package versions from all RedHat machines:
 
 Restart a service on all `travis` classified nodes:
 
-    @@@ Sh
+    @@@Sh
     $ mco service travis-ci restart -C travis
 
 Stop a service on a named node:
 
-    @@@ Sh
+    @@@Sh
     $ mco service exim stop -I compromised.training.vm
 
 Discover how many mailservers are running:
 
-    @@@ Sh
+    @@@Sh
     $ mco service exim status
 
 
@@ -114,7 +114,7 @@ Discover how many mailservers are running:
 
 ### Install MCollective Puppet Agent Plugin:
 
-    @@@ Sh
+    @@@Sh
     $ sudo git clone https://github.com/puppetlabs/mcollective-puppet-agent /opt/puppetlabs/mcollective/plugins/mcollective
     $ sudo systemctl restart mcollective.service
 
@@ -123,7 +123,7 @@ Discover how many mailservers are running:
 Behaviour changes depending on the fact if the agent is running or not. If it is running commands like `runonce` will take
 place immediately but can not take arguments like `--noop`. If it is stopped commands will be splayed by default.
 
-    @@@ Sh
+    @@@Sh
     $ mco puppet status
     $ mco puppet runonce --no-splay
     $ sleep 10
@@ -137,7 +137,8 @@ How to get this up and running is explained in https://docs.puppet.com/mcollecti
 
 Alternative add a fact manually to the file `/etc/puppetlabs/mcollective/facts.yaml` for testing.
 
-    @@@ Sh
-    $ echo "osfamily: RedHat" >> /etc/puppetlabs/mcollective/facts.yaml
+    @@@Sh
+    $ sudo echo "osfamily: RedHat" >> /etc/puppetlabs/mcollective/facts.yaml
+    $ sudo systemctl restart mcollective.service
     $ mco puppet runonce -F osfamily=Debian
     $ mco puppet runonce -F osfamily=RedHat

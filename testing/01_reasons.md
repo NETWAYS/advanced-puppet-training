@@ -28,11 +28,13 @@
 
 ****
 
-Does testing just duplicate smoke tests in another language?
+**Question:** Does testing just duplicate smoke tests in another language?
 
 ****
 
 **Answer:** Only for simple manifests!
+
+****
 
 Tests become invaluable when your manifests:
 

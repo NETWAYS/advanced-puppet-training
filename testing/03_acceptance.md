@@ -37,9 +37,9 @@ More on Serverspec including a overview of the resource types: http://serverspec
 !SLIDE small
 # Serverspec - Installation
 
-    @@@ Sh
+    @@@Sh
     $ gem install serverspec
-    $ cd /home/training/puppet/modules/apache/
+    $ cd /home/training/puppet/modules/apache
     $ serverspec-init
     Select OS type:
 
@@ -64,8 +64,9 @@ More on Serverspec including a overview of the resource types: http://serverspec
 !SLIDE small
 # Serverspec - Configuration
 
-    @@@ Ruby
-    $ vim /home/training/puppet/modules/apache/spec/localhost/sample_spec.rb
+    @@@Sh
+    $ cd /home/training/puppet/modules/apache
+    $ vim spec/localhost/sample_spec.rb
     require 'spec_helper'
 
     describe package('httpd') do
@@ -81,7 +82,7 @@ More on Serverspec including a overview of the resource types: http://serverspec
       it { should be_listening }
     end
 
-    decribe file('/etc/httpd/conf/httpd.conf') do
+    describe file('/etc/httpd/conf/httpd.conf') do
       it { should be_file }
       its(:content) { should match /ServerName localhost/ }
     end
@@ -90,8 +91,8 @@ More on Serverspec including a overview of the resource types: http://serverspec
 !SLIDE small
 # Running Tests
 
-    @@@ Sh
-    $ cd /home/training/puppet/modules/apache/
+    @@@Sh
+    $ cd /home/training/puppet/modules/apache
     $ rake spec
     $ ruby -S rspec spec/localhost/httpd_spec.rb
     
@@ -107,7 +108,7 @@ More on Serverspec including a overview of the resource types: http://serverspec
 * Objective:
  * Practice designing acceptance tests for the `apache` module
 * Steps:
- * Install and configure `serverspec`
+ * Install and configure `serverspec` on `agent-centos.localdomain`
  * Write tests to check the Apache webserver on your local virtual machine
  * Run the acceptance test
 
@@ -121,7 +122,7 @@ More on Serverspec including a overview of the resource types: http://serverspec
 
 ## Steps:
 
-* Install and configure `serverspec`
+* Install and configure `serverspec` on `agent-centos.localdomain`
 * Write tests to check the Apache webserver on your local virtual machine
 * Run the acceptance test
 
@@ -135,11 +136,11 @@ More on Serverspec including a overview of the resource types: http://serverspec
 
 ****
 
-Install and configure `serverspec`:
+Install and configure `serverspec` on `agent-centos.localdomain`:
 
-    @@@ Sh
+    @@@Sh
     $ gem install serverspec
-    $ cd /home/training/puppet/modules/apache/
+    $ cd /home/training/puppet/modules/apache
     $ mv Rakefile Rakefile.bak
     $ mv spec spec.bak
     $ serverspec-init
@@ -164,7 +165,7 @@ Install and configure `serverspec`:
 
 Write tests to check the Apache webserver on your local virtual machine:
 
-    @@@ Ruby
+    @@@Sh 
     $ vim spec/localhost/sample_spec.rb
     require 'spec_helper'
 
@@ -172,10 +173,14 @@ Write tests to check the Apache webserver on your local virtual machine:
       it { should be_installed }
     end
 
+    ...
+
     describe service('httpd'), :if => os[:family] == 'redhat' do
       it { should be_enabled }
       it { should be_running }
     end
+
+    ...
 
     describe port(80) do
       it { should be_listening }
@@ -183,7 +188,7 @@ Write tests to check the Apache webserver on your local virtual machine:
 
 Run the acceptance test:
 
-    @@@ Sh
+    @@@Sh
     $ rake spec
     ...
     Package "httpd"

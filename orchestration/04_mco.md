@@ -1,34 +1,35 @@
 !SLIDE small
 # Inventory
 
-    @@@ Sh
-    $ mco inventory agent.example.com
-    Inventory for agent.example.com:
-     Server Statistics:
-       Version: 1.2.1
-       Start Time: Mon Nov 14 15:25:33 -0800 2015
-       Config File: /etc/mcollective/server.cfg
-       Collectives: mcollective
-       Main Collective: mcollective
-       Process ID: 5553
-       Total Messages: 86
-       Messages Passed Filters: 74
-       Messages Filtered: 12
-       Replies Sent: 73
-       Total Processor Time: 1.34 seconds
-       System Time: 0.59 seconds
-     Agents:
-       discovery       package         puppetd
-       puppetral       rpcutil         service
-     Configuration Management Classes:
-       default                        helloworld
-       ...
+    @@@Sh
+    $ mco inventory puppet.localdomain
+    Inventory for puppet.localdomain:
+
+    Server Statistics:
+                     Version: 2.8.9
+                  Start Time: 2016-08-11 10:53:53 +0200
+                 Config File: /etc/puppetlabs/mcollective/server.cfg
+                 Collectives: mcollective
+             Main Collective: mcollective
+                  Process ID: 8181
+              Total Messages: 8
+     Messages Passed Filters: 8
+           Messages Filtered: 0
+            Expired Messages: 0
+                Replies Sent: 7
+        Total Processor Time: 1.42 seconds
+                 System Time: 2.68 seconds
+
+    Agents:
+      discovery       rpcutil
+
+    ...
 
 
 !SLIDE small
 # Filtering Nodes
 
-    @@@ Sh
+    @@@Sh
     $ mco ping --with-fact osfamily=RedHat
     master.example.com                     time=135.94 ms
     agent.example.com                      time=136.55 ms
@@ -46,7 +47,7 @@
 !SLIDE small
 # Help Subsystem for Applications
 
-    @@@ Sh
+    @@@Sh
     $ mco rpc --help
 
     Generic RPC agent client application
@@ -70,7 +71,7 @@
 !SLIDE small
 # Help Subsystem for Agents
 
-    @@@ Sh
+    @@@Sh
     $ mco help service
     Service Agent
     =============
@@ -90,5 +91,5 @@
 
 Display agent documentation:
 
-    @@@ Sh
+    @@@Sh
     $ mco help <agent>

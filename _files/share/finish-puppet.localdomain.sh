@@ -4,7 +4,7 @@ yum -t -y -e 0 remove facter puppet
 rm -Rf /etc/puppet
 rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
 yum -t -y -e 0 install puppet-agent
-ln -s /opt/puppetlabs/puppet/bin/{augtool,facter,mco,puppet} /usr/bin/
+ln -s /opt/puppetlabs/puppet/bin/{augtool,facter,mco,puppet,rake} /usr/bin/
 
 echo "[Unit]
 Description=Puppet master

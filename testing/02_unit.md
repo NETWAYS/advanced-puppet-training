@@ -16,7 +16,7 @@
 !SLIDE smbullets small
 # RSpec Tests for Puppet Manifests
 
-    @@@ Ruby
+    @@@Ruby
     require 'spec_helper'
 
     describe('apache', :type => :class) do
@@ -38,10 +38,10 @@
 !SLIDE small
 # Running Tests
 
-    @@@ Ruby
-    # /opt/puppetlabs/puppet/bin/rake spec
-    /opt/puppetlabs/puppet/bin/ruby
-      -S rspec spec/classes/motd_spec.rb --color
+    @@@Sh
+    $ /opt/puppetlabs/puppet/bin/rake spec \
+    /opt/puppetlabs/puppet/bin/ruby \
+    -S rspec spec/classes/motd_spec.rb --color
     ...
 
     Finished in 0.14713 seconds 1 example, 0 failures
@@ -62,28 +62,28 @@ Remember that you do not need to run rspec-puppet-init when using puppetlabs_spe
 
 Validate successful catalog compilation:
 
-    @@@ Sh
+    @@@Sh
     it {should compile}
 
 Validate the catolog contains resources:
 
-    @@@ Sh
+    @@@Sh
     contain_{resource type}
 
 Validate that resources have specified attributes:
 
-    @@@ Sh
+    @@@Sh
     with_{attribute}
     without_{attribute}
 
 Validate that resources have relationships set:
 
-    @@@ Sh
+    @@@Sh
     that_{relationship}
 
 Shortcut helpers combine matchers:
 
-    @@@ Sh
+    @@@Sh
     with, without
 
 ~~~SECTION:handouts~~~
@@ -92,7 +92,7 @@ Shortcut helpers combine matchers:
 
 RSpec matchers can match exact values, regular expressions, or Ruby Procs. You can see example usages for many matchers in the code sample on the following page.
 
-    @@@ Ruby
+    @@@Ruby
     require 'spec_helper'
 
     describe('apache', :type => :class) do
@@ -133,12 +133,12 @@ RSpec matchers can match exact values, regular expressions, or Ruby Procs. You c
 
 Install `rspec-puppet`:
 
-    @@@ Sh
+    @@@Sh
     $ gem install rspec-puppet
 
 Install `puppetlabs_spec_helpers` to setup tests:
 
-    @@@ Sh
+    @@@Sh
     $ gem install puppetlabs_spec_helper
 
 
@@ -147,17 +147,17 @@ Install `puppetlabs_spec_helpers` to setup tests:
 
 Create a module using the module tool:
 
-    @@@ Sh
+    @@@Sh
     $ puppet module generate {username}-{modulename}
 
 Create Rakefile:
 
-    @@@ Sh
+    @@@Sh
     $ require 'puppetlabs_spec_helper/rake_tasks'
 
 Update `spec/spec_helper.rb`:
 
-    @@@ Sh
+    @@@Sh
     $ require 'puppetlabs_spec_helper/module_spec_helper'
 
 
@@ -186,7 +186,7 @@ Create `.fixtures.yml`:
  * Update the apache module and create unit tests for it
  * Practice incremental development using tests as validation
 * Steps:
- * Install `rspec-puppet` and `puppetlabs_spec_helper`
+ * Install `rspec-puppet` and `puppetlabs_spec_helper` on `agent-centos.localdomain`
  * Create `Rakefile`, `.fixtures.yml` and `spec_helper.rb`
  * Write unit tests in `spec/classes/apache_spec.rb`
  * Run unit test
@@ -203,7 +203,7 @@ Create `.fixtures.yml`:
 
 ## Steps:
 
-* Install `rspec-puppet` and `puppetlabs_spec_helper`
+* Install `rspec-puppet` and `puppetlabs_spec_helper` on `agent-centos.localdomain`
 * Create `Rakefile`, `.fixtures.yml` and `spec_helper.rb`
 * Write unit tests in `spec/classes/apache_spec.rb`
 * Run unit test
@@ -218,16 +218,16 @@ Create `.fixtures.yml`:
 
 ****
 
-Install `rspec-puppet` and `puppetlabs_spec_helper`:
+Install `rspec-puppet` and `puppetlabs_spec_helper` on `agent-centos.localdomain`:
 
-    @@@ Sh
+    @@@Sh
     $ sudo /opt/puppetlabs/puppet/bin/gem install rspec-puppet
     $ sudo /opt/puppetlabs/puppet/bin/gem install puppetlabs_spec_helper
 
 Create `Rakefile`, `.fixtures.yml` and `spec_helper.rb`:
 
-    @@@ Sh
-    $ cd /home/training/puppet/modules/apache/
+    @@@Sh
+    $ cd /home/training/puppet/modules/apache
     $ vim Rakefile
     require 'puppetlabs_spec_helper/rake_tasks'
 
@@ -245,6 +245,7 @@ Create `Rakefile`, `.fixtures.yml` and `spec_helper.rb`:
 
 Write unit tests in `spec/classes/apache_spec.rb`:
 
+    $ mkdir spec/classes
     $ vim spec/classes/apache_spec.rb
     require 'spec_helper'
 
@@ -255,7 +256,7 @@ Write unit tests in `spec/classes/apache_spec.rb`:
         it do
           expect {
             should contain_package('httpd')
-          }.to raise_error(Puppet::Error, /Your plattform is not supported, yet./)
+          }.to raise_error(Puppet::Error, /Your platform is not supported, yet./)
         end
       end
 
@@ -265,14 +266,14 @@ Write unit tests in `spec/classes/apache_spec.rb`:
           should contain_package('httpd').with(
             'ensure' => 'installed')
 
-          should contain_file('/etc/httpd/conf/httpd.conf').with(
-            'ensure' => 'file',
-            'owner'  => 'root',
-            'group'  => 'root')
-
-          should contain_service('httpd').with(
-            'ensure' => 'running',
-            'enable' => 'true')
+        should contain_file('/etc/httpd/conf/httpd.conf').with(
+          'ensure' => 'file',
+          'owner'  => 'root',
+          'group'  => 'root')
+        
+        should contain_service('httpd').with(
+          'ensure' => 'running',
+          'enable' => 'true')
         end
       end
 
@@ -280,7 +281,6 @@ Write unit tests in `spec/classes/apache_spec.rb`:
         let(:facts) { {:osfamily => 'RedHat'} }
         it { should contain_package('mod_ssl') }
       end
-
     end
 
 Run unit test:

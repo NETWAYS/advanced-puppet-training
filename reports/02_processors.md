@@ -3,15 +3,15 @@
 
 On the Puppet Agent:
 
-    @@@ Sh
-    $ vim /etc/puppetlabs/puppet/puppet.conf
+    @@@Sh
+    $ sudo vim /etc/puppetlabs/puppet/puppet.conf
     [agent]
         report = true
 
 On the Puppet Master:
 
-    @@@ Sh
-    $ vim /etc/puppetlabs/puppet/puppet.conf
+    @@@Sh
+    $ sudo vim /etc/puppetlabs/puppet/puppet.conf
     [master]
         reports = https,tagmail,store,log
         reportdir = /var/lib/puppet/reports
@@ -49,14 +49,14 @@ On the Puppet Master:
 !SLIDE small
 # log Report Processor
 
-    @@@ Puppet
-    $ tail -f /var/log/puppet/puppetserver/puppetserver.log
-    Compiled catalog for training.puppetlabs.vm in 0.86 seconds
-    Caching catalog for training.puppetlabs.vm
-    Applying configuration version '1328977795'
-    Hello World!
-    (/Notify[example]/message) defined 'message' as 'Hello World!'
-    Finished catalog run in 0.69 seconds
+    @@@Puppet
+    $ tail -f /var/log/puppetlabs/puppet/masterhttp.log
+      Compiled catalog for training.puppetlabs.vm in 0.86 seconds
+      Caching catalog for training.puppetlabs.vm
+      Applying configuration version '1328977795'
+      Hello World!
+      (/Notify[example]/message) defined 'message' as 'Hello World!'
+      Finished catalog run in 0.69 seconds
 
 * Contains every log message in a transaction
 * Can be used to centralize client logs into syslog
@@ -67,7 +67,7 @@ On the Puppet Master:
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Core Report Processors
 
 * Objective:
- * Enable the `store` Core Report Processor
+ * Enable the `store` Core Report Processor on `puppet.localdomain`
 * Steps:
  * Configure `store` report processor in `puppet.conf`
  * Set `reportdir` to `/var/lib/puppet/reports`
@@ -82,7 +82,7 @@ On the Puppet Master:
 
 ****
 
-* Enable the `store` Core Report Processor
+* Enable the `store` Core Report Processor on `puppet.localdomain`
 
 ## Steps:
 
@@ -105,28 +105,27 @@ On the Puppet Master:
 
 Configure `store` report processor in `puppet.conf` and set `reportdir` to `/var/lib/puppet/reports`:
 
-    @@@ Sh
-    $ vim /etc/puppetlabs/puppet/puppet.conf
+    @@@Sh
+    $ sudo vim /etc/puppetlabs/puppet/puppet.conf
     [master]
       reports = puppetdb,store
       reportdir = /var/lib/puppet/reports
 
 Restart Puppet Master:
 
-    @@@ Sh
-    $ sudo mkdir /var/lib/puppet
+    @@@Sh
     $ sudo systemctl restart puppetmaster
 
 Have a look at the generated reports:
 
-    @@@ Sh
+    @@@Sh
     $ ls /var/lib/puppet/reports/
 
 
 !SLIDE small
 # Module Provided Report Processors
 
-    @@@ Sh
+    @@@Sh
     $ puppet module search report
     Notice: Searching https://forgeapi.puppetlabs.com ...
     NAME                            DESCRIPTION
@@ -153,7 +152,7 @@ $ tree /home/training/puppet/modules/irc/lib/
 !SLIDE small
 # tag Metaparameter
 
-    @@@ Puppet
+    @@@Puppet
     apache::vhost {'docs.example.com':
       port => 80,
       tag  => ['us_mirror1', 'us_mirror2'],
@@ -178,7 +177,7 @@ $ tree /home/training/puppet/modules/irc/lib/
 Configuration:
 
 <pre>
-# vim /etc/puppet/tagmail.conf
+$ sudo vim /etc/puppetlabs/puppet/tagmail.conf
 [transport]
 reportfrom = reports@example.org
 smptserver = smtp.example.org
@@ -196,15 +195,16 @@ security: secteam@example.com
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Report Processors
 
 * Objective:
- * Use `tagmail` Report Processor
+ * Use `tagmail` Report Processor on `puppet.localdomain`
 * Steps:
- * Install `puppetlabs-tagmail` module
+ * Add `puppetlabs-tagmail` module to Puppetfile
  * Ensure that `report` and `pluginsync` are enabled
  * Configure `tagmail` report processor in `puppet.conf`
  * Create `tagmail.conf` using sendmail
  * Send emails with tag `webserver` to `root@localhost`
  * Set tag `webserver` for `apache` main class
- * Apply and validate your configuration
+ * Push and deploy your configuration
+ * Remove the `httpd` package and trigger a Puppet run on `agent-centos.localdomain`:
  * Have a look at the mail on the Puppet Master
 
 
@@ -215,19 +215,20 @@ security: secteam@example.com
 
 ****
 
-* Use `tagmail` Report Processor
+* Use `tagmail` Report Processor on `puppet.localdomain`
 
 ## Steps:
 
 ****
 
-* Install `puppetlabs-tagmail` module
+* Add `puppetlabs-tagmail` module to Puppetfile
 * Ensure that `report` and `pluginsync` are enabled
 * Configure `tagmail` report processor in `puppet.conf`
 * Create `tagmail.conf` using sendmail
 * Send emails with tag `webserver` to `root@localhost`
 * Set tag `webserver` for `apache` main class
-* Apply and validate your configuration
+* Push and deploy your configuration
+* Remove the `httpd` package and trigger a Puppet run on `agent-centos.localdomain`
 * Have a look at the mail on the Puppet Master
 
 
@@ -240,60 +241,72 @@ security: secteam@example.com
 
 ****
 
-Install `puppetlabs-tagmail` module:
+Add `puppetlabs-tagmail` module to Puppetfile:
 
-    @@@ Sh
-    $ puppet module install puppetlabs-tagmail
+    @@@Sh
+    $ cd /home/training/puppet
+    $ vim Puppetfile
+    module "puppetlabs/tagmail", :latest
 
 Ensure that `report` and `pluginsync` are enabled:
 
-    @@@ Sh
-    $ puppet config print report
+    @@@Sh
+    $ sudo puppet config print report
     true
-    $ puppet config print pluginsync
+    $ sudo puppet config print pluginsync
     true
 
 Configure `tagmail` report processor in `puppet.conf`:
 
-    @@@ Sh
-    $ vim /etc/puppetlabs/puppet/puppet.conf
+    @@@Sh
+    $ sudo vim /etc/puppetlabs/puppet/puppet.conf
     [master]
-      #reports = store
-      #reportdir = /var/lib/puppet/reports
-      reports = tagmail
+      reports = puppetdb,store,tagmail
+      reportdir = /var/lib/puppet/reports
 
 Send emails with tag `webserver` to `root@localhost`:
 
-    @@@ Sh
-    $ vim /etc/puppetlabs/puppet/tagmail.conf
+    @@@Sh
+    $ sudo vim /etc/puppetlabs/puppet/tagmail.conf
     [transport]
     reportfrom = puppetmaster@puppet.localdomain
-    sendmail = /usr/sbin/sendmail
+    sendmail = /sbin/sendmail
 
     [tagmap]
     webserver: root@localhost
 
     $ sudo systemctl restart puppetmaster.service
-    $ sudo puppet agent -t --noop
 
 Set tag `webserver` for `apache` main class
 
-    @@@ Sh
-    $ vim /home/training/puppet/modules/profiles/manifests/webserver.pp
-    class { 'apache':
-      ssl => true,
-      tag => 'webserver',
-    }
-
-Apply and validate your configuration:
-
-    @@@ Sh
+    @@@Sh
     $ cd /home/training/puppet
-    $ git add modules/profiles/manifests/webserver.pp
+    $ vim manifests/site.pp
+    node "agent-centos.localdomain" {
+      #include apache
+      class { 'apache':
+        ssl => true,
+        tag => 'webserver',
+      }
+    ...
+
+Push and deploy your configuration:
+
+    @@@Sh
+    $ cd /home/training/puppet
+    $ git add Puppetfile
+    $ git add manifests/site.pp 
     $ git commit -m 'tagmail'
-    $ git push origin master
+    $ git push origin production
+    $ sudo puppet agent -t
+    $ r10k deploy environment production -p -c /etc/puppetlabs/puppet/r10k.yml 
+
+Remove the `httpd` package and trigger a Puppet run on `agent-centos.localdomain`:
+
+    @@@Sh
+    $ sudo yum remove httpd
     $ sudo puppet agent -t
 
-Have a look at the mail on the Puppet Master:
+Have a look at the mails on `puppet.localdomain`:
 
     $ sudo vim /var/spool/mail/root

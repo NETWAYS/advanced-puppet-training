@@ -13,14 +13,13 @@
 !SLIDE small
 # Using MCollective
 
-    @@@ Sh
+    @@@Sh
     $ mco ping
-    dev8                                     time=126.19 ms
-    dev6                                     time=132.79 ms
-    dev10                                    time=133.57 ms
+    agent-centos.localdomain                 time=38.53 ms
+    puppet.localdomain                       time=75.71 ms
     ...
     ---- ping statistics ----
-    25 replies max: 305.58 min: 57.50 avg: 113.16
+    2 replies max: 75.71 min: 38.53 avg: 57.12
 
 * Primary interaction is via commandline
 * `mco` executable brokers your commands to application plugins

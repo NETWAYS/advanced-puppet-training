@@ -31,7 +31,7 @@ Often you will be required to manually tweak the *dot* file to adjust names and 
 * Objective:
  * Render an image of the dependencies of your Puppet code
 * Steps:
- * Render the *dot* file from the catalog
+ * Render the *dot* file from the catalog `puppet.localdomain`
  * Render a image from the *dot* file
  * Transfer it to your laptop to view the graph
 
@@ -49,7 +49,7 @@ Often you will be required to manually tweak the *dot* file to adjust names and 
 
 ****
 
-* Render the *dot* file from the catalog of a system of your choice on the Puppet Master
+* Render the *dot* file from the catalog of a system of your choice on `puppet.localdomain`
 
 Command is `puppet catalog --render-as dot find agent > agent.dot` where agent is replaced by the system's certificate name.
 
@@ -69,21 +69,20 @@ Command is `dot -Tpng agent.dot -o agent.png`
 
 ****
 
-### Render the *dot* file from the catalog of a system of your choice on the Puppet Master
+Render the *dot* file from the catalog of a system of your choice on `puppet.localdomain`:
 
-    @@@ Sh
+    @@@Sh
     $ sudo yum install graphviz
     $ puppet catalog --render-as dot find agent-centos.localdomain > /tmp/agent.dot
 
-### Render a image from the *dot* file
+Render a image from the *dot* file:
 
-    @@@ Sh
+    @@@Sh
     $ sed -i -e "1d" /tmp/agent.dot
     $ dot -Tpng /tmp/agent.dot -o /tmp/agent.png
 
-### Transfer it to your laptop to view the graph
-
-    @@@ Sh
-    $ scp /tmp/agent.png 192.168.56.1:/tmp/
+Transfer it to your laptop to view the graph:
+    @@@Sh
+    $ scp /tmp/agent.png root@192.168.56.1:/tmp/
 
 Afterwards open it with an image viewer installed on the laptop.
