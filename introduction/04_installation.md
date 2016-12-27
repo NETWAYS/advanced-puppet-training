@@ -4,13 +4,14 @@
 * Objective:
  * Prepare Puppet Agent for later use on `agent-centos.localdomain`
 * Steps:
- * Copy `apache.tar.gz` to `agent-centos.localdomain` and extract it
- * Add puppet repository from http://yum.puppetlabs.com
- * Install package `puppet-agent`
- * Add symlinks for most used commands to `/usr/bin` 
- * Add server `puppet.localdomain` to `puppet.conf`
- * Add basemodulepath `/home/training/puppet/modules` to `puppet.conf`
+ * Copy `apache.tar.gz` to `agent-centos.localdomain`, extract it.
+ * Add puppet repository from http://yum.puppetlabs.com.
+ * Install package `puppet-agent` in the same version as the master runs.
+ * Add symlinks for most used commands to `/usr/bin`.
+ * Add server `puppet.localdomain` to `puppet.conf`.
+ * Add basemodulepath `/home/training/puppet/modules` to `puppet.conf`.
 
+Never run newer puppet versions on your agents than on the master!
 
 !SLIDE supplemental exercises
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Prepare Puppet Agent
@@ -19,18 +20,18 @@
 
 ****
 
-* Prepare Puppet Agent for later use on `agent-centos.localdomain`
+* Prepare Puppet Agent for later use on `agent-centos.localdomain`.
 
 ## Steps:
 
 ****
 
-* Copy `apache.tar.gz` to `agent-centos.localdomain` and extract it
-* Add puppet repository from http://yum.puppetlabs.com
-* Install package `puppet-agent`
-* Add symlinks for most used commands to `/usr/bin`
-* Add server `puppet.localdomain` to `puppet.conf`
-* Add basemodulepath `/home/training/puppet/modules` to `puppet.conf`
+* Copy `apache.tar.gz` to `agent-centos.localdomain` and extract it.
+* Add puppet repository from http://yum.puppetlabs.com.
+* Install package `puppet-agent` in the same version as the master runs.
+* Add symlinks for most used commands to `/usr/bin`.
+* Add server `puppet.localdomain` to `puppet.conf`.
+* Add basemodulepath `/home/training/puppet/modules` to `puppet.conf`.
 
 
 !SLIDE supplemental solutions
@@ -55,10 +56,16 @@ Add puppet repository from http://yum.puppetlabs.com:
     @@@ Sh
     $ sudo rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
 
+Inspect what version is installed on your master:
+
+    @@@ Sh
+    $ sudo rpm -aq |grep puppet-agent
+    puppet-agent-x.y.z-n.el7.x86_64
+
 Install package `puppet-agent`:
 
     @@@ Sh
-    $ sudo yum install puppet-agent
+    $ sudo yum install puppet-agent-x.y.z-n.el7.x86_64
 
 Add symlinks for most used commands to `/usr/bin`:
 
