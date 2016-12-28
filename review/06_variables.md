@@ -17,7 +17,7 @@ Access:
 
 * Top scope (facts):
 
-    $::osfamily
+    $::os, $::os['family'] or $::osfamily, $::mountpoints['/']['filesystem']
 
 * Out-of-Scope:
 
@@ -73,9 +73,15 @@ Access:
     }
 
 
-
     class apache::params {
-      $package = 'httpd'
-      $config  = '/etc/httpd/conf/httpd.conf'
-      $service = 'httpd'
+      case $::os['family'] {
+        'RedHat': {
+          $package = 'httpd'
+          $config  = '/etc/httpd/conf/httpd.conf'
+          $service = 'httpd'
+        }
+        default: {
+          fail('Your plattform is not supported, yet.')
+        }
+      }
     }
