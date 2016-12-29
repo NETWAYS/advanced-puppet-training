@@ -12,6 +12,6 @@
 
 ****
 
-Geppetto is available from: https://puppetlabs.github.io/geppetto/
+Geppetto is available on: https://puppetlabs.github.io/geppetto/
 
 ~~~ENDSECTION~~~
