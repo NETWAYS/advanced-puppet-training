@@ -29,24 +29,48 @@ is active pre default and pre configured.
 
 * Hierarchy of lookups is configurable:
  * Hierarchy level can be fix or use variables
- * Global configuration uses Hiera 3
- * Environment and module configuration uses Hiera 4
+ * Global configuration uses Hiera (version 3)
+ * Environment and module configuration uses Hiera (version 4)
 * Different backends are available:
  * YAML/JSON - default
  * EYAML - YAML with encrypted fields
  * MySQL/PostgreSQL - Database lookup
- * and more 
+ * and more
 
+Caution: Hiera (version 4) means configuration version 4 and not the version of the hiera binary.
 
 !SLIDE small
-# Sample Configuration
+# Sample Configuration (version 3)
+
+    @@@Sh
+    $ cat /etc/puppetlabs/puppet/hiera.yaml
+    ---
+    :backends:
+      - yaml
+      - json
+
+    :hierarchy:
+      - "nodes/%{trusted.certname}"
+      - "insecure_nodes/%{facts.fqdn}"
+      - "virtual/%{facts.fqdn}"
+      - common
+
+    :yaml:
+      :datadir: "/etc/puppetlabs/code/environments \
+        /%{environment}/hieradata"
+
+Notice: Describes different data sources for every environment, but uses one hierachy only.
+
+!SLIDE small
+# Sample Configuration (version 4)
 
     @@@Sh
     $ cat /etc/puppetlabs/puppet/hiera.yaml
     ---
     version: 4
-    datadir: data
+    datadir: hieradata
     hierarchy:
+
       - name: "Nodes"
         backend: yaml
         path: "nodes/%{trusted.certname}"
@@ -57,8 +81,8 @@ is active pre default and pre configured.
             - "nodes/%{trusted.certname}"
             - "insecure_nodes/%{facts.fqdn}"
 
-      - name: "virtual/%{facts.virtual}"
-        backend: yaml    
+      - name: "virtual/%{facts.fqdn}"
+        backend: yaml
 
       - name: "common"
         backend: yaml
@@ -71,7 +95,7 @@ Hiera 3 uses a different configuration format and has less capabilities but
 is still the default. Hiera 4 is used for the optional environment data and
 module data. The hierachy levels can be a fix string or use variables from Puppet.
 
-The automatic lookup uses the namespace to find a variable, for example parameter 
+The automatic lookup uses the namespace to find a variable, for example parameter
 manage_service of module apache has to be apache::manage_service for the automatic lookup.
 
 Hiera can utilize different backends which are pluggable. Per default it only

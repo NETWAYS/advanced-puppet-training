@@ -8,7 +8,7 @@
 
 Set `environment_data_provider`:
 
-* Global (`puppet.conf`)
+* Gloabl (`puppet.conf`)
 * Environment (`environment.conf`)
 
 Set `data_provider`:
