@@ -32,16 +32,13 @@ Collect exported resources:
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Exported Resources
 
 * Objective:
- * Create a haproxy configuration using exported resources
+ * Create a host entry configuration using exported resources
 * Steps:
- * Expand the `apache` module on `agent-centos.localdomain`
- * Declare an exported resource `haproxy::balancermember` in `config.pp`
- * Push your configuration to `master`
- * Install `puppetlabs-haproxy` and `puppetlabs-concat` module with r10k on `puppet.localdomain`
- * Collect exported resources via `site.pp`
+ * Insert a host collector into the top scope of your site.pp
+ * And add an exported host entry to the node definition of `agent-centos.localdomain`
  * Push your configuration to `production`
- * Deploy the `production` environment with r10k
- * Trigger Puppet run and test your configuration on `agent-centos.localdomain`
+ * Do an agent run on `agent-centos.localdomain`
+ * Now a puppet run on your master will apply the same entry to `puppet.localdomain`
 
 
 !SLIDE supplemental exercises
@@ -51,20 +48,18 @@ Collect exported resources:
 
 ****
 
-* Create a haproxy configuration using exported resources
+* Create a host entry configuration using exported resources
 
 ## Steps:
 
 ****
 
-* Expand the `apache` module on `agent-centos.localdomain`
-* Declare an exported resource `haproxy::balancermember` in `config.pp`
-* Push your configuration to `master`
-* Install `puppetlabs-haproxy` and `puppetlabs-concat` module with r10k on `puppet.localdomain`
-* Collect exported resources via `site.pp`
+* Insert a host collector into the top scope of your site.pp
+* And add an exported host entry to the node definition of `agent-centos.localdomain`
 * Push your configuration to `production`
-* Deploy the `production` environment with r10k
-* Trigger Puppet run and test your configuration on `agent-centos.localdomain`
+* Do an agent run on `agent-centos.localdomain`
+* Now a puppet run on your master will apply the same entry to `puppet.localdomain`
+
 
 
 !SLIDE supplemental solutions
@@ -76,76 +71,25 @@ Collect exported resources:
 
 ****
 
-Declare an exported resource `haproxy::balancermember` in `config.pp`:
-
-    @@@Sh
-    $ cd /home/training/puppet/modules
-    $ vim apache/manifests/config.pp
-    class apache::config (
-    ) inherits apache::params {
-
-      $vhosts = $apache::vhosts
-
-      file { $apache_config:
-        ensure => file,
-        owner  => 'root',
-        group  => 'root',
-        source => 'puppet:///modules/apache/httpd.conf',
-      }
-
-      @@haproxy::balancermember { 'master':
-        listening_service => "${apache_service}",
-        server_names      => "$::fqdn",
-        ipaddresses       => "$::ipaddress_enp0s8",
-        ports             => '80',
-        options           => 'check',
-      }
-
-      $vhosts.each | String $name, Hash $vhost | {
-        apache::vhost { $name :
-          * => $vhost,
-        }
-      }
-    }
-
-    $ puppet parser validate apache/manifests/config.pp
-
-Push your configuration to `master`:
-
-    @@@Sh
-    $ cd /home/training/puppet/modules/apache
-    $ git add manifests/config.pp
-    $ git commit -m 'haproxy'
-    $ git push origin master
-
-Install `puppetlabs-haproxy` and `puppetlabs-concat` module with r10k on `puppet.localdomain`:
+Insert a collector into the top scope of your site.pp:
 
     @@@Sh
     $ cd /home/training/puppet
-    $ vim Puppetfile
-    mod "puppetlabs/stdlib", :latest
-    mod 'apache',
-      :git => '/home/training/apache.git'
-    mod "puppetlabs/haproxy", :latest
-    mod "puppetlabs/concat", :latest
+    $ vim manifests/site.pp
+    Host <<||>>
 
-    $ git add Puppetfile
-
-Collect exported resources via `site.pp`:
+And add an exported host entry to the node definition of `agent-centos.localdomain`:
 
     @@@Sh
     $ vim manifests/site.pp
-    node "agent-centos.localdomain" {
-      include apache
-      include haproxy
-
-      haproxy::listen { "$::fqdn":
-        collect_exported => false,
-        ipaddress        => "$::ipaddress_enp0s8",
-        ports            => '8080',
+    ...
+    node 'agent-centos.localdomain' {
+      @@host { 'kermit.localdomain':
+        ensure => present,
+        ip     => '127.0.0.2',
+        host_aliases => 'kermit',
       }
-
-      Haproxy::Balancermember <<| |>>
+      ...
     }
 
     $ puppet parser validate manifests/site.pp
@@ -153,19 +97,26 @@ Collect exported resources via `site.pp`:
 
 Push your configuration to `production`:
 
-    $ git commit -m 'haproxy module'
+    @@@Sh
+    $ git commit -m 'host entires as exported resources'
     $ git push origin production
 
-Deploy the `production` environment with r10k:
-
-    @@@Sh
-    $ r10k deploy environment production -p -c /etc/puppetlabs/puppet/r10k.yaml
-
-Trigger Puppet run and test your configuration on `agent-centos.localdomain`:
+An agent run on `agent-centos.localdomain` store the host resource into the puppetdb and after that the entry is read and applied:
 
     @@@Sh
     $ sudo puppet agent -t
+    Info: Using configured environment 'production'
+    ...
+    Notice: /Stage[main]/Main/Node[default]/Host[kermit.localdomain]/ensure: created
+    Info: Computing checksum on file /etc/hosts
+    Notice: Applied catalog in 0.10 seconds
 
-Test HAProxy redirect to Apache:
+The host resource is already stored and now a puppet run on your master will apply it to `puppet.localdomain`, too:
 
-    http://192.168.56.102:8080
+    @@@Sh
+    $ sudo agent -t
+    Info: Using configured environment 'production'
+    ...
+    Notice: /Stage[main]/Main/Node[default]/Host[kermit.localdomain]/ensure: created
+    Info: Computing checksum on file /etc/hosts
+    Notice: Applied catalog in 2.05 seconds
