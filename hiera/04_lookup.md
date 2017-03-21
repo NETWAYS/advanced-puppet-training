@@ -3,7 +3,7 @@
 
 * Returns the first value found by default
 * Configure it to merge multiple values into one
-* Replaces `hiera`, `hiera_array`, and `hiera_hash` functions of Hiera 3
+* Replaces `hiera`, `hiera_array`, and `hiera_hash` functions of old config style Hiera (version 3)
 * Adds support for environment data and data in modules
 
 
@@ -60,13 +60,13 @@ Hiera command line tool:
       -c /etc/puppetlabs/puppet/hiera.yaml
 
 
-!SLIDE smbullets 
+!SLIDE smbullets
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Hiera
 
 * Objective:
- * Create and lookup hierarchy on `puppet.localdomain`
+ * Create and lookup hierarchy
 * Steps:
- * Add Hiera YAML backend with `/etc/puppetlabs/code/environments/%{environment}/hieradata` as datadir
+ * Add Hiera YAML backend to the production environment
  * Create hierarchy with fact `osfamily` and `common`
  * Create Hiera files
  * Push your configuration to `production`
@@ -75,24 +75,24 @@ Hiera command line tool:
 
 
 !SLIDE supplemental exercises
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Hiera
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use Hiera (version 3)
 
 ## Objective:
 
 ****
 
-* Create and lookup hierarchy on `puppet.localdomain`
+* Create and lookup hierarchy
 
 ## Steps:
 
 ****
 
-* Add Hiera YAML backend with `/etc/puppetlabs/code/environments/%{environment}/hieradata` as datadir
+* Add Hiera YAML backend to the production environment
 * Create hierarchy with fact `osfamily` and `common`
 * Create Hiera files
 * Push your configuration to `production`
 * Deploy the `production` environment with r10k
-* Use `puppet apply` and Hiera CLI tool for lookup
+* Use `puppet apply`, Hiera CLI and puppet lookup tool for lookup
 
 
 !SLIDE supplemental solutions
@@ -104,35 +104,39 @@ Hiera command line tool:
 
 ****
 
-Create and lookup hierarchy on `puppet.localdomain`:
+Create and lookup hierarchy for environment production:
 
     @@@Sh
-    $ sudo vim /etc/puppetlabs/puppet/hiera.yaml
+    $ vim /home/training/puppet/hiera.yaml
     ---
-    :backends:
-      - yaml
-
-    :hierarchy:
-      - "%{::osfamily}"
-      - common 
-
-    :yaml:
-      :datadir: "/etc/puppetlabs/code/environments/%{environment}/hieradata"
+    version: 5
+    defaults:
+      datadir: data
+      data_hash: yaml_data
+hierarchy:
+  - name: "Per-node data (yaml version)"
+    path: "%{trusted.certname}.yaml"
+  - name: "Other YAML hierarchy levels"
+    paths:
+      - "%{::osfamily}.yaml"
+      - "common.yaml"
 
     $ cd /home/training/puppet
-    $ vim hieradata/RedHat.yaml
+    $ mkdir data
+    $ vim data/RedHat.yaml
     ---
     message: "Value from RedHat.yaml"
 
-    $ vim hieradata/common.yaml
+    $ vim data/common.yaml
     ---
     message: "This node is using common data"
 
 Push your configuration to `production`:
 
     @@@Sh
-    $ git add hieradata/RedHat.yaml
-    $ git commit -m 'hieradata'
+    $ git add hiera.yaml
+    $ git add data/RedHat.yaml
+    $ git commit -m 'hiera data'
     $ git push origin production
 
 Deploy the `production` environment with r10k:
@@ -140,8 +144,9 @@ Deploy the `production` environment with r10k:
     @@@Sh
     $ r10k deploy environment production -p -c /etc/puppetlabs/puppet/r10k.yaml
 
-Use `puppet apply` and Hiera CLI tool for lookup:
+Use `puppet apply`, Hiera CLI and puppet lookup tool for lookup:
 
     @@@Sh
     $ sudo puppet apply -e "notice(hiera('message'))"
-    $ hiera message ::osfamily=RedHat environment=production -c /etc/puppetlabs/puppet/hiera.yaml
+    $ hiera message ::osfamily=RedHat environment=production -c /etc/puppetlabs/code/environments/production/hiera.yaml
+    $ puppet lookup message --node puppet.localdomain --explain
