@@ -4,9 +4,8 @@
 * Objective:
  * Add a client side pre-commit hook for Puppet Lint checking on `agent-centos.localdomain`
 * Steps:
- * Install `puppet-lint` via `yum` or `gem`
- * Clone `https://github.com/drwahl/puppet-git-hooks` repo
- * Symlink the pre-commit file to `.git/hooks/pre-commit` of your cloned `apache` repository
+ * `puppet-lint` is included into the AIO package, create a link
+ * Check config `commit_hooks/config.cfg`
  * Produce a style guide error and test the pre-commit hook
 
 
@@ -23,9 +22,8 @@
 
 ****
 
-* Install `puppet-lint` via `yum` or `gem`
-* Clone `https://github.com/drwahl/puppet-git-hooks` repo
-* Symlink the pre-commit file to `.git/hooks/pre-commit` of your cloned `apache` repository
+* `puppet-lint` is included into the AIO package, create a link
+* Check config `commit_hooks/config.cfg`
 * Produce a style guide error and test the pre-commit hook
 
 
@@ -38,28 +36,19 @@
 
 ****
 
-Install `puppet-lint` via `yum` (requires EPEL repository):
+Put `puppet-lint` to your path:
 
     @@@Sh
-    $ sudo yum install rubygem-puppet-lint
+    $ sudo ln -s /opt/puppetlabs/puppet/bin/puppet-lint /usr/bin/
 
-Install `puppet-lint` via `gem` (gives typically a newer version):
-
-    @@@Sh
-    $ gem install puppet-lint
-
-Clone `https://github.com/drwahl/puppet-git-hooks` repo:
+Check config `commit_hooks/config.cfg`:
 
     @@@Sh
-    $ cd /home/training/
-    $ git clone https://github.com/drwahl/puppet-git-hooks.git
+    $ vim /usr/local/share/puppet-git-hooks/commit_hooks/config.cfg
+    CHECK_PUPPET_LINT="enabled"
+    ...
 
-Symlink the pre-commit file to `.git/hooks/pre-commit` of your cloned `apache` repository:
-
-    @@@Sh
-    $ ln -s /home/training/puppet-git-hooks/pre-commit /home/training/puppet/modules/apache/.git/hooks/pre-commit
-
-Produce a style guide error and test the pre-commit hook on `agent-centos.localdomain`:
+Remove all lines of documentation from a file and test the pre-commit hook on `agent-centos.localdomain`:
 
     @@@Sh
     $ cd /home/training/puppet/modules
@@ -76,6 +65,4 @@ Produce a style guide error and test the pre-commit hook on `agent-centos.locald
     Error: 1 styleguide violation(s) found. Commit will be aborted.
     Please follow the puppet style guide outlined at:
     http://docs.puppetlabs.com/guides/style_guide.html
-    rspec not installed. Skipping rspec-puppet tests...
-    r10k not installed. Skipping r10k Puppetfile test...
     Error: 1 subhooks failed. Aborting commit.
