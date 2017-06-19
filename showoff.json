@@ -1,9 +1,9 @@
 {
   "name": "Advanced Puppet",
-  "date": "15.11. - 17.11.2016",
+  "date": "03.07. - 05.07.2017",
   "location": "Nuremberg",
-  "author": "Markus Waldmüller",
-  "release": "1.1",
+  "author": "Lennart Betz",
+  "release": "1.2.0",
 
   "favicon": "image/global/favicon.ico",
 
@@ -17,7 +17,7 @@
 
   "sections": [
    {"section":"global/Pre/Title"},
-   "global/Pre/Staff/MW.md",
+   "global/Pre/Staff/LB.md",
    {"section":"global/Pre/NETWAYS"},
 
    {"section":"introduction"},
