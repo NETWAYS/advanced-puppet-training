@@ -18,7 +18,7 @@ add the parameter `--graph` to the `puppet apply` command which will give you a 
 can render a graph for the complete configuration with `puppet catalog --render-as dot find agent > agent.dot`, but
 this graph will be huge.
 
-The *dot* file can then be rendered as an image using graphviz by simply running `graphiz -Tpng agent.dot -o agent.png`.
+The *dot* file can then be rendered as an image using graphviz by simply running `dot -Tpng agent.dot -o agent.png`.
 
 Often you will be required to manually tweak the *dot* file to adjust names and labels or to simplify the graph.
 
