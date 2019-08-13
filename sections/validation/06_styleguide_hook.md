@@ -4,7 +4,7 @@
 * Objective:
  * Add a client side pre-commit hook for Puppet Lint checking on `agent-centos.localdomain`
 * Steps:
- * `puppet-lint` is included into the AIO package, create a link
+ * Install `puppet-lint` via gem
  * Check config `commit_hooks/config.cfg`
  * Produce a style guide error and test the pre-commit hook
 
@@ -22,7 +22,7 @@
 
 ****
 
-* `puppet-lint` is included into the AIO package, create a link
+* Install `puppet-lint` via gem
 * Check config `commit_hooks/config.cfg`
 * Produce a style guide error and test the pre-commit hook
 
@@ -36,10 +36,10 @@
 
 ****
 
-Put `puppet-lint` to your path:
+Install `puppet-lint` via gem:
 
     @@@Sh
-    $ sudo ln -s /opt/puppetlabs/puppet/bin/puppet-lint /usr/bin/
+    $ sudo gem install puppet-lint
 
 Check config `commit_hooks/config.cfg`:
 
