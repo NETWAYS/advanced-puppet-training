@@ -7,7 +7,7 @@
  * Loglevel *notice*
 * Possible changes:
  * Increase `log_level` for more detailed output
- * Change facility or add startup parameter `--logdest` to seperate log messages
+ * Change the config setting `logdest` to either `syslog`, `eventlog`, `console` or the path to a log file
  * Add `show_diff` to see file changes in logfile
 
 ~~~SECTION:handouts~~~
@@ -25,9 +25,7 @@ of the distribution or to the event log if used on Windows.
 
 For debugging you can increase the `log_level` to get even more details in the log. *info* is
 the same you get when running the agent in verbose mode and *debug* corresponds the debug mode.
-By changing the facility to one of the local ones you can move the log messages to a seperate file
-using syslog or you can add the parameter `--logdest` to the startup script which disables syslog
-and uses file logging.
+By changing the facility to one of the local ones you can move the log messages to a seperate file. You can specify that file via the config setting `logdest` which can be either `syslog`, `eventlog`, `console` or the path to a log file.
 
 By setting `show_diff` to *true* you can get all file changes in detail logged.
 
