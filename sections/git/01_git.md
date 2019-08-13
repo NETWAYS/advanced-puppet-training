@@ -1,4 +1,4 @@
-!SLIDE small
+!SLIDE smbullets 
 # Version Control Workflow
 
 * Safe and recoverable changesets
@@ -6,7 +6,7 @@
 * Viewing complete change history of code
 * Reverting problematic changes
 
-Process:
+**Process:**
 
 1. Update local working directory
 2. Edit code and make any changes required
@@ -113,7 +113,7 @@ Process:
 * A `post-update` hook will update the environment working directory
 
 
-!SLIDE small
+!SLIDE smbullets
 # Git Development Workflow
 
 1. `git pull origin master`
@@ -197,16 +197,16 @@ Resources you may be interested in:
 On `puppet.localdomain`:
 
     @@@Sh
-    $ cd /home/training
-    $ git init --bare apache.git
+    training@puppet $ cd /home/training
+    training@puppet $ git init --bare apache.git
 
 On `agent-centos.localdomain`:
 
     @@@Sh
-    $ mv /home/training/puppet/modules/apache /home/training/puppet/modules/apache.bak
-    $ git clone puppet.localdomain:/home/training/apache.git /home/training/puppet/modules/apache
-    $ cp -Rf /home/training/puppet/modules/apache.bak/* /home/training/puppet/modules/apache/
-    $ cd /home/training/puppet/modules/apache
-    $ git add .
-    $ git commit -m 'apache module'
-    $ git push origin master
+    training@agent $ mv /home/training/puppet/modules/apache /home/training/puppet/modules/apache.bak
+    training@agent $ git clone puppet.localdomain:/home/training/apache.git /home/training/puppet/modules/apache
+    training@agent $ cp -Rf /home/training/puppet/modules/apache.bak/* /home/training/puppet/modules/apache/
+    training@agent $ cd /home/training/puppet/modules/apache
+    training@agent $ git add .
+    training@agent $ git commit -m 'apache module'
+    training@agent $ git push origin master

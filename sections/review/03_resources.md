@@ -75,7 +75,7 @@ Block based defaults (new with Puppet 4)
       subscribe => File['/etc/httpd/conf/httpd.conf'],
     }
 
-* Puppet 4 does enforce resources top down
+* Puppet does enforce resources top down
 * Four metaparameters to define relationships (before, subscribe, require and notify)
 
 ~~~SECTION:handouts~~~

@@ -69,10 +69,10 @@ Help:
 ****
 
     @@@Sh
-    $ cd /home/training/puppet/modules
-    $ mkdir -p ssh/{manifests,examples}
+    training@agent $ cd /home/training/puppet/modules
+    training@agent $ mkdir -p ssh/{manifests,examples}
 
-    $ vim ssh/manifests/file_line.pp
+    training@agent $ vim ssh/manifests/file_line.pp
     class ssh::file_line {
       file_line { 'GSSAPIAuthentication':
         ensure => present,
@@ -82,10 +82,10 @@ Help:
       }
     }
 
-    $ puppet parser validate ssh/manifests/file_line.pp
-    $ vim ssh/examples/file_line.pp
+    training@agent $ puppet parser validate ssh/manifests/file_line.pp
+    training@agent $ vim ssh/examples/file_line.pp
     include ssh::file_line
 
-    $ puppet parser validate ssh/examples/file_line.pp
-    $ sudo puppet apply --noop ssh/examples/file_line.pp
-    $ sudo puppet apply ssh/examples/file_line.pp
+    training@agent $ puppet parser validate ssh/examples/file_line.pp
+    training@agent $ sudo puppet apply --noop ssh/examples/file_line.pp
+    training@agent $ sudo puppet apply ssh/examples/file_line.pp

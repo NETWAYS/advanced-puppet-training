@@ -1,4 +1,4 @@
-!SLIDE small
+!SLIDE smbullets small
 # 'main' Class
 
     @@@Puppet
@@ -153,8 +153,8 @@ The same should be happend as before reworked the module.
 Rework the `main` apache class:
 
     @@@Puppet
-    $ cd /home/training/puppet/modules
-    $ vim apache/manifests/init.pp
+    training@agent $ cd /home/training/puppet/modules
+    training@agent $ vim apache/manifests/init.pp
     class apache (
       Enum['running','stopped'] $ensure = running,
       Boolean                   $enable = true,
@@ -169,12 +169,12 @@ Rework the `main` apache class:
       class{'apache::service':}
     }
 
-    $ puppet parser validate apache/manifests/init.pp
+    training@agent $ puppet parser validate apache/manifests/init.pp
 
 Rework the `apache::params` class:
 
     @@@Puppet
-    $ vim apache/manifests/params.pp
+    training@agent $ vim apache/manifests/params.pp
     class apache::params {
       case $::osfamily {
        'RedHat': {
@@ -194,12 +194,14 @@ Rework the `apache::params` class:
       }
     }
 
-    $ puppet parser validate apache/manifests/params.pp
+    training@agent $ puppet parser validate apache/manifests/params.pp
+
+~~~PAGEBREAK~~~
 
 Create the `apache::install` class:
 
     @@@Puppet
-    $ vim apache/manifests/install.pp
+    training@agent $ vim apache/manifests/install.pp
     class apache::install (
     ) inherits apache::params {
 
@@ -224,12 +226,12 @@ Create the `apache::install` class:
       }
     }
 
-    $ puppet parser validate apache/manifests/install.pp
+    training@agent $ puppet parser validate apache/manifests/install.pp
 
 Create the `apache::config` class:
 
     @@@Puppet
-    $ vim apache/manifests/config.pp
+    training@agent $ vim apache/manifests/config.pp
     class apache::config (
     ) inherits apache::params {
 
@@ -249,12 +251,14 @@ Create the `apache::config` class:
       }
     }
 
-    $ puppet parser validate apache/manifests/config.pp
+    training@agent $ puppet parser validate apache/manifests/config.pp
+
+~~~PAGEBREAK~~~
 
 Create the `apache::service` class:
 
     @@@Puppet
-    $ vim apache/manifests/service.pp
+    training@agent $ vim apache/manifests/service.pp
     class apache::service (
     ) inherits apache::params {
 
@@ -267,12 +271,12 @@ Create the `apache::service` class:
       }
     }
 
-    $ puppet parser validate apache/manifests/service.pp
+    training@agent $ puppet parser validate apache/manifests/service.pp
 
 Modify the defined resource `apache::vhost`:
 
     @@@Puppet
-    $ vim apache/manifests/vhost.pp
+    training@agent $ vim apache/manifests/vhost.pp
     define apache::vhost (
       String $ip,
       String $shortname    = $title,
@@ -289,6 +293,6 @@ Modify the defined resource `apache::vhost`:
       }
     }
 
-    $ puppet parser validate apache/manifests/vhost.pp
-    $ sudo puppet apply --noop apache/examples/init.pp
-    $ sudo puppet apply apache/examples/init.pp
+    training@agent $ puppet parser validate apache/manifests/vhost.pp
+    training@agent $ sudo puppet apply --noop apache/examples/init.pp
+    training@agent $ sudo puppet apply apache/examples/init.pp

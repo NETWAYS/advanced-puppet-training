@@ -1,4 +1,4 @@
-!SLIDE small 
+!SLIDE smbullets small 
 # Roles
 
     @@@Puppet

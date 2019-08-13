@@ -96,8 +96,8 @@ Chaining arrows:
 ****
 
     @@@Puppet
-    $ cd /home/training/puppet/modules
-    $ vim apache/manifests/yumrepos.pp
+    training@agent $ cd /home/training/puppet/modules
+    training@agent $ vim apache/manifests/yumrepos.pp
     class apache::yumrepos {
       yumrepo { 'base':
         ensure     => 'present',
@@ -108,16 +108,16 @@ Chaining arrows:
       }
     }
 
-    $ puppet parser validate apache/manifests/yumrepos.pp
-    $ vim apache/manifests/stages.pp
+    training@agent $ puppet parser validate apache/manifests/yumrepos.pp
+    training@agent $ vim apache/manifests/stages.pp
     class apache::stages {
       stage { 'yum':
         before => Stage['main'],
       }
     }
 
-    $ puppet parser validate apache/manifests/stages.pp
-    $ vim apache/manifests/init.pp
+    training@agent $ puppet parser validate apache/manifests/stages.pp
+    training@agent $ vim apache/manifests/init.pp
     ...
     include apache::stages
  
@@ -125,6 +125,6 @@ Chaining arrows:
       stage => 'yum',
     }
 
-    $ puppet parser validate apache/manifests/init.pp
-    $ sudo puppet apply --noop apache/examples/init.pp
-    $ sudo puppet apply apache/examples/init.pp
+    training@agent $ puppet parser validate apache/manifests/init.pp
+    training@agent $ sudo puppet apply --noop apache/examples/init.pp
+    training@agent $ sudo puppet apply apache/examples/init.pp

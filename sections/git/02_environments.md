@@ -34,7 +34,7 @@
 * `Control Manager` is a replacement for r10k in newer Puppet Enterprise versions (PE 2015.3)
 
 
-!SLIDE smbullets
+!SLIDE smbullets small
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Use r10k
 
 * Objective:
@@ -93,35 +93,35 @@
 Install `r10k` on `puppet.localdomain`:
 
     @@@Sh
-    $ gem install r10k
+    training@puppet $ gem install r10k
 
 Initialize a new Git repository:
 
     @@@Sh
-    $ git init --bare /home/training/puppet.git
+    training@puppet $ git init --bare /home/training/puppet.git
 
 Clone the repository and create a new branch `production`:
 
     @@@Sh
-    $ git clone /home/training/puppet.git /home/training/puppet
-    $ cd /home/training/puppet
-    $ git checkout -b production
+    training@puppet $ git clone /home/training/puppet.git /home/training/puppet
+    training@puppet $ cd /home/training/puppet
+    training@puppet $ git checkout -b production
 
 Add the content from the `control-repo`:
 
     @@@Sh
-    $ cd /home/training
-    $ git clone https://github.com/puppetlabs/control-repo.git
-    $ cp -Rf control-repo/* puppet/
-    $ cd /home/training/puppet
-    $ git add .
-    $ git commit -m 'inital commit'
-    $ git push origin production
+    training@puppet $ cd /home/training
+    training@puppet $ git clone https://github.com/puppetlabs/control-repo.git
+    training@puppet $ cp -Rf control-repo/* puppet/
+    training@puppet $ cd /home/training/puppet
+    training@puppet $ git add .
+    training@puppet $ git commit -m 'inital commit'
+    training@puppet $ git push origin production
 
 Create a configuration file `r10k.yaml`:
 
     @@@Sh
-    $ sudo vim /etc/puppetlabs/puppet/r10k.yaml
+    training@puppet $ sudo vim /etc/puppetlabs/puppet/r10k.yaml
     :cachedir: '/tmp/r10k/cache'
 
     :sources:
@@ -132,37 +132,39 @@ Create a configuration file `r10k.yaml`:
 Deploy the `production` environment:
 
     @@@Sh
-    $ sudo chown -Rf training:training /etc/puppetlabs/code/environments/
-    $ r10k deploy environment production -p -c /etc/puppetlabs/puppet/r10k.yaml
+    training@puppet $ sudo chown -Rf training:training /etc/puppetlabs/code/environments/
+    training@puppet $ r10k deploy environment production -p -c /etc/puppetlabs/puppet/r10k.yaml
+
+~~~PAGEBREAK~~~
 
 Add the `puppetlabs-stdlib` and your `apache` module to the Puppetfile:
 
     @@@Sh
-    $ vim /home/training/puppet/Puppetfile
+    training@puppet $ vim /home/training/puppet/Puppetfile
     mod "puppetlabs/stdlib", :latest
     mod 'apache',
       :git => '/home/training/apache.git'
 
-    $ cd /home/training/puppet/
-    $ git add Puppetfile
-    $ git commit -m 'modules'
-    $ git push origin production
+    training@puppet $ cd /home/training/puppet/
+    training@puppet $ git add Puppetfile
+    training@puppet $ git commit -m 'modules'
+    training@puppet $ git push origin production
 
 Update the `production` environment:
 
     @@@Sh
-    $ r10k deploy environment production -p -c /etc/puppetlabs/puppet/r10k.yaml
+    training@puppet $ r10k deploy environment production -p -c /etc/puppetlabs/puppet/r10k.yaml
 
 ## Bonus:
 
 Add a new branch `development`:
 
     @@@Sh
-    $ cd /home/training/puppet/
-    $ git checkout -b development
-    $ git push -u origin development
+    training@puppet $ cd /home/training/puppet/
+    training@puppet $ git checkout -b development
+    training@puppet $ git push -u origin development
 
 Deploy the `development` environment:
 
     @@@Sh
-    $ r10k deploy environment development -p -c /etc/puppetlabs/puppet/r10k.yaml
+    training@puppet $ r10k deploy environment development -p -c /etc/puppetlabs/puppet/r10k.yaml

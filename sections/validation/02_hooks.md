@@ -1,4 +1,4 @@
-!SLIDE small
+!SLIDE smbullets
 # Git Hooks
 
 * Assist Puppet module development

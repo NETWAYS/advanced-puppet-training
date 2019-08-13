@@ -96,15 +96,15 @@ Help:
 ****
 
     @@@Sh
-    $ sudo yum install augeas
-    $ sudo augtool
+    training@agent $ sudo yum install augeas
+    training@agent $ sudo augtool
     augtool> ls /files/etc/ssh/sshd_config
     ...
     X11Forwarding = yes
     ...
 
-    $ cd /home/training/puppet/modules
-    $ vim ssh/manifests/augeas.pp
+    training@agent $ cd /home/training/puppet/modules
+    training@agent $ vim ssh/manifests/augeas.pp
     class ssh::augeas {
       augeas { 'sshd_config':
         context => '/files/etc/ssh/sshd_config',
@@ -114,22 +114,22 @@ Help:
       }
     }
 
-    $ puppet parser validate ssh/manifests/augeas.pp
-    $ vim ssh/examples/augeas.pp
+    training@agent $ puppet parser validate ssh/manifests/augeas.pp
+    training@agent $ vim ssh/examples/augeas.pp
     include ssh::augeas
 
-    $ puppet parser validate ssh/examples/augeas.pp 
-    $ sudo puppet apply --noop ssh/examples/augeas.pp
-    $ sudo puppet apply ssh/examples/augeas.pp
+    training@agent $ puppet parser validate ssh/examples/augeas.pp 
+    training@agent $ sudo puppet apply --noop ssh/examples/augeas.pp
+    training@agent $ sudo puppet apply ssh/examples/augeas.pp
 
 ## Bonus
 
     @@@Sh
-    $ cd /home/training/puppet/modules
-    $ vim ssh/examples/filechanges.pp
+    training@agent $ cd /home/training/puppet/modules
+    training@agent $ vim ssh/examples/filechanges.pp
     include ssh::file_line
     include ssh::augeas
 
-    $ puppet parser validate ssh/examples/filechanges.pp
-    $ sudo puppet apply --noop ssh/examples/filechanges.pp
-    $ sudo puppet apply ssh/examples/filechanges.pp
+    training@agent $ puppet parser validate ssh/examples/filechanges.pp
+    training@agent $ sudo puppet apply --noop ssh/examples/filechanges.pp
+    training@agent $ sudo puppet apply ssh/examples/filechanges.pp

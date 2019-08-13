@@ -8,7 +8,7 @@
 * Available for most editors
 
 
-!SLIDE small
+!SLIDE
 # Syntax Checking
 
 Manually with: **puppet parser validate {FILE NAME}.pp**

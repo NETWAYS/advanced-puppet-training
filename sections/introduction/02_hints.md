@@ -1,4 +1,4 @@
-!SLIDE smbullets small 
+!SLIDE smbullets 
 
 # Training Hints
 

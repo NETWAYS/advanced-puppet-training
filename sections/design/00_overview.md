@@ -2,7 +2,7 @@
 # ~~~SECTION:MAJOR~~~ Module Design
 
 
-!SLIDE small
+!SLIDE
 # Good Module Design
 
 * Only manage their own resources
@@ -12,7 +12,7 @@
 * Avoid exposing implementation details
 
 
-!SLIDE small
+!SLIDE
 # Architecting Modules
 
 Motivation:

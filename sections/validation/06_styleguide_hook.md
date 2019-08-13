@@ -1,5 +1,5 @@
 !SLIDE smbullets
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Add a Pre-Commit Hook for Style Guide Checking
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Add a Pre-Commit Hook
 
 * Objective:
  * Add a client side pre-commit hook for Puppet Lint checking on `agent-centos.localdomain`

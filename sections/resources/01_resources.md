@@ -65,8 +65,8 @@ Help:
 ****
 
     @@@Sh
-    $ cd /home/training/puppet/modules
-    $ vim apache/manifests/hosts.pp
+    training@puppet $ cd /home/training/puppet/modules
+    training@puppet $ vim apache/manifests/hosts.pp
     class apache::hosts {
       host { 'localhost4.localdomain4':
         ip           => '127.0.0.1',
@@ -93,9 +93,9 @@ Help:
       }
     }
 
-    $ vim apache/examples/hosts.pp
+    training@puppet $ vim apache/examples/hosts.pp
     include apache::hosts
 
-    $ puppet parser validate apache/manifests/hosts.pp
-    $ sudo puppet apply --noop apache/examples/hosts.pp
-    $ sudo puppet apply apache/examples/hosts.pp
+    training@puppet $ puppet parser validate apache/manifests/hosts.pp
+    training@puppet $ sudo puppet apply --noop apache/examples/hosts.pp
+    training@puppet $ sudo puppet apply apache/examples/hosts.pp

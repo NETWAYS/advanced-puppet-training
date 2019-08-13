@@ -16,5 +16,5 @@
     }
 
 * Classes can take parameters to change their behaviour
-* The parameters can have a defined data type with Puppet 4
+* The parameters can have a defined data type
 * Also with parameters a class is still a singleton
