@@ -54,7 +54,7 @@ Copy `apache.tar.gz` to `agent-centos.localdomain`:
 Add puppet repository from http://yum.puppetlabs.com:
 
     @@@ Sh
-    $ sudo rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+    $ sudo rpm -ivh http://yum.puppetlabs.com/puppet6-release-el-7.noarch.rpm
 
 Inspect what version is installed on your master:
 
@@ -136,9 +136,9 @@ Trigger Puppet run on `agent-centos.localdomain`:
 Sign certificate on `puppet.localdomain`:
 
     @@@Sh
-    $ sudo puppet cert list
-    $ sudo puppet cert sign agent-centos.localdomain
-    $ sudo puppet cert list --all
+    $ sudo puppetserver ca list
+    $ sudo puppetserver ca sign --certname agent-centos.localdomain
+    $ sudo puppetserver ca list --all
 
 Trigger Puppet run on `agent-centos.localdomain`:
 

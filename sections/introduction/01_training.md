@@ -10,4 +10,4 @@ how to design a Puppet module, additional resource types and advanced constructs
 Furthermore you will learn about tools supporting your development process and
 last but not least how to troubleshoot your modules if problems occure.
 
-The material is based on Puppet 4.
+The material is based on Puppet 6.
