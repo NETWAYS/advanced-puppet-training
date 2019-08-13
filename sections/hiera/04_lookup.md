@@ -148,5 +148,4 @@ Use `puppet apply`, Hiera CLI and puppet lookup tool for lookup:
 
     @@@Sh
     $ sudo puppet apply -e "notice(hiera('message'))"
-    $ hiera message ::osfamily=RedHat environment=production -c /etc/puppetlabs/code/environments/production/hiera.yaml
     $ puppet lookup message --node puppet.localdomain --explain
