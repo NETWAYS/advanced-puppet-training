@@ -107,7 +107,7 @@ Hiera command line tool:
 Create and lookup hierarchy for environment production:
 
     @@@Sh
-    $ vim /home/training/puppet/hiera.yaml
+    training@puppet $ vim /home/training/puppet/hiera.yaml
     ---
     version: 5
     defaults:
@@ -121,31 +121,31 @@ hierarchy:
       - "%{::osfamily}.yaml"
       - "common.yaml"
 
-    $ cd /home/training/puppet
-    $ mkdir data
-    $ vim data/RedHat.yaml
+    training@puppet $ cd /home/training/puppet
+    training@puppet $ mkdir data
+    training@puppet $ vim data/RedHat.yaml
     ---
     message: "Value from RedHat.yaml"
 
-    $ vim data/common.yaml
+    training@puppet $ vim data/common.yaml
     ---
     message: "This node is using common data"
 
 Push your configuration to `production`:
 
     @@@Sh
-    $ git add hiera.yaml
-    $ git add data/RedHat.yaml
-    $ git commit -m 'hiera data'
-    $ git push origin production
+    training@puppet $ git add hiera.yaml
+    training@puppet $ git add data/RedHat.yaml
+    training@puppet $ git commit -m 'hiera data'
+    training@puppet $ git push origin production
 
 Deploy the `production` environment with r10k:
 
     @@@Sh
-    $ r10k deploy environment production -p -c /etc/puppetlabs/puppet/r10k.yaml
+    training@puppet $ r10k deploy environment production -p -c /etc/puppetlabs/puppet/r10k.yaml
 
 Use `puppet apply`, Hiera CLI and puppet lookup tool for lookup:
 
     @@@Sh
-    $ sudo puppet apply -e "notice(hiera('message'))"
-    $ puppet lookup message --node puppet.localdomain --explain
+    training@puppet $ sudo puppet apply -e "notice(hiera('message'))"
+    training@puppet $ puppet lookup message --node puppet.localdomain --explain

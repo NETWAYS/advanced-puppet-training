@@ -143,11 +143,11 @@ More on Serverspec including a overview of the resource types: http://serverspec
 Install and configure `serverspec` on `agent-centos.localdomain`:
 
     @@@Sh
-    $ gem install serverspec
-    $ cd /home/training/puppet/modules/apache
-    $ mv Rakefile Rakefile.bak
-    $ mv spec spec.bak
-    $ serverspec-init
+    training@agent $ gem install serverspec
+    training@agent $ cd /home/training/puppet/modules/apache
+    training@agent $ mv Rakefile Rakefile.bak
+    training@agent $ mv spec spec.bak
+    training@agent $ serverspec-init
     Select OS type:
 
       1) UN*X
@@ -170,7 +170,7 @@ Install and configure `serverspec` on `agent-centos.localdomain`:
 Write tests to check the Apache webserver on your local virtual machine:
 
     @@@Sh 
-    $ vim spec/localhost/sample_spec.rb
+    training@agent $ vim spec/localhost/sample_spec.rb
     require 'spec_helper'
 
     describe package('httpd'), :if => os[:family] == 'redhat' do
@@ -190,10 +190,12 @@ Write tests to check the Apache webserver on your local virtual machine:
       it { should be_listening }
     end
 
+~~~PAGEBREAK~~~
+
 Run the acceptance test:
 
     @@@Sh
-    $ rake spec
+    training@agent $ rake spec
     ...
     Package "httpd"
       should be installed

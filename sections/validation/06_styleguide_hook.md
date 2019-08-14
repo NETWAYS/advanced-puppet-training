@@ -39,25 +39,25 @@
 Install `puppet-lint` via gem:
 
     @@@Sh
-    $ sudo gem install puppet-lint
+    training@puppet $ sudo gem install puppet-lint
 
 Check config `commit_hooks/config.cfg`:
 
     @@@Sh
-    $ vim /usr/local/share/puppet-git-hooks/commit_hooks/config.cfg
+    training@puppet $ vim /usr/local/share/puppet-git-hooks/commit_hooks/config.cfg
     CHECK_PUPPET_LINT="enabled"
     ...
 
 Remove all lines of documentation from a file and test the pre-commit hook on `agent-centos.localdomain`:
 
     @@@Sh
-    $ cd /home/training/puppet/modules
-    $ vim apache/manifests/init.pp
+    training@agent $ cd /home/training/puppet/modules
+    training@agent $ vim apache/manifests/init.pp
     class apache {
     ...
 
-    $ git add apache/manifests/init.pp
-    $ git commit -m 'lint check'
+    training@agent $ git add apache/manifests/init.pp
+    training@agent $ git commit -m 'lint check'
     Checking puppet manifest syntax for production/modules/apache/manifests/init.pp...
     Checking puppet style guide compliance for production/modules/apache/manifests/init.pp...
     production/modules/apache/manifests/init.pp - WARNING: class not documented on line 1

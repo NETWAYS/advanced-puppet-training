@@ -44,13 +44,13 @@
 Create the subdirectory structure for custom facts:
 
     @@@ Sh
-    $ mkdir -p /home/training/puppet/modules/apache/lib/facter
+    training@puppet $ mkdir -p /home/training/puppet/modules/apache/lib/facter
 
 Create a new ruby file `/home/training/puppet/modules/apache/lib/facter/apache_version.rb`:
 
     @@@SH
-    $ cd /home/training/puppet/modules
-    $ vim apache/lib/facter/apache_version.rb
+    training@puppet $ cd /home/training/puppet/modules
+    training@puppet $ vim apache/lib/facter/apache_version.rb
     Facter.add(:apache_version) do
       setcode 'apachectl -v 2>&1 | \
         sed -n "s|^Server version:\s*Apache/\([0-9]\\+.[0-9]\\+.[0-9]\\+\).*$|\1|p"'
@@ -61,13 +61,13 @@ Create a new ruby file `/home/training/puppet/modules/apache/lib/facter/apache_v
 Check the syntax of the ruby file:
 
     @@@Sh
-    $ ruby -c ./apache/lib/facter/apache_version.rb
+    training@puppet $ ruby -c ./apache/lib/facter/apache_version.rb
     Syntax OK
 
 Call facter by setting the RUBYLIB environment variable:
 
     @@@Sh
-    $ RUBYLIB=/home/training/puppet/modules/apache/lib facter apache_version
+    training@puppet $ RUBYLIB=/home/training/puppet/modules/apache/lib facter apache_version
     2.4.6
 
 ### Optional: Build the same fact in ruby
@@ -75,8 +75,8 @@ Call facter by setting the RUBYLIB environment variable:
 New content of `/home/training/puppet/modules/apache/lib/facter/apache_version.rb`:
 
     @@@Sh
-    $ cd /home/training/puppet/modules
-    $ vim apache/lib/facter/apache_version.rb
+    training@puppet $ cd /home/training/puppet/modules
+    training@puppet $ vim apache/lib/facter/apache_version.rb
     Facter.add(:apache_version) do
       setcode do
         if Facter::Util::Resolution.which('apachectl')

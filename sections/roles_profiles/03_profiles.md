@@ -78,15 +78,15 @@
 Create `database` and `webserver` profiles on `agent-centos.localdomain`:
 
     @@@Sh
-    $ puppet module install puppetlabs-mysql
+    training@agent $ puppet module install puppetlabs-mysql
 
-    $ mkdir /home/training/puppet/modules/profiles/{examples,manifests}
-    $ cd /home/training/puppet/modules
+    training@agent $ mkdir /home/training/puppet/modules/profiles/{examples,manifests}
+    training@agent $ cd /home/training/puppet/modules
 
 Create a `database` profile for mysql:
 
     @@@Sh
-    $ vim profiles/manifests/database.pp
+    training@agent $ vim profiles/manifests/database.pp
     class profiles::database {
       class { '::mysql::server':
         root_password           => 'swordfish',
@@ -112,18 +112,18 @@ Create a `database` profile for mysql:
       }
     }
 
-    $ puppet parser validate profiles/manifests/database.pp
-    $ vim profiles/examples/database.pp
+    training@agent $ puppet parser validate profiles/manifests/database.pp
+    training@agent $ vim profiles/examples/database.pp
     include profiles::database
 
-    $ puppet parser validate profiles/examples/database.pp
-    $ sudo puppet apply --noop profiles/examples/database.pp
-    $ sudo puppet apply profiles/examples/database.pp
+    training@agent $ puppet parser validate profiles/examples/database.pp
+    training@agent $ sudo puppet apply --noop profiles/examples/database.pp
+    training@agent $ sudo puppet apply profiles/examples/database.pp
 
 Create a `webserver` profile for apache:
 
     @@@Sh
-    $ vim profiles/manifests/webserver.pp
+    training@agent $ vim profiles/manifests/webserver.pp
     class profiles::webserver {
       class { 'apache':
         ensure => running,
@@ -132,14 +132,14 @@ Create a `webserver` profile for apache:
       }
     }
 
-    $ puppet parser validate profiles/manifests/webserver.pp
-    $ vim profiles/examples/webserver.pp
+    training@agent $ puppet parser validate profiles/manifests/webserver.pp
+    training@agent $ vim profiles/examples/webserver.pp
     include profiles::webserver
 
-    $ puppet parser validate profiles/examples/webserver.pp
+    training@agent $ puppet parser validate profiles/examples/webserver.pp
 
 Test and apply your configuration:
 
     @@@Sh
-    $ sudo puppet apply --noop profiles/examples/webserver.pp
-    $ sudo puppet apply profiles/examples/webserver.pp
+    training@agent $ sudo puppet apply --noop profiles/examples/webserver.pp
+    training@agent $ sudo puppet apply profiles/examples/webserver.pp
