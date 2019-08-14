@@ -76,26 +76,26 @@
 Create and use a `webserver` role on `agent-centos.localdomain`:
 
     @@@Sh
-    training@agent $ mkdir /home/training/puppet/modules/roles/{examples,manifests}
+    training@agent $ mkdir /home/training/puppet/modules/role/{examples,manifests}
     training@agent $ cd /home/training/puppet/modules
 
 Combine `database` and `webserver` profiles to a role:
 
     @@@Sh
-    training@agent $ vim roles/manifests/webserver.pp
-    class roles::webserver {
-      include profiles::database
-      include profiles::webserver
+    training@agent $ vim role/manifests/webserver.pp
+    class role::webserver {
+      include profile::database
+      include profile::webserver
     }
 
-    training@agent $ puppet parser validate roles/manifests/webserver.pp
-    training@agent $ vim roles/examples/webserver.pp
-    include roles::webserver
+    training@agent $ puppet parser validate role/manifests/webserver.pp
+    training@agent $ vim role/examples/webserver.pp
+    include role::webserver
 
-    training@puppet $ puppet parser validate roles/examples/webserver.pp
+    training@puppet $ puppet parser validate role/examples/webserver.pp
 
 Test and apply your configuration:
 
     @@@Sh
-    training@agent $ sudo puppet apply --noop roles/examples/webserver.pp
-    training@agent $ sudo puppet apply roles/examples/webserver.pp
+    training@agent $ sudo puppet apply --noop role/examples/webserver.pp
+    training@agent $ sudo puppet apply role/examples/webserver.pp
