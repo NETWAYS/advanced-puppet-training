@@ -46,3 +46,8 @@ Templates in `templates`
 * Lookup by Puppet template functions like
  * Embedded Ruby (ERB): 'template({MODULE NAME}/{TEMPLATE NAME}.erb)'
  * Embedded Puppet (EPP): 'epp({MODULE NAME}/{TEMPLATE NAME}.epp)'
+
+!SLIDE
+# Autoloading
+
+<center><img src="./_images/Puppet_Autoloading.png" style="width:756px;height:516px;" alt="Legacy Classification"/></center>
