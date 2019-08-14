@@ -53,8 +53,13 @@ Create a new ruby file `/home/training/puppet/modules/apache/lib/facter/apache_v
     training@puppet $ vim apache/lib/facter/apache_version.rb
     Facter.add(:apache_version) do
       setcode 'apachectl -v 2>&1 | \
-        sed -n "s|^Server version:\s*Apache/\([0-9]\\+.[0-9]\\+.[0-9]\\+\).*$|\1|p"'
+        sed -n "s|^Server version:\s*Apache/\([0-9]\\+.[0-9]\\+.[0-9]\\+\).*$|\\1|p"'
     end
+
+Alternatively the following statement can be used instead of sed:
+
+    @@@SH
+    grep "Server version" | cut -d : -f 2 | cut -d / -f 2 | cut -d " " -f 1
 
 ### Test your code locally
 
