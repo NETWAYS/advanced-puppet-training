@@ -47,6 +47,8 @@
 
 ~~~SECTION:handouts~~~
 
+~~~PAGEBREAK~~~
+
 This design pattern is based on Puppet 3 best practice. Puppet 4 allows to define a lookup for data
 based on hiera or a internal function which can replace this design pattern when Puppet 4 has widely
 replaced Puppet 3.

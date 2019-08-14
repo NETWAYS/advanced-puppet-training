@@ -20,8 +20,6 @@ The password for user "root" typically not required is "netways0815".
 For virtualization the laptop runs Virtualbox. The virtual machines are best accessed using ssh
 with the user "training" and password "netways". The user "root" has the same password"
 
-~~~PAGEBREAK~~~
-
 The virtual machine named "puppet.localdomain" has the Puppet Master and a Git repository
 pre-installed which will be required for later labs.
 

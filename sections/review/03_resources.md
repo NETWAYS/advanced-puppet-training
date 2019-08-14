@@ -82,6 +82,8 @@ Block based defaults (new with Puppet 4)
 
 ****
 
+~~~PAGEBREAK~~~
+
 One major change from older versions is Puppet 4 does enforce resources top down. In older versions enforcement order was based on
 the hash of the resource type and title, so now it is more predictable. But you should not only rely on the written order because
 implicit and explicit dependencies will change the order. So it is best practice to define relationships and to enforce code developers
