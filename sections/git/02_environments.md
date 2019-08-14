@@ -14,7 +14,7 @@
         ├── modules
         └── manifests/site.pp
 
-    # git checkout -m 'apache-module'
+    # git checkout -b 'apache-module'
     # cd development/modules/
     # puppet module generate training-apache
     ...
