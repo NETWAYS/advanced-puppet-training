@@ -39,7 +39,7 @@
 Install `puppet-lint` via gem:
 
     @@@Sh
-    training@puppet $ sudo gem install puppet-lint
+    training@puppet $ sudo sudo /opt/puppetlabs/puppet/bin/gem install puppet-lint
 
 Check config `commit_hooks/config.cfg`:
 

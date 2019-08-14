@@ -93,7 +93,7 @@
 Install `r10k` on `puppet.localdomain`:
 
     @@@Sh
-    training@puppet $ gem install r10k
+    training@puppet $ sudo /opt/puppetlabs/puppet/bin/gem install r10k
 
 Initialize a new Git repository:
 

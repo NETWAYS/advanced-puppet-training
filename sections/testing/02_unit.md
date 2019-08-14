@@ -134,12 +134,12 @@ RSpec matchers can match exact values, regular expressions, or Ruby Procs. You c
 Install `rspec-puppet`:
 
     @@@Sh
-    $ gem install rspec-puppet
+    $ sudo /opt/puppetlabs/puppet/bin/gem install rspec-puppet
 
 Install `puppetlabs_spec_helpers` to setup tests:
 
     @@@Sh
-    $ gem install puppetlabs_spec_helper
+    $ sudo /opt/puppetlabs/puppet/bin/gem install puppetlabs_spec_helper
 
 
 !SLIDE small

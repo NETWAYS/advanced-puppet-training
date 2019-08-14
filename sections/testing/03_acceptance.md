@@ -38,7 +38,7 @@ More on Serverspec including a overview of the resource types: http://serverspec
 # Serverspec - Installation
 
     @@@Sh
-    $ gem install serverspec
+    $ sudo /opt/puppetlabs/puppet/bin/gem install serverspec
     $ cd /home/training/puppet/modules/apache
     $ serverspec-init
     Select OS type:
@@ -143,7 +143,7 @@ More on Serverspec including a overview of the resource types: http://serverspec
 Install and configure `serverspec` on `agent-centos.localdomain`:
 
     @@@Sh
-    training@agent $ gem install serverspec
+    training@agent $ sudo /opt/puppetlabs/puppet/bin/gem install serverspec
     training@agent $ cd /home/training/puppet/modules/apache
     training@agent $ mv Rakefile Rakefile.bak
     training@agent $ mv spec spec.bak
