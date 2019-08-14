@@ -3,15 +3,15 @@
 
     @@@Puppet
     class system {
-      $operatingsystem = 'OzzyOS'
-      notify { "Your operatingsystem is: ${::operatingsystem}" }
+      $facts['operatingsystem'] = 'OzzyOS'
+      notify { "Your operatingsystem is: ${::facts['operatingsystem']}" }
     }
 
     notice: Your operatingsystem is: CentOS
 
     class system {
-      $operatingsystem = 'OzzyOS'
-      notify { "Your operatingsystem is: ${operatingsystem}" }
+      $facts['operatingsystem'] = 'OzzyOS'
+      notify { "Your operatingsystem is: ${facts['operatingsystem']}" }
     }
 
     notice: Your operatingsystem is: OzzyOS
