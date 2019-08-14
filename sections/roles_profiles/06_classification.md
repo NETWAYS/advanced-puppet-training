@@ -35,6 +35,40 @@ Simply assign a role to each node in the site manifest `site.pp`:
   external_nodes = /usr/local/bin/puppet_node_classifier
 </pre>
 
+!SLIDE small
+#ENC YAML Output in YAML format
+
+<pre>
+---
+parameters:
+  hostgroup: OpenSCAP
+  foreman_subnets:
+  - name: foreman
+    network: 192.168.56.0
+    mask: 255.255.255.0
+    gateway: 192.168.56.1
+    dns_primary: 192.168.56.2
+    boot_mode: DHCP
+    ipam: DHCP
+    mtu: 1500
+    network_type: IPv4
+classes:
+  foreman_scap_client:
+    policies:
+    - id: 2
+      profile_id: xccdf_org.ssgproject.content_profile_standard_customized
+      minute: '0'
+      hour: '1'
+      monthday: "*"
+      month: "*"
+      weekday: '0'
+    - id: 1
+      profile_id: xccdf_org.ssgproject.content_profile_common
+    port: 8443
+    server: foreman.localdomain
+environment: production
+</pre>
+
 
 !SLIDE small
 # Assigning Classes with Hiera
