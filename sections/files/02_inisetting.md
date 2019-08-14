@@ -16,23 +16,19 @@
     @@@Puppet
     ini_setting {'Java Home':
       ensure            => present,
-      section           => '',
+      section           => 'Date',
       key_val_separator => '=',
-      path              => '/etc/sysconfig/tomcat',
-      setting           => 'JAVA_HOME',
-      value             => '/usr/lib/jvm/java-1.8.0',
-    }
-    ini_subsetting {'Java Memory Max':
-      ensure            => present,
-      section           => '',
-      key_val_separator => '=',
-      path              => '/etc/sysconfig/tomcat',
-      setting           => 'JAVA_OPTS',
-      subsetting        => '-Xmx',
-      value             => '512m',
+      path              => '/etc/php/7.2/apache2/php.ini',
+      setting           => 'date.timezone',
+      value             => 'US/Pacific',
     }
 
 Results in:
 
-    JAVA_HOME="/usr/lib/jvm/java-1.8.0"
-    JAVA_OPTS="-Xmx 512m -Xms 128m"
+    @@@ini
+    ...
+    [Date]
+    ; Defines the default timezone used by the date functions
+    ; http://php.net/date.timezone
+    date.timezone = US/Pacific
+    ...
