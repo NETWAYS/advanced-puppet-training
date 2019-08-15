@@ -107,9 +107,6 @@ Puppet has enforced resources top down sicinge Puppet 4. In even older versions 
 The picture above shows an overview of the most important implicit dependencies.
 A dependency is only created if both resources are managed by Puppet.
 
-To find all implicit dependencies have a look on the Autorequires description of
-the resources on: https://docs.puppet.com/puppet/latest/reference/type.html
-
 ~~~ENDSECTION~~~
 
 
