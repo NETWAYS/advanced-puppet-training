@@ -27,7 +27,7 @@ On "agent-centos.localdomain" we will install Puppet as an agent and will use it
 our puppet code, it has a clone of the Git repository allowing us to commit code and publish it
 onto the master, located in the home directory of the "training" user.
 
-The last machine is "agent-debian.localdomain" which has a Puppet agent pre-installed and will
+The last machine is "agent-centos.localdomain" which has a Puppet agent pre-installed and will
 be used in the optional labs at the end.
 
 ~~~ENDSECTION~~~

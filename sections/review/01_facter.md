@@ -8,7 +8,7 @@
     <pre>
     $ facter
     augeas => {
-      version => "1.4.0"
+      version => "1.12.0"
     }
     disks => {
       vda => {
@@ -40,18 +40,18 @@ To access such a fact like the disk size as a top scope variable use:
     @@@ Puppet
     $::disks['vda']['size']
 
-Facter can also be used to display the legacy style. Here all legacy facts shown in the old way as simple strings.
-
 ~~~PAGEBREAK~~~
+
+Facter can also be used to display the legacy style. Here all legacy facts shown in the old way as simple strings.
 
     @@@ sh
     $ facter --show-legacy
-    aio_agent_version => 1.6.0
+    aio_agent_version => 6.7.2
     architecture => x86_64
     augeas => {
-      version => "1.4.0"
+      version => "1.12.0"
     }
-    augeasversion => 1.4.0
+    augeasversion => 1.12.0
     bios_release_date => 12/01/2006
     bios_vendor => innotek GmbH
     bios_version => VirtualBox
