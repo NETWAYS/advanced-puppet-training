@@ -11,6 +11,8 @@
 
 Puppet Git Hooks are available from: https://github.com/drwahl/puppet-git-hooks
 
+~~~PAGEBREAK~~~
+
 Client side checks:
 
 * Puppet manifest syntax

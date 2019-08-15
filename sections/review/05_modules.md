@@ -16,8 +16,6 @@
      |-- spec           <- Unit tests
      `-- templates      <- Dynamic files in ERB or EPP syntax
 
-**Deprecation Note:** The `tests` directory is deprecated (Puppet 4.5) in favor of the `examples` directory.
-
 ~~~SECTION:handouts~~~
 
 ****
@@ -47,7 +45,12 @@ Templates in `templates`
  * Embedded Ruby (ERB): 'template({MODULE NAME}/{TEMPLATE NAME}.erb)'
  * Embedded Puppet (EPP): 'epp({MODULE NAME}/{TEMPLATE NAME}.epp)'
 
-!SLIDE
+!SLIDE small noprint
 # Autoloading
 
 <center><img src="./_images/Puppet_Autoloading.png" style="width:756px;height:516px;" alt="Legacy Classification"/></center>
+
+!SLIDE small printonly
+# Autoloading
+
+<center><img src="./_images/Puppet_Autoloading.png" style="width:434px;height:296px;" alt="Legacy Classification"/></center>

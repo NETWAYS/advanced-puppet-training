@@ -13,5 +13,5 @@
 
 * Always executed on the Master during Catalog Compilation
 * Two types:
- * **Statement** - Executes an action and do not return arguments (fail, notice, etc.)
+ * **Statement** - Executes an action and does not return arguments (fail, notice, etc.)
  * **rvalue** - Returns a value (template, versioncmp, etc.)

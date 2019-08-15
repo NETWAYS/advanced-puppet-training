@@ -103,9 +103,6 @@ RSpec matchers can match exact values, regular expressions, or Ruby Procs. You c
 
         it { should contain_package('httpd').with_ensure('installed') }
 
-~~~PAGEBREAK~~~
-
-    @@@ Ruby
         it {
           should contain_file('/etc/httpd/conf/httpd.conf').with(
             'ensure' => 'file',

@@ -88,4 +88,4 @@ specific solutions like Foreman are available which use an existing datastore as
 !SLIDE printonly
 # Resolution Hierarchy
 
-<center><img src="./_images/hiera.png" style="width:470px;height:294px;" alt="Resolution Hierarchy"/></center>
+<center><img src="./_images/hiera.png" style="width:434px;height:271px;" alt="Resolution Hierarchy"/></center>

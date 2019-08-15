@@ -1,4 +1,4 @@
-!SLIDE smbullets
+!SLIDE smbullets small
 # Merge Behavior
 
 Specify merge behavior:

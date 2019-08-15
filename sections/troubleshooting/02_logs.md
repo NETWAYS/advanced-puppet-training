@@ -21,8 +21,6 @@ By default the Puppet agent logs to syslog using the facility *daemon* and a log
 which results in quite many messages going to '/var/log/messages' or '/var/log/daemon' depending
 of the distribution or to the event log if used on Windows.
 
-~~~PAGEBREAK~~~
-
 For debugging you can increase the `log_level` to get even more details in the log. *info* is
 the same you get when running the agent in verbose mode and *debug* corresponds the debug mode.
 By changing the facility to one of the local ones you can move the log messages to a seperate file. You can specify that file via the config setting `logdest` which can be either `syslog`, `eventlog`, `console` or the path to a log file.

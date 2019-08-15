@@ -33,7 +33,7 @@ Access:
 !SLIDE printonly
 # Scopes
 
-<center><img src="./_images/scope-euler-diagram.png" style="width:470px;height:384px;" alt="Scopes"></center>
+<center><img src="./_images/scope-euler-diagram.png" style="width:434px;height:354px;" alt="Scopes"></center>
 
 
 !SLIDE small

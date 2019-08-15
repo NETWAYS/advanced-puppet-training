@@ -11,7 +11,7 @@ The Puppet Agent can send a report to the Puppet Master after every puppet run
 
 The Puppet Agent can send a report to the Puppet Master after every puppet run
 
-<center><img src="./_images/agent_report.png" style="width:470px;height:337px;" alt="Agent Report"/></center>
+<center><img src="./_images/agent_report.png" style="width:434px;height:311px;" alt="Agent Report"/></center>
 
 
 !SLIDE small

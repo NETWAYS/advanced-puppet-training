@@ -45,19 +45,6 @@
 * Inherits variable scope to all child classes
 * Defines no resources
 
-~~~SECTION:handouts~~~
-
-~~~PAGEBREAK~~~
-
-This design pattern is based on Puppet 3 best practice. Puppet 4 allows to define a lookup for data
-based on hiera or a internal function which can replace this design pattern when Puppet 4 has widely
-replaced Puppet 3.
-
-Puppet 4's data in module works in a similar fashion like enviroment data you will learn in a later chapter.
-
-~~~ENDSECTION~~~
-
-
 !SLIDE small
 # 'install' Subclass
 

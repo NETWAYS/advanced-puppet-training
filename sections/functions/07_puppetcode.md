@@ -19,7 +19,8 @@
 
 ****
 
-More on this at: https://docs.puppet.com/puppet/latest/reference/lang_write_functions_in_puppet.html
+More on this at: https://puppet.com/docs/puppet/latest/lang_write_functions_in_puppet.html
+
 
 ~~~ENDSECTION~~~
 

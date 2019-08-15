@@ -20,6 +20,6 @@
 
 ~~~SECTION:handouts~~~
 
-More on custom types and providers: https://docs.puppet.com/guides/custom_types.html
+More on custom types and providers: https://puppet.com/docs/puppet/latest/custom_types.html
 
 ~~~ENDSECTION~~~

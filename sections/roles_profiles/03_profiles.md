@@ -32,7 +32,7 @@
 
 * Modules are grouped to profiles
 
-<center><img src="./_images/profile_classification.png" style="width:470px;height:120px;" alt="Profile Classification"/></center>
+<center><img src="./_images/profile_classification.png" style="width:434px;height:110px;" alt="Profile Classification"/></center>
 
 
 !SLIDE smbullets 

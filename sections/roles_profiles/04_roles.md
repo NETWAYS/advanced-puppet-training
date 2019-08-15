@@ -21,7 +21,7 @@
 **A node can only have one role!**
 
 * If a node requires two roles, it has by definition become a new role
-* A single role can be applied to many nodes, however
+* However, a single role can be applied to many nodes
 
 <center><img src="./_images/role_classification.png" style="width:800px;height:116px;" alt="Role Classification"/></center>
 
@@ -34,7 +34,7 @@
 * If a node requires two roles, it has by definition become a new role
 * A single role can be applied to many nodes, however
 
-<center><img src="./_images/role_classification.png" style="width:470px;height:68px;" alt="Role Classification"/></center>
+<center><img src="./_images/role_classification.png" style="width:434px;height:63px;" alt="Role Classification"/></center>
 
 
 !SLIDE smbullets 

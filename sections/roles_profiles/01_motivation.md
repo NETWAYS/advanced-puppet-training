@@ -22,7 +22,7 @@
 * Develop modules and
 * Classify them to nodes
 
-<center><img src="./_images/legacy_classification.png" style="width:470px;height:120px;" alt="Legacy Classification"/></center>
+<center><img src="./_images/legacy_classification.png" style="width:434px;height:110px;" alt="Legacy Classification"/></center>
 
 
 !SLIDE smbullets

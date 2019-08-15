@@ -37,5 +37,4 @@ The code on this page is the long form version of the following code, which is m
       filename = args[0]
       File.basename filename
     end
-
 ~~~ENDSECTION~~~

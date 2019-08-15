@@ -22,11 +22,13 @@
 
 ****
 
+
+~~~PAGEBREAK~~~
+
 Notice that the Puppet agent run first downloads any new or changed facts and then loads them. This precedes the catalog request and application. The practical implications of this are that custom facts are available for use on the very first Puppet agent run after they are defined. You do not need to sync them on one Puppet run and then use them on the next unless they depend on resources that are managed by Puppet itself.
 
 You can force a pluginsync without a Puppet run with `puppet plugin download`.
 
-~~~PAGEBREAK~~~
 
 If a fact is synced via pluginsync, then the version of the fact that was synced will take precedence over a fact tested by setting FACTERLIB. For this reason, it is often useful to stop the Puppet agent before commencing development so that an incomplete fact doesn't get synced.
 
