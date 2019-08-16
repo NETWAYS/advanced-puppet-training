@@ -11,6 +11,10 @@
 * Enforcement order can be unpredictable and surprising
 * Classes included in other classes are unordered
 
+!SLIDE noprint
+# include Function
+
+<center><img src="./_images/Include_Puppet.png" style="width:850px;height:351px;" alt="Legacy Classification"/></center>
 
 !SLIDE small
 # require Function
@@ -24,6 +28,11 @@
 
 * Declares a class and causes it to become a dependency of the surrounding container
 * Every resource in the `apache` and `mysql` classes to be applied before any of the resources in the `wordpress` class
+
+!SLIDE noprint
+# require Function
+
+<center><img src="./_images/Require_Puppet.png" style="width:850px;height:450px;" alt="Legacy Classification"/></center>
 
 
 !SLIDE small
@@ -68,6 +77,11 @@
 * Declare the class with include-like behavior if it isn’t already declared
 * Contained by the surrounding class
 * Replacement for `anchor` resource
+
+!SLIDE noprint
+# contain Function
+
+<center><img src="./_images/Contain_Puppet.png" style="width:850px;height:465px;" alt="Legacy Classification"/></center>
 
 
 !SLIDE small
