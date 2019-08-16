@@ -35,6 +35,12 @@ Chaining arrows:
     }
 
 
+!SLIDE noprint
+# Declare Stages
+
+<center><img src="./_images/Stages_Puppet.png" style="width:850px;height:368px;" alt="Legacy Classification"/></center>
+
+
 !SLIDE small
 # Assign Classes to Stages
 

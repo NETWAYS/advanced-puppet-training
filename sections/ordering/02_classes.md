@@ -107,6 +107,11 @@
 * Resources are contained
 * Relationships can be established between resources and classes
 
+!SLIDE small
+# anchor Resource
+
+<center><img src="./_images/Anchor_Puppet.png" style="width:671px;height:544px;" alt="Legacy Classification"/></center>
+
 
 !SLIDE smbullets
 # Declaring Classes
