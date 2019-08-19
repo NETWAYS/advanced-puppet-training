@@ -94,6 +94,48 @@
 
 * Finally the service subclass handles all resources to manage the service respectively services
 
+!SLIDE small
+# Module design using pdk
+
+* PDK or puppet development kit is the recommended tool for designing a module
+
+The following command creates a module-directory:  `pdk new module <MODULE_NAME>`
+
+The directory looks like this:
+
+    ├── appveyor.yml
+    ├── CHANGELOG.md
+    ├── data
+    │   └── common.yaml
+    ├── examples
+    ├── files
+    │   └── httpd.conf
+    ├── Gemfile
+    ├── Gemfile.lock
+    ├── hiera.yaml
+    ├── manifests
+    ├── metadata.json
+    ├── Rakefile
+    ├── README.md
+    ├── spec
+    │   ├── default_facts.yml
+    │   └── spec_helper.rb
+    ├── tasks
+    └── templates
+        └── vhost.conf.erb
+
+!SLIDE small
+# Module design using pdk
+In past versions of puppet, you used to create files manually. From now on we will use `pdk new class <MODULE_NAME>` and other pdk features.
+
+E.g. the case of the apache module:
+
+    @@@puppet
+    pdk new module apache
+    pdk new class params
+
+Would create the file `params.pp`, with a blueprint for the class `apache::params` in it.
+    
 
 !SLIDE smbullets
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Module Design
@@ -142,8 +184,8 @@ The same should be happend as before reworked the module.
 Rework the `main` apache class:
 
     @@@Puppet
-    training@agent $ cd /home/training/puppet/modules
-    training@agent $ vim apache/manifests/init.pp
+    training@agent $ cd /home/training/puppet/modules/apache
+    training@agent $ vim manifests/init.pp
     class apache (
       Enum['running','stopped'] $ensure = running,
       Boolean                   $enable = true,
@@ -158,12 +200,12 @@ Rework the `main` apache class:
       class{'apache::service':}
     }
 
-    training@agent $ puppet parser validate apache/manifests/init.pp
+    training@agent $ puppet parser validate manifests/init.pp
 
 Rework the `apache::params` class:
 
     @@@Puppet
-    training@agent $ vim apache/manifests/params.pp
+    training@agent $ vim manifests/params.pp
     class apache::params {
       case $::osfamily {
        'RedHat': {
@@ -183,14 +225,15 @@ Rework the `apache::params` class:
       }
     }
 
-    training@agent $ puppet parser validate apache/manifests/params.pp
+    training@agent $ puppet parser validate manifests/params.pp
 
 ~~~PAGEBREAK~~~
 
 Create the `apache::install` class:
 
     @@@Puppet
-    training@agent $ vim apache/manifests/install.pp
+    training@agent $ pdk create class install
+    training@agent $ vim manifests/install.pp
     class apache::install (
     ) inherits apache::params {
 
@@ -215,12 +258,13 @@ Create the `apache::install` class:
       }
     }
 
-    training@agent $ puppet parser validate apache/manifests/install.pp
+    training@agent $ puppet parser validate manifests/install.pp
 
 Create the `apache::config` class:
 
     @@@Puppet
-    training@agent $ vim apache/manifests/config.pp
+    training@agent $ pdk new class config
+    training@agent $ vim manifests/config.pp
     class apache::config (
     ) inherits apache::params {
 
@@ -240,14 +284,15 @@ Create the `apache::config` class:
       }
     }
 
-    training@agent $ puppet parser validate apache/manifests/config.pp
+    training@agent $ puppet parser validate manifests/config.pp
 
 ~~~PAGEBREAK~~~
 
 Create the `apache::service` class:
 
     @@@Puppet
-    training@agent $ vim apache/manifests/service.pp
+    training@agent $ pdk new class service
+    training@agent $ vim manifests/service.pp
     class apache::service (
     ) inherits apache::params {
 
@@ -260,12 +305,13 @@ Create the `apache::service` class:
       }
     }
 
-    training@agent $ puppet parser validate apache/manifests/service.pp
+    training@agent $ puppet parser validate manifests/service.pp
 
 Modify the defined resource `apache::vhost`:
 
     @@@Puppet
-    training@agent $ vim apache/manifests/vhost.pp
+    training@agent $ pdk new class vhost
+    training@agent $ vim manifests/vhost.pp
     define apache::vhost (
       String $ip,
       String $shortname    = $title,
@@ -282,6 +328,6 @@ Modify the defined resource `apache::vhost`:
       }
     }
 
-    training@agent $ puppet parser validate apache/manifests/vhost.pp
-    training@agent $ sudo puppet apply --noop apache/examples/init.pp
-    training@agent $ sudo puppet apply apache/examples/init.pp
+    training@agent $ puppet parser validate manifests/vhost.pp
+    training@agent $ sudo puppet apply --noop examples/init.pp
+    training@agent $ sudo puppet apply examples/init.pp

@@ -74,14 +74,14 @@ Collect exported resources:
 Insert a collector into the top scope of your site.pp:
 
     @@@Sh
-    $ cd /home/training/puppet
-    $ vim manifests/site.pp
+    training@puppet $ cd /home/training/puppet
+    training@puppet $ vim manifests/site.pp
     Host <<||>>
 
 And add an exported host entry to the node definition of `agent-centos.localdomain`:
 
     @@@Sh
-    $ vim manifests/site.pp
+    training@puppet $ vim manifests/site.pp
     ...
     node 'agent-centos.localdomain' {
       @@host { 'kermit.localdomain':
@@ -92,8 +92,8 @@ And add an exported host entry to the node definition of `agent-centos.localdoma
       ...
     }
 
-    $ puppet parser validate manifests/site.pp
-    $ git add manifests/site.pp
+    training@puppet $ puppet parser validate manifests/site.pp
+    training@puppet $ git add manifests/site.pp
 
 Push your configuration to `production`:
 

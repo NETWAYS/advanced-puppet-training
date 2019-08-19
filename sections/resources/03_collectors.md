@@ -102,8 +102,8 @@ The users julian, bernd, blerim will be created, but achim will not.
 ****
 
     @@@Sh
-    $ cd /home/training/puppet/modules
-    $ vim apache/manifests/install.pp
+    $ cd /home/training/puppet/modules/apache
+    $ vim manifests/install.pp
     class apache::install (
     ) inherits apache::params {
 
@@ -129,9 +129,9 @@ The users julian, bernd, blerim will be created, but achim will not.
       Package <| |>
     }
 
-    $ puppet parser validate apache/manifests/install.pp
-    $ sudo puppet apply --noop apache/examples/init.pp
-    $ sudo puppet apply apache/examples/init.pp
+    $ puppet parser validate manifests/install.pp
+    $ sudo puppet apply --noop examples/init.pp
+    $ sudo puppet apply examples/init.pp
 
 
 !SLIDE small
