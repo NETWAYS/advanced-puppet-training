@@ -73,7 +73,7 @@ environment: production
 !SLIDE small
 # Assigning Classes with Hiera
 
-* `hiera_include` function: **hiera_include('classes')**
+* `lookup().include` function: **lookup('classes').include**
 
 Usage with YAML files:
 
@@ -87,6 +87,6 @@ classes:
   - apache
   - postfix
 
-# puppet apply -e "notice(hiera('classes'))"
+# puppet apply -e "notice(lookup('classes'))"
 ["ntp", "apache", "postfix"]
 </pre>

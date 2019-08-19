@@ -19,7 +19,7 @@ Look up a key and return the first value found:
     @@@Sh
     lookup('ntp::service_name')
 
-Do a unique merge lookup of class names, then add all of those classes to the catalog (like `hiera_include`):
+Do a unique merge lookup of class names, then add all of those classes to the catalog (like `lookup().include`):
 
     @@@Sh
     lookup('classes', Array[String], 'unique').include
