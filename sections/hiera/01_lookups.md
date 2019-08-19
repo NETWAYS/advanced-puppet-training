@@ -66,7 +66,9 @@ was a seperated project. The hierachy levels can be a fix string or use variable
 from Puppet. With version 5 the file suffix i.e. .yaml is required.
 
 All features and the complete syntax is described in the online documentation:
-https://docs.puppet.com/puppet/4.9/hiera_config_yaml_5.html
+https://puppet.com/docs/puppet/latest/hiera_config_yaml_5.html
+
+~~~PAGEBREAK~~~
 
 Note: The old hiera_* functions are deprecated now and should be relaced with the
 lookup function.

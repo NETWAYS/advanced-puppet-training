@@ -42,7 +42,6 @@ Puppet apply:
 
     @@@Sh
     $ puppet apply -e "notice(lookup('message'))"
-    $ puppet apply -e "notice(hiera('message'))"
 
 Hiera command line tool:
 
@@ -58,6 +57,27 @@ Hiera command line tool:
 
     $ hiera message ::osfamily=RedHat environment=production \
       -c /etc/puppetlabs/puppet/hiera.yaml
+
+
+!SLIDE small
+# CLI Lookup
+
+Puppet apply:
+
+    @@@Sh
+    $ puppet apply -e "notice(lookup('message'))"
+
+Puppet lookup
+
+    @@@Sh
+    hiera [options] keys
+      ...
+      --node NODE-NAME         Specify which noede to look up data for
+      --environment ENV        Specify an enviroment to look up data for
+      --default VALUE          A value to return if Hiera can not find a value in data.
+      --type TYPESTRING        Assert that value has the specified type.
+      --render-as s|json|yaml|binary|msgpack Specify the output format of the results.
+      ...
 
 
 !SLIDE smbullets
@@ -113,13 +133,12 @@ Create and lookup hierarchy for environment production:
     defaults:
       datadir: data
       data_hash: yaml_data
-hierarchy:
-  - name: "Per-node data (yaml version)"
-    path: "%{trusted.certname}.yaml"
-  - name: "Other YAML hierarchy levels"
-    paths:
-      - "%{::osfamily}.yaml"
-      - "common.yaml"
+      - name: "Per-node data (yaml version)"
+        path: "%{trusted.certname}.yaml"
+      - name: "Other YAML hierarchy levels"
+        paths:
+          - "%{::osfamily}.yaml"
+          - "common.yaml"
 
     training@puppet $ cd /home/training/puppet
     training@puppet $ mkdir data
@@ -147,5 +166,5 @@ Deploy the `production` environment with r10k:
 Use `puppet apply`, Hiera CLI and puppet lookup tool for lookup:
 
     @@@Sh
-    training@puppet $ sudo puppet apply -e "notice(hiera('message'))"
+    training@puppet $ sudo puppet apply -e "notice(lookup('message'))"
     training@puppet $ puppet lookup message --node puppet.localdomain --explain
