@@ -232,7 +232,7 @@ Rework the `apache::params` class:
 Create the `apache::install` class:
 
     @@@Puppet
-    training@agent $ pdk create class install
+    training@agent $ pdk new class install
     training@agent $ vim manifests/install.pp
     class apache::install (
     ) inherits apache::params {
@@ -310,7 +310,6 @@ Create the `apache::service` class:
 Modify the defined resource `apache::vhost`:
 
     @@@Puppet
-    training@agent $ pdk new class vhost
     training@agent $ vim manifests/vhost.pp
     define apache::vhost (
       String $ip,
