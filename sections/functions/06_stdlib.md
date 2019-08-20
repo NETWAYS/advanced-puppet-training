@@ -15,6 +15,9 @@ The `puppetlabs-stdlib` module provides a lot of functions for type and syntax c
 * Pick values from an array given a single index value, or a range:
  * `values_at`
 
+Yet these functions are soon to be deprecated and are replaced by `validate_legacy`.
+
+
 !SLIDE smbullets small
 # Stdlib Module Functions
 
