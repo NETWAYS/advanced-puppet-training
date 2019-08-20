@@ -137,7 +137,7 @@ Create and lookup hierarchy for environment production:
         path: "%{trusted.certname}.yaml"
       - name: "Other YAML hierarchy levels"
         paths:
-          - "%{::osfamily}.yaml"
+          - "%{facts.os.family}.yaml"
           - "common.yaml"
 
     training@puppet $ cd /home/training/puppet
