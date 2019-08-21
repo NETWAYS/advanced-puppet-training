@@ -42,7 +42,7 @@ Create the function in `apache/lib/puppet/functions/bool2httpd.rb`:
     @@@Sh
     training@puppet $ mkdir -p /home/training/puppet/modules/apache/lib/puppet/parser/functions
     training@puppet $ cd /home/training/puppet/modules
-    training@puppet $ vim apache/lib/puppet/parser/functions/bool2httpd.rb
+    training@puppet $ vim apache/lib/puppet/functions/bool2httpd.rb
     Puppet::Functions.create_function(:bool2httpd) do
       dispatch :bool2httpd do
         param 'Variant[String,Array,Hash,Boolean]', :value
