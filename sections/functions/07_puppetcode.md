@@ -10,7 +10,7 @@
       }
     }
 
-* New in Puppet 4
+* Introduced in Puppet 4
 * Always a return value function
 * Useable like every builtin or custom function
 * Located in a modules subfolder `functions`
@@ -19,7 +19,7 @@
 
 ****
 
-More on this at: https://puppet.com/docs/puppet/latest/lang_write_functions_in_puppet.html
+More about Puppet code at: https://puppet.com/docs/puppet/latest/lang_write_functions_in_puppet.html
 
 
 ~~~ENDSECTION~~~

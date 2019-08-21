@@ -99,7 +99,7 @@
 
 * PDK or puppet development kit is the recommended tool for designing a module
 
-The following command creates a module-directory:  `pdk new module <MODULE_NAME>`
+The following command creates a module-directory:  `pdk module generate <MODULE_NAME>`
 
 The directory looks like this:
 
@@ -131,7 +131,7 @@ In past versions of puppet, you used to create files manually. From now on we wi
 E.g. the case of the apache module:
 
     @@@puppet
-    pdk new module apache
+    pdk module generate apache
     pdk new class params
 
 Would create the file `params.pp`, with a blueprint for the class `apache::params` in it.

@@ -140,10 +140,10 @@ More commands and topics you may want to research:
 Resources you may be interested in:
 
 * Free online Git book:
- * http://git-scm.com/book
+  * http://git-scm.com/book
 
 * Learn Git in your browser:
- * http://try.github.com/
+  * http://try.github.com/
 
 ~~~ENDSECTION~~~
 

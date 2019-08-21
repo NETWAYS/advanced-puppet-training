@@ -10,13 +10,11 @@
 * Written in Ruby
 * Located in the module structure
  * Types: 
-  <pre>
-  `lib/puppet/type/<Type Name>.rb`
-  </pre>
+`lib/puppet/type/<Type Name>.rb`
  * Provider:
-  <pre>
-  `lib/puppet/provider/<Type Name>/<Provider Name>.rb`
-  </pre>
+<pre>
+`lib/puppet/provider/<Type Name>/<Provider Name>.rb`
+</pre>
 
 ~~~SECTION:handouts~~~
 

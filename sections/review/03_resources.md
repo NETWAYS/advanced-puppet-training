@@ -34,7 +34,7 @@ Global defaults
       mode  => '0644',
     }
 
-Block based defaults (new with Puppet 4)
+Block based defaults
 
     @@@ Puppet
     file {
@@ -84,7 +84,7 @@ Block based defaults (new with Puppet 4)
 
 ~~~PAGEBREAK~~~
 
-Puppet has enforced resources top down sicinge Puppet 4. In even older versions enforcement order was based on the hash of the resource type and title, so it used to be less predictable. But you should not only rely on the written order because implicit and explicit dependencies will change the order. So it is best practice to define relationships and to enforce code developers to explicitly define relationships you can tell puppet to enforce resources in random order if no dependencies is given.
+Puppet has enforced resources top down since Puppet 4. In even older versions enforcement order was based on the hash of the resource type and title, so it used to be less predictable. But you should not only rely on the written order because implicit and explicit dependencies will change the order. So it is best practice to define relationships and to enforce code developers to explicitly define relationships you can tell puppet to enforce resources in random order if no dependencies is given.
 
 ~~~ENDSECTION~~~
 

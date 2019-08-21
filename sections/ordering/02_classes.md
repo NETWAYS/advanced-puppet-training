@@ -107,7 +107,7 @@
 * Resources are contained
 * Relationships can be established between resources and classes
 
-!SLIDE small
+!SLIDE small noprint
 # anchor Resource
 
 <center><img src="./_images/Anchor_Puppet.png" style="width:671px;height:544px;" alt="Legacy Classification"/></center>

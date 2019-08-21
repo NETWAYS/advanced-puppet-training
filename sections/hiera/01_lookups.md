@@ -61,7 +61,7 @@ Caution: Hiera (version 5) means configuration version 5 and not the version of 
 ****
 
 Hiera 3 uses a different configuration format, has less capabilities and is
-deprecated since Pupept 4.9. Hiera now is complete integrated in Puppet. Hiera 3
+deprecated since Puppet 4.9. Hiera now is complete integrated in Puppet. Hiera 3
 was a seperated project. The hierachy levels can be a fix string or use variables
 from Puppet. With version 5 the file suffix i.e. .yaml is required.
 

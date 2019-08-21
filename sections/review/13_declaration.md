@@ -51,7 +51,7 @@ Defined Resource Type:
 
 ~~~SECTION:handouts~~~
 
-****
+~~~PAGEBREAK~~~
 
 The Puppet apply command combines master and agent functionality which is useful for development
 and local testing or master-less setups.

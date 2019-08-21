@@ -70,7 +70,7 @@ Help:
 
     @@@Sh
     training@agent $ cd /home/training/puppet/modules
-    training@agent $ pdk new module ssh
+    training@agent $ pdk module generate ssh
     training@agent $ cd ssh
     training@agent $ pdk new class ssh
     training@agent $ pdk new class file_line
