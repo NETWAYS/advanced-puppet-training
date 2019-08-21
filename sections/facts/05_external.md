@@ -11,6 +11,14 @@
     location=nuremberg
     cluster=webserver
 
+    $ cat {MODULE NAME}/facts.d/datacenter.py
+    #!/usr/bin/env python
+    data = {"location" : "nuremberg", "cluster" : "webserver" }
+
+    for k in data:
+    print "%s=%s" % (k,data[k])
+
+
     $ facter location
     nuremberg
 
