@@ -3,16 +3,17 @@
 
     @@@Ruby
     $ cat {MODULE NAME}/lib/puppet/parser/functions/basename.rb
-    module Puppet::Parser::Functions
-      newfunction(:basename,
-        :type   => :rvalue,
-        :arbity => 1
-      ) do |args|
-        raise ArgumentError, 'Expected a string!' \
-          unless args.first.class == String
-
-        filename = args[0]
-        File.basename filename
+    Puppet::Functions.create_function(:basename)  do
+      dispatch :basename do
+        param 'Variant[String,Array,Hash]', :value
+      end
+      def basename(value)
+        if value.is_a?(String)
+          result = "true"
+        else
+          raise ArgumentError, 'Expected a string!'
+        end
+        result
       end
     end
 
@@ -26,15 +27,18 @@
 The code on this page is the long form version of the following code, which is more like the code sample from the previous page.
 
     @@@Ruby
-    Puppet::Parser::Functions.newfunction(
-      :basename,
-      :type   => :rvalue,
-      :arbity => 1
-    ) do |args|
-      raise ArgumentError, 'Expected a string!' \
-        unless args.first.class == String
-
-      filename = args[0]
-      File.basename filename
+    Puppet::Functions.create_function(:basename)  do
+      dispatch :basename do
+        param 'Variant[String,Array,Hash]', :value
+      end
+      def basename(value)
+        if value.is_a?(String)
+          result = "true"
+        else
+          raise ArgumentError, 'Expected a string!'
+        end
+        result
+      end
     end
+
 ~~~ENDSECTION~~~

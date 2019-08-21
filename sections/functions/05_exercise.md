@@ -37,29 +37,33 @@
 
 ****
 
-Create the function in `apache/lib/puppet/parser/functions/bool2httpd.rb`:
+Create the function in `apache/lib/puppet/functions/bool2httpd.rb`:
 
     @@@Sh
     training@puppet $ mkdir -p /home/training/puppet/modules/apache/lib/puppet/parser/functions
     training@puppet $ cd /home/training/puppet/modules
     training@puppet $ vim apache/lib/puppet/parser/functions/bool2httpd.rb
-    Puppet::Parser::Functions::newfunction(
-      :bool2httpd,
-      :type   => :rvalue,
-      :arbity => 1
-    ) do |args|
-      raise ArgumentError, 'bool2httpd() wrong number of arguments.' if args.size != 1
-
-      arg = args[0]
-
-      if arg.nil? or arg == false or arg =~ /false/i or arg == :undef
-        return 'Off'
-      elsif arg == true or arg =~ /true/i
-        return 'On'
+    Puppet::Functions.create_function(:bool2httpd) do
+      dispatch :bool2httpd do
+        param 'Variant[String,Array,Hash,Boolean]', :value
       end
-
-      return arg.to_s
+      def bool2httpd(values)
+        if values.size != 1
+          raise ArgumentError, 'bool2httpd() wrong number of arguments.'
+        end
+  
+        value = values[0]
+  
+        if value.nil? or value == false or value =~ /false/i or value == :undef
+          return 'Off'
+        elsif value == true or value =~ /true/i
+          return 'On'
+        end
+        return value.to_s
+      end
     end
+  
+
 
 Test the new function with `puppet apply`:
 

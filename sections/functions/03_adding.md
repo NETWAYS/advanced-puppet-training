@@ -4,14 +4,14 @@
 A custom **:statement** function:
 
     @@@Ruby
-    Puppet::Parser::Functions.newfunction(:myfunc) do |args|
+    Puppet::Functions.create_function(:myfunc) do |args|
       ...
     end
 
 A custom **:rvalue** function:
 
     @@@Ruby
-    Puppet::Parser::Functions.newfunction(:myfunc), \
+    Puppet::Functions.create_function(:myfunc), \
       type => :rvalue do |args|
       ...
     end
