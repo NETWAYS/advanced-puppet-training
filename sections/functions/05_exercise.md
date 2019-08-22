@@ -24,7 +24,7 @@
 ****
 
 * Change into the modules directory
-* Create the function in `apache/lib/puppet/parser/functions/bool2httpd.rb`
+* Create the function in `apache/lib/puppet/functions/bool2httpd.rb`
 * Test the new function with `puppet apply`
 
 
@@ -40,7 +40,7 @@
 Create the function in `apache/lib/puppet/functions/bool2httpd.rb`:
 
     @@@Sh
-    training@puppet $ mkdir -p /home/training/puppet/modules/apache/lib/puppet/parser/functions
+    training@puppet $ mkdir -p /home/training/puppet/modules/apache/lib/puppet/functions
     training@puppet $ cd /home/training/puppet/modules
     training@puppet $ vim apache/lib/puppet/functions/bool2httpd.rb
     Puppet::Functions.create_function(:bool2httpd) do
