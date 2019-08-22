@@ -21,6 +21,8 @@ If on a string no other manipulation is needed you can pass the string to `setco
       setcode 'cat /etc/role'
     end
 
+* Custom facts have to be executable scripts
+
 ~~~SECTION:handouts~~~
 
 ****
