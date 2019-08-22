@@ -13,7 +13,7 @@ Further information on all the features puppet bolt has to offer at: https://pup
 # Using Bolt
 
     @@@Sh
-    $ bolt command run 'ping -c 4 8.8.8.8'
+    $ bolt command run 'ping -c 4 8.8.8.8' --nodes agent-centos.localdomain
     Started on agent-centos.localdomain...
     Finished on agent-centos.localdomain:
       STDOUT:
@@ -26,4 +26,4 @@ Further information on all the features puppet bolt has to offer at: https://pup
 
 * Primary interaction is via commandline
 * `bolt` is the primary command with various subcommands, like in this case `command run`
-* `ping` is the application called by the `mco` executable
+* `ping -c 4 8.8.8.8` is the command run on the target node

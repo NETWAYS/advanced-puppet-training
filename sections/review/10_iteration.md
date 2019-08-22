@@ -2,7 +2,7 @@
 # Iteration
 
     @@@ Puppet
-    $binaries = ["facter", "hiera", "mco", "puppet"]
+    $binaries = ["facter", "hiera", "bolt", "puppet"]
 
     ${binaries}.each |String $binary| {
       file {"/usr/bin/$binary":
