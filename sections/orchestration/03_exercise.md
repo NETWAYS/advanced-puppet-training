@@ -2,13 +2,10 @@
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Add Orchestration
 
 * Objective:
- * Add orchestration with MCollective using ActiveMQ
+ * Add orchestration using bolt
 * Steps:
- * Install and start ActiveMQ
- * Configure MCollective to work with ActiveMQ
- * Start MCollective Server
+ * Install bolt
  * Test orchestration
-
 
 !SLIDE supplemental exercises
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Add Orchestration
@@ -17,18 +14,16 @@
 
 ****
 
-* Add orchestration with MCollective using ActiveMQ
+* Add orchestration using bolt
 
 ## Steps:
 
 ****
 
-* Install and start ActiveMQ on your puppet master
+* Install bolt
 
-You can get it from a community repository: https://copr.fedoraproject.org/coprs/lkiesow/apache-activemq-dist/repo/epel-7/lkiesow-apache-activemq-dist-epel-7.repo
+It's part of the same repository that pdk is: https://yum.puppet.com/puppet-tools-release-el-7.noarch.rpm
 
-* Configure MCollective to work with ActiveMQ
-* Start MCollective Server
 * Test orchestration
 
 
@@ -41,68 +36,21 @@ You can get it from a community repository: https://copr.fedoraproject.org/coprs
 
 ****
 
-Install ActiveMQ from a third party repository:
+Install bolt:
 
     @@@Sh
-    $ sudo curl -L https://copr.fedoraproject.org \
-      /coprs/lkiesow/apache-activemq-dist/repo/epel-7/lkiesow-apache-activemq-dist-epel-7.repo \
-      -o /etc/yum.repos.d/lkiesow-apache-activemq-dist-epel-7.repo
-    $ sudo yum install activemq-dist
-
-Configure and start ActiveMQ:
-
-    @@@Sh
-    $ sudo vim /etc/activemq/activemq.xml
-    ...
-    <transportConnectors>
-      <transportConnector name="stomp" uri= \
-        "stomp://0.0.0.0:61613?maximumConnections=1000&amp;wireFormat.maxFrameSize=104857600" \
-      />
-    </transportConnectors>
-    ...
-
-    $ sudo systemctl start activemq.service
-    $ sudo systemctl enable activemq.service
-
-Configure MCollective to work with ActiveMQ:
-
-You do not need to install MCollective as a seperate package because it is already included in Puppet's all-in-one-package.
-You only have to configure it to find your message queue (host and port).
-
-    @@@Sh
-    $ sudo vim /etc/puppetlabs/mcollective/server.cfg
-    ...
-    connector = activemq
-    plugin.activemq.pool.size = 1
-    plugin.activemq.pool.1.host = localhost
-    plugin.activemq.pool.1.port = 61613
-    plugin.activemq.pool.1.user = mcollective
-    plugin.activemq.pool.1.password = marionette
-    ...
-
-    $ sudo vim /etc/puppetlabs/mcollective/client.cfg
-    ...
-    connector = activemq
-    plugin.activemq.pool.size = 1
-    plugin.activemq.pool.1.host = localhost
-    plugin.activemq.pool.1.port = 61613
-    plugin.activemq.pool.1.user = mcollective
-    plugin.activemq.pool.1.password = marionette
-    ...
-
-If you want to test MCollective with your puppet agent machine too, configure and start the mcollective server on this machine and use the IP address or fqdn instead of localhost.
-
-Start MCollective Server:
-
-    @@@ Sh
-    $ sudo systemctl start mcollective.service
-    $ sudo systemctl enable mcollective.service
+    training@puppet $ sudo rpm -Uvh https://yum.puppet.com/puppet-tools-release-el-7.noarch.rpm
+    training@puppet $ sudo yum install puppet-bolt
 
 Test orchestration on a machine:
 
     @@@ Sh
-    $ mco ping
+    $ bolt command run 'ping -c 4 8.8.8.8' --nodes agent-centos.localdomain
     agent-centos.localdomain      time=41.53 ms
     puppet.localdomain            time=75.71 ms
 
-In a productive environment you should not run a message queue without securing it! In this configuration it only uses a password on a clear-text connection.
+In a productive environment you should not run a message queue without securing it!
+`bolt command run <COMMAND> --nodes -u training -p`
+
+`-u` stands for user and
+`-p` for password

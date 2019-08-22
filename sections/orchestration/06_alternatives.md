@@ -1,5 +1,5 @@
 !SLIDE smbullets
-# MCollective Alternatives
+# Bolt Alternatives
 
 Other tools for Remote Command Execution:
 
