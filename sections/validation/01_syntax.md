@@ -7,6 +7,26 @@
 * Faster troubleshooting
 * Available for most editors
 
+!SLIDE small printonly
+#Syntax Highlighting
+
+Install vim Pathogen: https://github.com/tpope/vim-pathogen
+
+    @@@Sh
+    mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+    curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+    vim ~/.vimrc
+    execute pathogen#infect()
+    syntax on
+    filetype plugin indent on
+
+Install syntax-highlighting, enabled by Pathogen: https://github.com/rodjek/vim-puppet
+
+* Just clone the repository into your ~/.vim/bundle directory and syntax-highlighting is enabled for all \*.pp files:
+
+`git clone https://github.com/rodjek/vim-puppet.git ~/.vim/bundle`
+
 
 !SLIDE
 # Syntax Checking
