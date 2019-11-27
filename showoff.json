@@ -1,8 +1,7 @@
 {
   "name": "Advanced Puppet",
-  "date": "03.07. - 05.07.2017",
-  "location": "Nuremberg",
-  "author": "Lennart Betz",
+  "subtitle": "Configuration Management",
+  "author": "Lennart Betz, Markus Waldmüller, Alexander Stoll and contributors",
   "release": "1.2.0",
 
   "favicon": "image/global/favicon.ico",
@@ -12,12 +11,12 @@
   "password": "awesome",
 
   "templates" : {
-       "default"   : "global/layouts/netways.tpl"
+     "default": "global/layouts/netways.tpl"
   },
 
   "sections": [
-   {"section":"global/pre/Title"},
-   {"section":"global/pre/NETWAYS"},
+   {"section":"global/pre/netways/title"},
+   {"section":"global/pre/netways/about"},
 
    {"section":"sections/introduction"},
 
