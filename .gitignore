@@ -1,2 +1,8 @@
+## Editors
+.*.sw[op]
+*~
+
+## Output
 static
 stats
+*.pdf
