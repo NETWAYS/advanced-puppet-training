@@ -5,7 +5,7 @@
  * Prepare Puppet Agent for later use on `agent-centos.localdomain`
 * Steps:
  * Copy `apache.tar.gz` to `agent-centos.localdomain`, extract it.
- * Add puppet repository from http://yum.puppetlabs.com.
+ * Add puppet repository from https://yum.puppetlabs.com.
  * Install package `puppet-agent` in the same version as the master runs.
  * Add symlinks for most used commands to `/usr/bin`.
  * Add server `puppet.localdomain` to `puppet.conf`.
@@ -27,7 +27,7 @@ Never run newer puppet versions on your agents than on the master!
 ****
 
 * Copy `apache.tar.gz` to `agent-centos.localdomain` and extract it.
-* Add puppet repository from http://yum.puppetlabs.com.
+* Add puppet repository from https://yum.puppetlabs.com.
 * Install package `puppet-agent` in the same version as the master runs.
 * Add symlinks for most used commands to `/usr/bin`.
 * Add server `puppet.localdomain` to `puppet.conf`.
@@ -51,16 +51,17 @@ Copy `apache.tar.gz` to `agent-centos.localdomain`:
     training@agent $ cd /home/training/puppet/modules
     training@agent $ tar -xf apache.tar.gz
 
-Add puppet repository from http://yum.puppetlabs.com:
+Add puppet repository from https://yum.puppetlabs.com:
 
     @@@ Sh
-    training@agent $ sudo rpm -ivh http://yum.puppetlabs.com/puppet6-release-el-7.noarch.rpm
+    training@agent $ sudo yum install https://yum.puppetlabs.com/puppet6-release-el-7.noarch.rpm
 
 Inspect what version is installed on your master:
 
     @@@ Sh
-    training@puppet $ sudo rpm -aq |grep puppet-agent
+    training@puppet $ sudo rpm -qa "puppet*"
     puppet-agent-x.y.z-n.el7.x86_64
+    ...
 
 Install package `puppet-agent`:
 
@@ -76,7 +77,8 @@ Add symlinks for most used commands to `/usr/bin`:
 Add server and basemodulepath to `puppet.conf`:
 
     @@@Sh
-    training@agent $ mkdir /home/training/.puppetlabs/etc/puppet
+    training@agent $ mkdir -p /home/training/.puppetlabs/etc/puppet
+
     training@agent $ vim /home/training/.puppetlabs/etc/puppet/puppet.conf
     [main]
       server = puppet.localdomain

@@ -48,7 +48,7 @@ Embedded Puppet Template:
     ...
 
 !SLIDE small
-# If in templates
+# Code in templates
 
 Embedded Ruby Template:
 
@@ -56,8 +56,8 @@ Embedded Ruby Template:
     $ vim apache/templates/httpd.conf.erb
     ...
     <% if @servername != nil %>
-    servername <%= @servername %>
-    <% else %> 
+    ServerName <%= @servername %>
+    <% else %>
     ServerName "not-defined"
     <% end %>    
     ...
@@ -66,7 +66,7 @@ Embedded Puppet Template:
 
     @@@ Puppet
     <% if $servername != undef { -%>
-    servername <%= $servername %>
+    ServerName <%= $servername %>
     <% } else { -%>
     ServerName "not-defined"
     <% } -%>

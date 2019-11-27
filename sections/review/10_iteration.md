@@ -4,15 +4,15 @@
     @@@ Puppet
     $binaries = ["facter", "hiera", "bolt", "puppet"]
 
-    ${binaries}.each |String $binary| {
-      file {"/usr/bin/$binary":
+    $binaries.each |String $binary| {
+      file { "/usr/bin/${binary}":
         ensure => link,
         target => "/opt/puppetlabs/bin/${binary}",
       }
     }
 
 * Introduced with Puppet 4
-* Different iteration functions 
+* Different iteration functions
  * **each** - repeat a code block for each object
  * **slice** - repeat a code block a given number of times
  * **filter** - remove non-matching elements

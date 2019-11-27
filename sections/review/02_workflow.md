@@ -1,11 +1,11 @@
 !SLIDE noprint
-# Workflow
+# Puppet Run Cycle
 
 <center><img src="./_images/puppet_workflow.png" style="width:516px;height:456px;" alt="Workflow"/></center>
 
 
 !SLIDE printonly
-# Lifecycle
+# Puppet Run Cycle
 
 <center><img src="./_images/puppet_workflow.png" style="width:470px;height:418px;" alt="Workflow"/></center>
 

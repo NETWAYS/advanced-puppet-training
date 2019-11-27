@@ -9,19 +9,37 @@ Assignment:
 
 **Note:** No reassignment!
 
-Access:
+Local Scope:
 
-* Local scope:
-
+    @@@ Puppet
     $httpd_confdir
 
-* Top scope (facts):
+Facts and top scope:
 
-    $::os, $::os['family'] or $::osfamily, $::mountpoints['/']['filesystem']
+    @@@ Puppet
+    $facts['os'], $trusted['certname'], $::environment
+    $::os, $::osfamily, $::mountpoints['/']['filesystem']
 
-* Out-of-Scope:
+Out-of-Scope:
 
+    @@@ Puppet
     $apache::params::confdir
+
+~~~SECTION:handouts~~~
+
+***
+
+~~~PAGEBREAK~~~
+
+You can omit the leading `::` notation when there is no local scoped variable with the same name.
+
+Also see the documentation:
+
+* https://puppet.com/docs/puppet/latest/lang_facts_builtin_variables.html
+* https://puppet.com/docs/puppet/latest/lang_facts_accessing.html
+* https://puppet.com/docs/puppet/latest/lang_scope.html
+
+~~~ENDSECTION~~~
 
 
 !SLIDE noprint

@@ -5,13 +5,13 @@ Default:
 
     @@@Puppet
     include apache
-
-    class {'apache': }
+    # or
+    class { 'apache': }
 
 Parameterized Class:
 
     @@@Puppet
-    class {'apache':
+    class { 'apache':
       ensure => running,
       ssl    => true,
     }
@@ -19,7 +19,7 @@ Parameterized Class:
 Defined Resource Type:
 
     @@@Puppet
-    apache::vhost {'training.netways.de':
+    apache::vhost { 'training.netways.de':
       ensure  => present,
       docroot => '/var/www/training',
     }
@@ -43,7 +43,7 @@ Defined Resource Type:
 
 * The Puppet apply command combines master and agent functionality
  * Takes a file containing Puppet code
- * Gathers information using facter
+ * Gathers information using Facter
  * Compiles a catalog
  * Enforces the configuration
  * Can also run in simulation mode
@@ -57,7 +57,7 @@ The Puppet apply command combines master and agent functionality which is useful
 and local testing or master-less setups.
 
 It takes a file containing Puppet code as input, then gathers information about the system using
-facter to compile a catalog and last but not least enforces the configuration. It can also run in
+Vacter to compile a catalog and last but not least enforces the configuration. It can also run in
 simulation mode which only notifies about required changes instead of enforcing it.
 
 To reduce complexity for now we will start developing Puppet code and use apply to test it and only

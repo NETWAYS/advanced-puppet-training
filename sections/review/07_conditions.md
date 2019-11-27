@@ -14,7 +14,7 @@ Selectors are a conditional to set a value for an attribute or variable dependin
 
 A `"Case"` statement can be used to set any number of variables or provide alternative Puppet code depending of the value of a variable.
 
-`"If"` and `"Unless"` statements are used to alternate based on conditions which can be simple value comparision to complex functions.
+`"If"` and `"Unless"` statements are used to alternate based on conditions which can be simple value comparison to complex functions.
 
 ~~~ENDSECTION~~~
 
@@ -23,7 +23,7 @@ A `"Case"` statement can be used to set any number of variables or provide alter
 
     @@@ Puppet
     class apache::params {
-       case $::osfamily {
+       case $facts['os']['family'] {
         'RedHat': {
           $package = 'httpd'
           $config  = '/etc/httpd/conf/httpd.conf'

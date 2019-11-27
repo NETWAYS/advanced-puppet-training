@@ -37,13 +37,13 @@ Classes in `manifests`
 
 Files in `files`
 
-* Served by Puppet fileserver as 'puppet:///modules/{MODULE NAME}/{FILE NAME}'
+* Served by Puppet fileserver as `puppet:///modules/{MODULE NAME}/{FILE NAME}`
 
 Templates in `templates`
 
 * Lookup by Puppet template functions like
- * Embedded Ruby (ERB): 'template({MODULE NAME}/{TEMPLATE NAME}.erb)'
- * Embedded Puppet (EPP): 'epp({MODULE NAME}/{TEMPLATE NAME}.epp)'
+ * Embedded Ruby (ERB): `template("{MODULE NAME}/{TEMPLATE NAME}.erb")`
+ * Embedded Puppet (EPP): `epp("{MODULE NAME}/{TEMPLATE NAME}.epp")`
 
 !SLIDE small noprint
 # Autoloading

@@ -76,7 +76,7 @@ Block based defaults
     }
 
 * Puppet does enforce resources top down
-* Four metaparameters to define relationships (before, subscribe, require and notify)
+* Four meta-parameters to define relationships (before, subscribe, require and notify)
 
 ~~~SECTION:handouts~~~
 
@@ -128,7 +128,7 @@ A dependency is only created if both resources are managed by Puppet.
 The picture above gives some examples of the Resource Abstraction Layer used by Puppet.
 
 The Resource Abstraction Layer defines types like Package with all attributes required to describe them
-and offers Providers to realize them depending on the commands available on the plattform the resource
+and offers Providers to realize them depending on the commands available on the platform the resource
 is assigned to.
 
 ~~~ENDSECTION~~~

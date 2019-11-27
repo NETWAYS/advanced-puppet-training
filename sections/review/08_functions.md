@@ -3,7 +3,7 @@
 
     @@@Puppet
     class apache::params {
-      case $::osfamily {
+      case $facts['os']['family'] {
       ...
         default: {
          fail('Your operatingsystem is not supported, yet.')
