@@ -12,32 +12,32 @@
   "password": "awesome",
 
   "templates" : {
-       "default"   : "global/templates/default.tpl"
+       "default"   : "global/layouts/netways.tpl"
   },
 
   "sections": [
-   {"section":"global/Pre/Title"},
-   {"section":"global/Pre/NETWAYS"},
+   {"section":"global/pre/Title"},
+   {"section":"global/pre/NETWAYS"},
 
-   {"section":"introduction"},
+   {"section":"sections/introduction"},
 
-   {"section":"review"},
-   {"section":"design"},
-   {"section":"ordering"},
-   {"section":"files"},
-   {"section":"git"},
-   {"section":"resources"},
-   {"section":"hiera"},
-   {"section":"roles_profiles"},
-   {"section":"facts"},
-   {"section":"functions"},
-   {"section":"types_providers"},
-   {"section":"validation"},
-   {"section":"testing"},
-   {"section":"orchestration"},
-   {"section":"reports"},
-   {"section":"troubleshooting"},
+   {"section":"sections/review"},
+   {"section":"sections/design"},
+   {"section":"sections/ordering"},
+   {"section":"sections/files"},
+   {"section":"sections/git"},
+   {"section":"sections/resources"},
+   {"section":"sections/hiera"},
+   {"section":"sections/roles_profiles"},
+   {"section":"sections/facts"},
+   {"section":"sections/functions"},
+   {"section":"sections/types_providers"},
+   {"section":"sections/validation"},
+   {"section":"sections/testing"},
+   {"section":"sections/orchestration"},
+   {"section":"sections/reports"},
+   {"section":"sections/troubleshooting"},
 
-   {"section":"global/Post"}
+   {"section":"global/post"}
   ]
 }
