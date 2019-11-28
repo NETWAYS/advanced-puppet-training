@@ -37,6 +37,10 @@
    {"section":"sections/reports"},
    {"section":"sections/troubleshooting"},
 
+   // TODO: add new sections when finished
+   //{"section":"sections/windows"},
+   //{"section":"sections/device"},
+
    {"section":"global/post"}
   ]
 }
