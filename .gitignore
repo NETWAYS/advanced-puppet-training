@@ -6,3 +6,6 @@
 static
 stats
 *.pdf
+
+## Vagrant
+.vagrant/
