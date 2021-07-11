@@ -1,0 +1,2 @@
+class{ 'overallsetup': } ->
+class{ 'puppetserver': } 
